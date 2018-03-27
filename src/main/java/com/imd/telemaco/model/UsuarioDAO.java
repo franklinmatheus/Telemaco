@@ -15,21 +15,6 @@ import java.sql.SQLException;
  * @author franklin
  */
 public class UsuarioDAO {
-    /*
-    private final Map<String, Usuario> usuarios = new HashMap<String, Usuario>();
-       
-    public String size() {
-        return this.usuarios.size() + "";
-    }
-    
-    public void insertUsuario(Usuario usuario) {
-        this.usuarios.put(usuario.toString(), usuario);
-    }
-    
-    public void removeUsuario(Usuario usuario) {
-        this.usuarios.remove(usuario.toString());
-    }
-    */
     private final Connection connection;
     private ResultSet resultSet;
     
