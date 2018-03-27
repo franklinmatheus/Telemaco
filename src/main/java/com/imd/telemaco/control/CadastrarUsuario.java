@@ -9,7 +9,8 @@ import com.imd.telemaco.model.Usuario;
 import com.imd.telemaco.model.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,9 +47,11 @@ public class CadastrarUsuario extends HttpServlet {
                 Usuario usuario = new Usuario(nome, email, senha);
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 usuarioDAO.cadastrarUsuario(usuario);
-                request.getRequestDispatcher("Index.jsp").forward(request, response);
+                response.sendRedirect("Index.jsp");
             } 
         } catch(Exception e) {
+            e.printStackTrace();
+            e.getMessage();
             response.sendRedirect("Erro.jsp");
         } finally {
             out.close();

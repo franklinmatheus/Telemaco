@@ -5,8 +5,6 @@
  */
 package com.imd.telemaco.model;
 
-import java.util.Date;
-
 /**
  *
  * @author franklin

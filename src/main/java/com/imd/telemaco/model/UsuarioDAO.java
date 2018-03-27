@@ -15,7 +15,21 @@ import java.sql.SQLException;
  * @author franklin
  */
 public class UsuarioDAO {
-
+    /*
+    private final Map<String, Usuario> usuarios = new HashMap<String, Usuario>();
+       
+    public String size() {
+        return this.usuarios.size() + "";
+    }
+    
+    public void insertUsuario(Usuario usuario) {
+        this.usuarios.put(usuario.toString(), usuario);
+    }
+    
+    public void removeUsuario(Usuario usuario) {
+        this.usuarios.remove(usuario.toString());
+    }
+    */
     private final Connection connection;
     private ResultSet resultSet;
     
@@ -23,15 +37,16 @@ public class UsuarioDAO {
         this.connection = ConnectionFactory.getConnection();
     }
     
-    public void cadastrarUsuario(Usuario usuario) {
-        String sql = "INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)";
+    public void cadastrarUsuario(Usuario usuario) throws SQLException {
+        String sql = "INSERT INTO usuario (nome, email, senha) VALUES (?,?,?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, usuario.getNome());
-            statement.setString(1, usuario.getEmail());
-            statement.setString(1, usuario.getSenha());
+            statement.setString(2, usuario.getEmail());
+            statement.setString(3, usuario.getSenha());
+            
             statement.execute();
-            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
