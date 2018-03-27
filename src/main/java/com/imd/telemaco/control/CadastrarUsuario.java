@@ -6,11 +6,9 @@
 package com.imd.telemaco.control;
 
 import com.imd.telemaco.model.Usuario;
-import com.imd.telemaco.model.UsuarioDAO;
+import com.imd.telemaco.model.FacadeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,12 +43,11 @@ public class CadastrarUsuario extends HttpServlet {
                 response.sendRedirect("Cadastrar.jsp");
             } else {
                 Usuario usuario = new Usuario(nome, email, senha);
-                UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
-                usuarioDAO.cadastrarUsuario(usuario);
+                FacadeDAO facade = FacadeDAO.getInstance();
+                facade.cadastrarUsuario(usuario);
                 response.sendRedirect("Index.jsp");
             } 
         } catch(Exception e) {
-            e.printStackTrace();
             e.getMessage();
             response.sendRedirect("Erro.jsp");
         } finally {
