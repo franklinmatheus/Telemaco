@@ -45,7 +45,7 @@ public class CadastrarUsuario extends HttpServlet {
                 response.sendRedirect("Cadastrar.jsp");
             } else {
                 Usuario usuario = new Usuario(nome, email, senha);
-                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
                 usuarioDAO.cadastrarUsuario(usuario);
                 response.sendRedirect("Index.jsp");
             } 

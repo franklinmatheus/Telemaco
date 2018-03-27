@@ -1,0 +1,6 @@
+com/imd/telemaco/control/CadastrarUsuario.class
+com/imd/telemaco/model/SerieDAO.class
+com/imd/telemaco/model/UsuarioDAO.class
+com/imd/telemaco/model/ConnectionFactory.class
+com/imd/telemaco/model/Serie.class
+com/imd/telemaco/model/Usuario.class

@@ -15,11 +15,18 @@ import java.sql.SQLException;
  * @author franklin
  */
 public class UsuarioDAO {
-    private final Connection connection;
+    private Connection connection;
     private ResultSet resultSet;
+    private static UsuarioDAO usuarioDAO = null;
     
-    public UsuarioDAO() throws SQLException {
+    private UsuarioDAO() throws SQLException {
         this.connection = ConnectionFactory.getConnection();
+    }
+    
+    public static synchronized UsuarioDAO getInstancia() throws SQLException {
+        if(usuarioDAO == null)
+            usuarioDAO = new UsuarioDAO();
+        return usuarioDAO;
     }
     
     public void cadastrarUsuario(Usuario usuario) throws SQLException {
