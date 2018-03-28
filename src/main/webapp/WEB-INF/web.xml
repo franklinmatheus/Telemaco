@@ -4,9 +4,25 @@
         <servlet-name>CadastrarUsuario</servlet-name>
         <servlet-class>com.imd.telemaco.control.CadastrarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginUsuario</servlet-name>
+        <servlet-class>com.imd.telemaco.control.LoginUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutUsuario</servlet-name>
+        <servlet-class>com.imd.telemaco.control.LogoutUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CadastrarUsuario</servlet-name>
         <url-pattern>/CadastrarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginUsuario</servlet-name>
+        <url-pattern>/LoginUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutUsuario</servlet-name>
+        <url-pattern>/LogoutUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

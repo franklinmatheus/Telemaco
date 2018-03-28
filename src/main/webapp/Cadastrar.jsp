@@ -24,7 +24,7 @@
             <p><span>Nome</span><input type="text" name="nome" required /></p>
             <p><span>Senha</span><input type="password" name="senha" required /></p>
             <p><span>Email</span><input type="email" name="email" required /></p>
-            <p><input type="submit" name="Cadastrar" /></p>
+            <p><input type="submit" value="Cadastrar" /></p>
         </form>
         </p>
     </body>
