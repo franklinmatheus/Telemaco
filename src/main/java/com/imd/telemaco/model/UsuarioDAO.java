@@ -44,8 +44,8 @@ public class UsuarioDAO {
         }
     }
     
-    public Usuario select(String nome, String senha) throws SQLException {
-        String sql = "SELECT * FROM usuario WHERE nome='" + nome + "' AND senha='" + senha + "'";
+    public Usuario select(String email, String senha) throws SQLException {
+        String sql = "SELECT * FROM usuario WHERE email='" + email + "' AND senha='" + senha + "'";
         Usuario usuario = new Usuario();
         try {
             Statement statement = connection.createStatement();
@@ -53,7 +53,7 @@ public class UsuarioDAO {
             boolean existe = resultSet.next();
             
             if(existe) {
-                String email = resultSet.getString("email");
+                String nome = resultSet.getString("nome");
                 usuario.setEmail(email);
                 usuario.setNome(nome);
                 usuario.setSenha(senha);

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.imd.telemaco.model;
-
 import java.util.ArrayList;
 
 /**

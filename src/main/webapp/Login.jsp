@@ -9,9 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <p><a href="Index.jsp">Home </a>></p>
+        <h1>Login</h1>
+        <p>
+        <form name="cadastro" action="LoginUsuario" method="POST">
+            <p><span>Email</span><input type="email" name="email" required /></p>
+            <p><span>Senha</span><input type="password" name="senha" required /></p>
+            <p><input type="submit" value="Login" /></p>
+        </form>
+        </p>
     </body>
 </html>

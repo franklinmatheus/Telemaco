@@ -27,7 +27,17 @@ public class FacadeDAO {
             UsuarioDAO usuarioDAO = UsuarioDAO.getInstance();
             usuarioDAO.insert(usuario);
         } catch(SQLException e) {
-            
+            throw new RuntimeException();
+        }
+    }
+    
+    public Usuario loginUsuario(String email, String senha) {
+        try {
+            UsuarioDAO usuarioDAO = UsuarioDAO.getInstance();
+            Usuario usuario = usuarioDAO.select(email, senha);
+            return usuario;
+        } catch(SQLException e) {
+            throw new RuntimeException();
         }
     }
     
