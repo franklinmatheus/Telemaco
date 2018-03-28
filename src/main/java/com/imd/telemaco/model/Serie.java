@@ -5,32 +5,6 @@
  */
 package com.imd.telemaco.model;
 
-<<<<<<< HEAD
-/**
- *
- * @author franklin
- */
-public class Serie {
-    private String nome;
-    
-    public Serie() { }
-    
-    public Serie(String nome) {
-        this.nome = nome;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @Override
-    public String toString() {
-        return "Serie{" + "nome=" + nome + '}';
-=======
 import java.util.ArrayList;
 
 /**
@@ -42,6 +16,15 @@ public class Serie {
     private String year;
     private ArrayList<Season> seasons;
     public Rating rating;
+    
+    public Serie() { }
+    
+    public Serie( String name, String year, ArrayList<Season> seasons, Rating rating) { 
+        this.name = name;
+        this.year = year;
+        this.seasons = seasons;
+        this.rating = rating;
+    }
     
     /**
      * @return the name
@@ -99,6 +82,13 @@ public class Serie {
     public void setSeasons(ArrayList<Season> seasons) {
         this.seasons = seasons;
     }
+    
+    /**
+     * @return the stars of rating
+     */
+    public int stars() {
+        return this.rating.stars;
+    }
 
     /**
      * @return the rating
@@ -117,6 +107,5 @@ public class Serie {
     @Override
     public String toString() {
         return "Serie{" + "nome=" + name + ", Ano=" + year + '}';
->>>>>>> valmir-novo-models
     }
 }

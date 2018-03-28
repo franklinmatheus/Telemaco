@@ -1,6 +1,11 @@
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/model/SerieDAO.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/model/Usuario.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/model/Serie.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/model/ConnectionFactory.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/model/UsuarioDAO.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/control/CadastrarUsuario.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/model/ConnectionFactory.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/model/Season.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/model/FacadeDAO.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/control/CadastrarSerie.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/model/Serie.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/model/Episode.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/model/Usuario.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/model/Rating.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/model/SerieDAO.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/model/UsuarioDAO.java
+/home/valmir/NetBeansProjects/Telemaco/src/main/java/com/imd/telemaco/control/CadastrarUsuario.java

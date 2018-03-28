@@ -15,6 +15,7 @@
         <h2>Bem vindo, escolha uma opção!</h2>
         <ul>
             <li><a href="Cadastrar.jsp">Cadastrar</a></li>
+            <li><a href="CadastrarSerie.jsp">Cadastrar Serie</a></li>
             <li><a href="Login.jsp">Login</a></li>
         </ul>
     </body>

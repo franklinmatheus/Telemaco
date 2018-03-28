@@ -4,9 +4,17 @@
         <servlet-name>CadastrarUsuario</servlet-name>
         <servlet-class>com.imd.telemaco.control.CadastrarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CadastrarSerie</servlet-name>
+        <servlet-class>com.imd.telemaco.control.CadastrarSerie</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CadastrarUsuario</servlet-name>
         <url-pattern>/CadastrarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarSerie</servlet-name>
+        <url-pattern>/CadastrarSerie</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

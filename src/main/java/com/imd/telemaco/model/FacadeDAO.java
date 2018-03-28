@@ -30,4 +30,16 @@ public class FacadeDAO {
             
         }
     }
+    
+    public void cadastrarSerie(Serie serie) {
+        
+        try {
+            SerieDAO serieDAO;
+            serieDAO = SerieDAO.getInstance();
+            serieDAO.cadastrarSerie(serie);
+        } catch(SQLException e) {
+            
+        }
+        
+    }
 }
