@@ -10,9 +10,8 @@ package com.imd.telemaco.model;
  * @author valmir
  */
 class Episode {
-    public String name;
-    public boolean completed;
-    public int rating;
+    private String name;
+    private boolean completed;
     
     /**
      * Default constructor
@@ -25,7 +24,6 @@ class Episode {
     public Episode(String name, boolean completed, int rating) { 
         this.name = name;
         this.completed = completed;
-        this.rating = rating;
     }
 
     /**
@@ -55,18 +53,9 @@ class Episode {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
-
-    /**
-     * @return the rating
-     */
-    public int getRating() {
-        return rating;
-    }
-
-    /**
-     * @param rating the rating to set
-     */
-    public void setRating(int rating) {
-        this.rating = rating;
+    
+     @Override
+    public String toString() {
+        return "Episódio{" + "nome=" + name + '}';
     }
 }

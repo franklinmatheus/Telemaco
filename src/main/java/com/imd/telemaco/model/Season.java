@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author valmir
  */
 class Season {
-    public String name;
-    public ArrayList<Episode> episodes;
+    private String name;
+    private ArrayList<Episode> episodes;
     
     /**
      * Default constructor 
@@ -54,6 +54,26 @@ class Season {
      */
     public void setEpisodes(ArrayList<Episode> episodes) {
         this.episodes = episodes;
+    }
+    
+     /**
+     * Verifica todo array de series para ver se esta compelto
+     * @return the completed
+     */
+    public boolean isCompleted() {
+        
+        for (Episode e : episodes) {
+            if (e.isCompleted() == false) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+        return "Temporada{" + "nome=" + name + '}';
     }
     
 }

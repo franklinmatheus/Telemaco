@@ -12,12 +12,11 @@ import java.util.ArrayList;
  * @author valmir
  */
 public class Serie {
-    public String name;
-    public String year;
-    public ArrayList<Season> seasons;
-    public String description;
-    //private Image image;
-
+    private String name;
+    private String year;
+    private ArrayList<Season> seasons;
+    public Rating rating;
+    
     /**
      * @return the name
      */
@@ -46,27 +45,19 @@ public class Serie {
         this.year = year;
     }
 
-//    /**
-//     * Verifica todo array de seasoin para ver se esta compelto
-//     * @return the completed
-//     */
-//    public boolean isCompleted() {
-//        return completed;
-//    }
-
-    /**
-     * @return the description
+     /**
+     * Verifica todo array de seasons para ver se esta compelto.
+     * @return the completed
      */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Details of the series.
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
+    public boolean isCompleted() {
+        
+        for (Season s : seasons) {
+            if (s.isCompleted() == false) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     /**
@@ -82,5 +73,23 @@ public class Serie {
     public void setSeasons(ArrayList<Season> seasons) {
         this.seasons = seasons;
     }
+
+    /**
+     * @return the rating
+     */
+    public Rating getRating() {
+        return rating;
+    }
+
+    /**
+     * @param rating the rating to set
+     */
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
     
+    @Override
+    public String toString() {
+        return "Serie{" + "nome=" + name + ", Ano=" + year + '}';
+    }
 }
