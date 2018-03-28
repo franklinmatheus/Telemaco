@@ -26,7 +26,7 @@ public class SerieDAO {
         String sql = "INSERT INTO serie (nome) VALUES (?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, serie.getNome());
+            statement.setString(1, serie.getName());
             
             statement.execute();
             connection.close();
