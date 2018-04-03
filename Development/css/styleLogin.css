@@ -118,5 +118,8 @@ header a img {
 
 @font-face {
     font-family: sfGalaxy;
-    src: url(../media/fonts/SF_Distant_Galaxy.ttf);
+    src: url(../media/fonts/SF_Distant_Galaxy.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
 }
