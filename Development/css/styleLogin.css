@@ -118,6 +118,8 @@ header a img {
 
 @font-face {
     font-family: sfGalaxy;
+    src: local("SF_Distant_Galaxy");
+    src: url(../media/fonts/SF_Distant_Galaxy_EOT.eot);
     src: url(../media/fonts/SF_Distant_Galaxy.ttf) format('truetype');
     font-weight: normal;
     font-style: normal;
