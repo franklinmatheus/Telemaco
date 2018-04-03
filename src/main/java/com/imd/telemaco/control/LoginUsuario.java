@@ -47,7 +47,7 @@ public class LoginUsuario extends HttpServlet {
             }
         } catch(Exception e) {
             e.getMessage();
-            response.sendRedirect("Error.jsp");
+            response.sendRedirect("Erro.jsp");
         }
     }
 

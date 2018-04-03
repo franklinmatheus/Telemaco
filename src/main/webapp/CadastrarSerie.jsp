@@ -4,10 +4,18 @@
     Author     : valmir
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.imd.telemaco.model.Usuario"%>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="serie" scope="session" class="com.imd.telemaco.model.Usuario" />
 <jsp:setProperty name="serie" property="nome" />
-
+<% 
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    Usuario logado = new Usuario();
+    if(session.getAttribute("logado") == null)
+        response.sendRedirect("Login.jsp");
+    else
+        logado = (Usuario) (session.getAttribute("logado"));
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +23,7 @@
         <title>Cadastrar Serie</title>
     </head>
     <body>
-       <p><a href="Index.jsp">Home </a>></p>
+       <p><a href="Logado.jsp">Home </a>></p>
        <h1>Cadastro de Serie</h1>
         <p>
         <form name="CadastrarSerie" action="CadastrarSerie" method="POST">

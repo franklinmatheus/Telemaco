@@ -46,7 +46,7 @@ public class CadastrarSerie extends HttpServlet {
                 FacadeDAO facade = FacadeDAO.getInstance();
                 facade.cadastrarSerie(serie);
                 
-                response.sendRedirect("Index.jsp");
+                response.sendRedirect("Logado.jsp");
             } 
         } catch(Exception e) {
             e.getMessage();

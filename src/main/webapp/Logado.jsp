@@ -22,6 +22,7 @@
     </head>
     <body>
         Esta é sua página de logado! Seja bem vindo, <%=logado.getNome()%>
+        <a href="CadastrarSerie.jsp">Cadastrar Serie</a>
         <form name="logout" action="LogoutUsuario" method="POST">
             <input type="submit" value="Sair" />
         </form>
