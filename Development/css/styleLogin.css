@@ -13,7 +13,7 @@ header {
 header a {
 	color: #fff;
 	text-decoration: none;
-	font-family: "SF Distant Galaxy";
+	font-family: sfGalaxy;
 	font-size: 120%;
 	padding-left: 4%;
 	display: run-in;
@@ -52,7 +52,7 @@ header a img {
 #form label {
 	width: 100%;
 	color: #E9872A;
-	font-family: "SF Distant Galaxy"
+	font-family: sfGalaxy;
 }
 
 #form input {
@@ -114,4 +114,9 @@ header a img {
 	font-size: 100%;
 	padding: 10px 20px 10px 20px;
 	color: #fff;
+}
+
+@font-face {
+    font-family: sfGalaxy;
+    src: url(../media/fonts/SF_Distant_Galaxy.ttf);
 }
