@@ -36,6 +36,15 @@ public class UserDAO {
     }
     
     /**
+     * 
+     * @throws SQLException 
+     */
+    private void startsConnection() throws SQLException {
+        if(connection.isClosed())
+               connection = ConnectionFactory.getConnection();
+    }
+    
+    /**
      * TODO
      * @param user
      * @throws SQLException 
@@ -43,15 +52,20 @@ public class UserDAO {
     public void insert(User user) throws SQLException {
         String sql = "INSERT INTO usuario (nome, email, senha) VALUES (?,?,?)";
         try {
+            this.startsConnection();
+            
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
             
             statement.execute();
-            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) { /* empty */ }
         }
     }
     
@@ -66,6 +80,8 @@ public class UserDAO {
         String sql = "SELECT * FROM usuario WHERE email='" + email + "' AND senha='" + senha + "'";
         User usuario = new User();
         try {
+            this.startsConnection();
+            
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             boolean existe = resultSet.next();
@@ -75,13 +91,17 @@ public class UserDAO {
                 usuario.setEmail(email);
                 usuario.setName(nome);
                 usuario.setPassword(senha);
-            } else {
+            } else
                 usuario = null;
-            }
+            
             return usuario;
             
         } catch(SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) { /* empty */ }
         }
     }
 }
