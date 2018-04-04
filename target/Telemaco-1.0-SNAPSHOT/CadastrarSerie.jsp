@@ -4,17 +4,15 @@
     Author     : valmir
 --%>
 
-<%@page import="com.imd.telemaco.model.Usuario"%>
+<%@page import="com.imd.telemaco.entity.User"%>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="serie" scope="session" class="com.imd.telemaco.model.Usuario" />
-<jsp:setProperty name="serie" property="nome" />
 <% 
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    Usuario logado = new Usuario();
+    User logado = new User();
     if(session.getAttribute("logado") == null)
         response.sendRedirect("Login.jsp");
     else
-        logado = (Usuario) (session.getAttribute("logado"));
+        logado = (User) (session.getAttribute("logado"));
 %>
 <!DOCTYPE html>
 <html>
