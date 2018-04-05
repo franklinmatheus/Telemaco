@@ -14,7 +14,6 @@ header {
 }
 
 #icon {
-	
 	float: left;
 	margin-left: 3%;
 	height: 80%;
@@ -155,16 +154,21 @@ header ul li:hover > ul {
 		background: transparent;
 		height: 100%;
 		margin-left: 1px;
+		text-align: center;
+	}
+
+	#btn-menu img {
+		line-height: 100px;
+		height: 60px;
 	}
 
 	#icon {
 		display: block;
-		height: 80%; 
-		left: 35%;
+		height: 90%;
 		position: relative;
-		line-height: 120px;
+		line-height: 100px;
 	}
-
+	
 	#icon img {
 		vertical-align: middle;
 	}
@@ -261,23 +265,23 @@ header ul li:hover > ul {
 		vertical-align: middle;
 	}
 
-	#profile {
-		float: right;
-		height: 100%;
-		width: 10%;
-		position: relative;
-		margin-right: 10px;
-		line-height: 120px;
-	}
-
-	#profile img {
-		vertical-align: middle;
-	}
-
 	#searchImg{
 		height: 50%;
 	}
 
+	#profile {
+		float: right;
+		height: 100%;
+		display: inline;
+		position: relative;
+		margin-right: 20px;
+		line-height: 100px;
+	}
+
+	#profile img {
+		vertical-align: middle;
+		height: 60px;
+	}
 
 	#profile:hover > ul {
 		display: block;
