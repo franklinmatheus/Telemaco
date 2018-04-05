@@ -1,0 +1,123 @@
+body {
+	background: #333;
+}
+
+header {
+	width: 100%;
+	height: 120px;
+	background: #E9872A;
+	position: fixed;
+}
+
+#icon {
+	float: left;
+	margin-left: 3%;
+	height: 80%;
+	position: relative;
+	line-height: 120px;
+}
+
+#icon img {
+	vertical-align: middle;
+}
+
+header ul {
+	margin: 0;
+	float: left;
+	height: 100%;
+	width: 80%;
+}
+
+header ul li {
+	display: inline-block;
+	list-style: none;
+	width: 130px;
+	height: 100%;
+}
+
+header > ul > li:hover {
+	background: rgba(206, 106, 12, .9);
+	transition: 1s;
+}
+
+header ul li a {
+	height: 45%;
+	margin-top: 50%;
+	color: #fff;
+	display: block;
+	font-size: 75%;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+header ul ul {
+	background: #ce6a0c;
+	width: 500px;
+	height: auto;
+	display: none;
+	padding-left: 0;
+}
+
+header ul ul li {
+	height: 60px;
+	width: 50%;
+	float: left;
+	line-height: 60px;
+}
+
+header ul ul li a {
+	text-align: left;
+	margin-top: 0;
+	margin-left: 3%;
+	color: #fff;
+	width: 100%;
+}
+
+header ul ul li:hover {
+	background: #333;
+	transition: .7s;
+}
+
+header ul li:hover > ul {
+	display: block;
+}
+
+#li-search {
+	height: 40%;
+	width: 270px;
+	margin-left: 5%;
+	display: inline-table;
+}
+
+#li-search input {
+	width: 70%;
+	border: none;
+	padding-left: 10px;
+	height: 100%;
+	border-right: 3px solid #333;
+	font-family: arial;
+}
+
+#li-search button {
+	width: 25%;
+	background: #fff;
+	border: none;
+	border-radius: 0 5px 5px 0;
+	float: right;
+}
+
+#li-search button img {
+	vertical-align: middle;
+}
+
+#profile {
+	margin-right: 3%;
+	position: relative;
+	line-height: 120px;	
+}
+
+#profile img {
+	vertical-align: middle;
+}
+

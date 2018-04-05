@@ -1,5 +1,5 @@
 body {
-	background-image: linear-gradient(135deg, rgba(30,30,30,.95), rgba(0,0,0,.6), rgba(0,0,0,1)), url(../media/images/overviewBg.png);
+	background-image: linear-gradient(135deg, rgba(40,40,40,.95), rgba(10,10,10,.7), rgba(0,0,0,1)), url(../media/images/overviewBg.png);
 	background-size: 103%;
 	background-repeat: no-repeat, repeat-y;
 	height: 100vh;
