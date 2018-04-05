@@ -12,9 +12,9 @@
         <title>Home</title>
     </head>
     <body>
-        <h2>Bem vindo, escolha uma opção!</h2>
+        <h2>Welcome! Choose an option below</h2>
         <ul>
-            <li><a href="Cadastrar.jsp">Cadastrar</a></li>
+            <li><a href="Register.jsp">Register</a></li>
             <li><a href="Login.jsp">Login</a></li>
         </ul>
     </body>

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author franklin
  */
-public class LoginUsuario extends HttpServlet {
+public class UpdatePassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,19 +35,19 @@ public class LoginUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            ValidateUserServices validate = new ValidateUserServices();
-            User user = validate.validUserLogin(request.getParameter("email"), request.getParameter("senha"));
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("logged");
+            String cOldPassword = request.getParameter("coldpassword");
+            String newPassword = request.getParameter("newpassword");
+            String cNewPassword = request.getParameter("cnewpassword");
             
-            if(user == null)
-                response.sendRedirect("Login.jsp");
-            else {
-                HttpSession session = request.getSession(true); 
-                session.setAttribute("logado", user); 
-                response.sendRedirect("Logado.jsp");
-            }
+            ValidateUserServices validate = new ValidateUserServices();
+            if(validate.validUserPasswordUpdate(user, cOldPassword, newPassword, cNewPassword))
+                response.sendRedirect("Logged.jsp");
+            else
+                response.sendRedirect("UpdatePassword.jsp");
         } catch(Exception e) {
-            e.getMessage();
-            response.sendRedirect("Erro.jsp");
+            response.sendRedirect("Error.jsp");
         }
     }
 

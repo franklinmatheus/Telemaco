@@ -8,25 +8,25 @@
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    User logado = new User();
-    if(session.getAttribute("logado") == null)
+    User logged = new User();
+    if(session.getAttribute("logged") == null)
         response.sendRedirect("Login.jsp");
     else
-        logado = (User) (session.getAttribute("logado"));
+        logged = (User) (session.getAttribute("logged"));
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastrar Serie</title>
+        <title>Register serie</title>
     </head>
     <body>
-       <p><a href="Logado.jsp">Home </a>></p>
-       <h1>Cadastro de Serie</h1>
+       <p><a href="Logged.jsp">Home </a>></p>
+       <h1>Register serie</h1>
         <p>
-        <form name="CadastrarSerie" action="CadastrarSerie" method="POST">
-            <p><span>Nome</span><input type="text" name="nome" required /></p>
-            <p><input type="submit" name="CadastrarSerie" /></p>
+        <form name="RegisterSerie" action="RegisterSerie" method="POST">
+            <p><span>Name</span><input type="text" name="name" required /></p>
+            <p><input type="submit" name="Submit" /></p>
         </form>
         </p>
     </body>

@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>CadastrarUsuario</servlet-name>
-        <servlet-class>com.imd.telemaco.presentation.CadastrarUsuario</servlet-class>
+        <servlet-name>RegisterUser</servlet-name>
+        <servlet-class>com.imd.telemaco.presentation.RegisterUser</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginUsuario</servlet-name>
-        <servlet-class>com.imd.telemaco.presentation.LoginUsuario</servlet-class>
+        <servlet-name>LoginUser</servlet-name>
+        <servlet-class>com.imd.telemaco.presentation.LoginUser</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LogoutUsuario</servlet-name>
-        <servlet-class>com.imd.telemaco.presentation.LogoutUsuario</servlet-class>
+        <servlet-name>LogoutUser</servlet-name>
+        <servlet-class>com.imd.telemaco.presentation.LogoutUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePassword</servlet-name>
+        <servlet-class>com.imd.telemaco.presentation.UpdatePassword</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CadastrarUsuario</servlet-name>
-        <url-pattern>/CadastrarUsuario</url-pattern>
+        <servlet-name>RegisterUser</servlet-name>
+        <url-pattern>/RegisterUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginUsuario</servlet-name>
-        <url-pattern>/LoginUsuario</url-pattern>
+        <servlet-name>LoginUser</servlet-name>
+        <url-pattern>/LoginUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LogoutUsuario</servlet-name>
-        <url-pattern>/LogoutUsuario</url-pattern>
+        <servlet-name>LogoutUser</servlet-name>
+        <url-pattern>/LogoutUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePassword</servlet-name>
+        <url-pattern>/UpdatePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

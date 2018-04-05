@@ -5,20 +5,24 @@
  */
 package com.imd.telemaco.presentation;
 
+import com.imd.telemaco.business.ValidateUserServices;
+import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author franklin
  */
-public class LogoutUsuario extends HttpServlet {
-
+public class RegisterUser extends HttpServlet {
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,10 +36,32 @@ public class LogoutUsuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        HttpSession session = request.getSession();
-        session.removeAttribute("logado");
-        session.invalidate();
-        response.sendRedirect("Login.jsp");
+        PrintWriter out = response.getWriter();
+        try {            
+            String name = request.getParameter("name");
+            String lastname = request.getParameter("lastname");
+            String email = request.getParameter("email");
+            String cemail = request.getParameter("cemail");
+            String password = request.getParameter("password");
+            String cpassword = request.getParameter("cpassword");
+            String gender = request.getParameter("gender");
+            String date = request.getParameter("date");
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsedDate = format.parse(date);
+            
+            ValidateUserServices validate = new ValidateUserServices();
+            
+            User user = new User(name, lastname, email, password, parsedDate, gender);
+            if(validate.validUserInsert(user, cemail, cpassword))
+                response.sendRedirect("Index.jsp");
+            else
+                response.sendRedirect("Register.jsp");
+        } catch(ParseException e) {
+            response.sendRedirect("Register.jsp");
+        } finally {
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

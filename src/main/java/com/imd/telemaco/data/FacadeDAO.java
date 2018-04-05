@@ -57,6 +57,20 @@ public class FacadeDAO {
         }
     }
     
+    /**
+     * TODO
+     * @param user
+     * @param newPassword 
+     */
+    public void updatePassword(User user, String newPassword) {
+        try {
+            UserDAO userDAO = UserDAO.getInstance();
+            userDAO.updatePassword(user, newPassword);
+        } catch(SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+    
     public void cadastrarSerie(Serie serie) {
         
         try {

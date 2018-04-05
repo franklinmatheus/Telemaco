@@ -25,7 +25,7 @@ public class ValidateUserServices {
      */
     public boolean validUserInsert(User user, String cemail, String cpassword) {
         if(this.valid(user))
-            if(this.confirmInputs(user, cemail, cpassword))
+            if(this.confirmPassword(user.getPassword(), cpassword) && this.confirmEmail(user.getEmail(), cemail))
                 if(!this.userExists(user)) {
                     FacadeDAO facade = FacadeDAO.getInstance();
                     facade.insertUser(user);
@@ -50,15 +50,22 @@ public class ValidateUserServices {
     
     /**
      * TODO
-     * @param user
-     * @param cemail
+     * @param password
      * @param cpassword
      * @return 
      */
-    private boolean confirmInputs(User user, String cemail, String cpassword) {
-        if(user.getEmail().equals(cemail) && user.getPassword().equals(cpassword))
-            return true;
-        return false;
+    private boolean confirmPassword(String password, String cpassword) {
+        return password.equals(cpassword);
+    }
+    
+    /**
+     * TODO
+     * @param email
+     * @param cemail
+     * @return 
+     */
+    private boolean confirmEmail(String email, String cemail) {
+        return email.equals(cemail);
     }
     
     /**
@@ -76,7 +83,7 @@ public class ValidateUserServices {
     }
     
     /**
-     * 
+     * TODO
      * @param email
      * @param password
      * @return 
@@ -87,5 +94,22 @@ public class ValidateUserServices {
         
         return user;
     }
-
+    
+    /**
+     * 
+     * @param user
+     * @param cOldPassword
+     * @param newPassword
+     * @param cNewPassword
+     * @return 
+     */
+    public boolean validUserPasswordUpdate(User user, String cOldPassword, String newPassword, String cNewPassword) {
+        if(this.confirmPassword(newPassword, cNewPassword))
+            if(this.confirmPassword(user.getPassword(), cOldPassword)) {
+                FacadeDAO facade = FacadeDAO.getInstance();
+                facade.updatePassword(user, newPassword);
+                return true;
+            }
+        return false;
+    }
 }

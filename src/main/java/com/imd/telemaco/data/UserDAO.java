@@ -94,8 +94,8 @@ public class UserDAO {
             if(existe) {
                 String nome = resultSet.getString("name");
                 String lastname = resultSet.getString("lastname");
-                String gender = resultSet.getString("name");
-                Date birth = resultSet.getDate("date");
+                String gender = resultSet.getString("gender");
+                Date birth = resultSet.getDate("birth");
                 int id = resultSet.getInt("id");
                 
                 user.setEmail(email);
@@ -115,7 +115,29 @@ public class UserDAO {
         } finally {
             try {
                 connection.close();
-            } catch (SQLException e) { /* empty */ }
+            } catch(SQLException e) { /* empty */ }
+        }
+    }
+    
+    /**
+     * TODO
+     * @param user
+     * @param newPassword
+     */
+    public void updatePassword(User user, String newPassword) {
+        String sql = "UPDATE telemaco.user SET password=" + newPassword + " WHERE id=" + user.getId();
+        
+        try {
+            this.startsConnection();
+            Statement statement = connection.createStatement();
+            user.setPassword(newPassword);
+            statement.execute(sql);
+        } catch(SQLException e) {
+            
+        } finally {
+            try{
+                connection.close();
+            } catch(SQLException e) { /* empty */ }
         }
     }
 }

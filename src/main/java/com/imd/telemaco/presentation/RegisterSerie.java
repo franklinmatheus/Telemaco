@@ -5,13 +5,10 @@
  */
 package com.imd.telemaco.presentation;
 
-import com.imd.telemaco.business.ValidateUserServices;
-import com.imd.telemaco.entity.User;
+import com.imd.telemaco.data.FacadeDAO;
+import com.imd.telemaco.entity.Serie;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author franklin
+ * @author valmirn
  */
-public class CadastrarUsuario extends HttpServlet {
+public class RegisterSerie extends HttpServlet {
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,31 +33,24 @@ public class CadastrarUsuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        PrintWriter out = response.getWriter();
-        try {            
+        try (PrintWriter out = response.getWriter()) {            
             String name = request.getParameter("name");
-            String lastname = request.getParameter("lastname");
-            String email = request.getParameter("email");
-            String cemail = request.getParameter("cemail");
-            String password = request.getParameter("password");
-            String cpassword = request.getParameter("cpassword");
-            String gender = request.getParameter("gender");
-            String date = request.getParameter("date");
             
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date parsedDate = format.parse(date);
-            
-            ValidateUserServices validate = new ValidateUserServices();
-            
-            User user = new User(name, lastname, email, password, parsedDate, gender);
-            if(validate.validUserInsert(user, cemail, cpassword))
-                response.sendRedirect("Index.jsp");
-            else
-                response.sendRedirect("Cadastrar.jsp");
-        } catch(ParseException e) {
-            response.sendRedirect("Cadastro.jsp");
-        } finally {
-            out.close();
+            if( ( name == null || name.isEmpty() ) ) {
+                response.sendRedirect("RegisterSerie.jsp");
+            } else {
+                Serie serie;
+                serie = new Serie();
+                serie.setName(name);
+                
+                FacadeDAO facade = FacadeDAO.getInstance();
+                facade.cadastrarSerie(serie);
+                
+                response.sendRedirect("Logged.jsp");
+            } 
+        } catch(Exception e) {
+            e.getMessage();
+            response.sendRedirect("Error.jsp");
         }
     }
 
@@ -104,3 +94,4 @@ public class CadastrarUsuario extends HttpServlet {
     }// </editor-fold>
 
 }
+

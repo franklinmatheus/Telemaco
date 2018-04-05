@@ -1,4 +1,3 @@
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/LoginUsuario.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Season.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/FacadeDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateSerieServices.java
@@ -6,11 +5,13 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Rating.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/User.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateUserServices.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/LogoutUsuario.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/CadastrarUsuario.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/UpdatePassword.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/UserDAO.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/LoginUser.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Serie.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/LogoutUser.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Episode.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/CadastrarSerie.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/RegisterSerie.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/SerieDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/ConnectionFactory.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/RegisterUser.java

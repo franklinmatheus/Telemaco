@@ -5,21 +5,22 @@
  */
 package com.imd.telemaco.presentation;
 
-import com.imd.telemaco.data.FacadeDAO;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.business.ValidateUserServices;
+import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author valmirn
+ * @author franklin
  */
-public class CadastrarSerie extends HttpServlet {
-    
+public class LoginUser extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,25 +33,21 @@ public class CadastrarSerie extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        try (PrintWriter out = response.getWriter()) {            
-            String nome = request.getParameter("nome");
+        PrintWriter out = response.getWriter();
+        try {
+            ValidateUserServices validate = new ValidateUserServices();
+            User user = validate.validUserLogin(request.getParameter("email"), request.getParameter("password"));
             
-            if( ( nome == null || nome.isEmpty() ) ) {
-                response.sendRedirect("CadastrarSerie.jsp");
-            } else {
-                Serie serie;
-                serie = new Serie();
-                serie.setName(nome);
-                
-                FacadeDAO facade = FacadeDAO.getInstance();
-                facade.cadastrarSerie(serie);
-                
-                response.sendRedirect("Logado.jsp");
-            } 
+            if(user == null)
+                response.sendRedirect("Login.jsp");
+            else {
+                HttpSession session = request.getSession(true); 
+                session.setAttribute("logged", user); 
+                response.sendRedirect("Logged.jsp");
+            }
         } catch(Exception e) {
             e.getMessage();
-            response.sendRedirect("Erro.jsp");
+            response.sendRedirect("Error.jsp");
         }
     }
 
@@ -94,4 +91,3 @@ public class CadastrarSerie extends HttpServlet {
     }// </editor-fold>
 
 }
-

@@ -15,9 +15,9 @@
         <p><a href="Index.jsp">Home </a>></p>
         <h1>Login</h1>
         <p>
-        <form name="cadastro" action="LoginUsuario" method="POST">
+        <form name="register" action="LoginUser" method="POST">
             <p><span>Email</span><input type="email" name="email" required /></p>
-            <p><span>Senha</span><input type="password" name="senha" required /></p>
+            <p><span>Senha</span><input type="password" name="password" required /></p>
             <p><input type="submit" value="Login" /></p>
         </form>
         </p>
