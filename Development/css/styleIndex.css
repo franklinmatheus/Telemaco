@@ -14,6 +14,7 @@ header {
 }
 
 #icon {
+	
 	float: left;
 	margin-left: 3%;
 	height: 80%;
@@ -139,7 +140,7 @@ header ul li:hover > ul {
 	display: none !important;
 }
 
-@media screen and (max-width: 1272px) {
+@media screen and (max-width: 1280px) {
 	header {
 		width: 100%;
 		height: 100px;
@@ -148,16 +149,18 @@ header ul li:hover > ul {
 	}
 
 	#btn-menu {
-		display: block;
+		float: left;
+		display: inline;
+		position: relative;
 		background: transparent;
 		height: 100%;
-		margin-left: 3%;
+		margin-left: 1px;
 	}
 
 	#icon {
-		height: 80%;
-		left: 45%;
-		top: 0;
+		display: block;
+		height: 80%; 
+		left: 35%;
 		position: relative;
 		line-height: 120px;
 	}
@@ -167,7 +170,7 @@ header ul li:hover > ul {
 	}
 
 	header ul {
-		display: flex;
+		display: none;
 		margin: 0;
 		float: left;
 		height: 100%;
@@ -175,7 +178,7 @@ header ul li:hover > ul {
 	}
 
 	header ul li {
-		display: none;
+		display: inline-block;
 		list-style: none;
 		width: 130px;
 		height: 100%;
@@ -263,13 +266,16 @@ header ul li:hover > ul {
 		height: 100%;
 		width: 10%;
 		position: relative;
-		margin-right: 20px;
+		margin-right: 10px;
 		line-height: 120px;
 	}
 
 	#profile img {
 		vertical-align: middle;
-		height: 70%;
+	}
+
+	#searchImg{
+		height: 50%;
 	}
 
 
