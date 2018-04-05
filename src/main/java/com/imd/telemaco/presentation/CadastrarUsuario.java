@@ -9,6 +9,9 @@ import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,20 +38,27 @@ public class CadastrarUsuario extends HttpServlet {
         
         PrintWriter out = response.getWriter();
         try {            
-            String nome = request.getParameter("nome");
+            String name = request.getParameter("name");
+            String lastname = request.getParameter("lastname");
             String email = request.getParameter("email");
-            String senha = request.getParameter("senha");
+            String cemail = request.getParameter("cemail");
+            String password = request.getParameter("password");
+            String cpassword = request.getParameter("cpassword");
+            String gender = request.getParameter("gender");
+            String date = request.getParameter("date");
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsedDate = format.parse(date);
             
             ValidateUserServices validate = new ValidateUserServices();
             
-            User user = new User(nome, email, senha);
-            if(validate.validUserInsert(user))
+            User user = new User(name, lastname, email, password, parsedDate, gender);
+            if(validate.validUserInsert(user, cemail, cpassword))
                 response.sendRedirect("Index.jsp");
             else
                 response.sendRedirect("Cadastrar.jsp");
-        } catch(Exception e) {
-            e.getMessage();
-            response.sendRedirect("Erro.jsp");
+        } catch(ParseException e) {
+            response.sendRedirect("Cadastro.jsp");
         } finally {
             out.close();
         }

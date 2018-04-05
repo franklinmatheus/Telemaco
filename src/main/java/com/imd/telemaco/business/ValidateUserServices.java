@@ -19,15 +19,18 @@ public class ValidateUserServices {
     /**
      * TODO
      * @param user
+     * @param cemail
+     * @param cpassword
      * @return 
      */
-    public boolean validUserInsert(User user) {
+    public boolean validUserInsert(User user, String cemail, String cpassword) {
         if(this.valid(user))
-            if(!this.userExists(user)) {
-                FacadeDAO facade = FacadeDAO.getInstance();
-                facade.insertUser(user);
-                return true;
-            }
+            if(this.confirmInputs(user, cemail, cpassword))
+                if(!this.userExists(user)) {
+                    FacadeDAO facade = FacadeDAO.getInstance();
+                    facade.insertUser(user);
+                    return true;
+                }
         return false;
     }
     
@@ -48,6 +51,19 @@ public class ValidateUserServices {
     /**
      * TODO
      * @param user
+     * @param cemail
+     * @param cpassword
+     * @return 
+     */
+    private boolean confirmInputs(User user, String cemail, String cpassword) {
+        if(user.getEmail().equals(cemail) && user.getPassword().equals(cpassword))
+            return true;
+        return false;
+    }
+    
+    /**
+     * TODO
+     * @param user
      * @return 
      */
     private boolean userExists(User user) {
@@ -59,10 +75,17 @@ public class ValidateUserServices {
         return true;
     }
     
+    /**
+     * 
+     * @param email
+     * @param password
+     * @return 
+     */
     public User validUserLogin(String email, String password) {
         FacadeDAO facade = FacadeDAO.getInstance();
         User user = facade.selectUser(email, password);
         
         return user;
     }
+
 }

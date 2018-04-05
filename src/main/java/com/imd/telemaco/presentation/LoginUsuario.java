@@ -6,7 +6,6 @@
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateUserServices;
-import com.imd.telemaco.data.FacadeDAO;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
