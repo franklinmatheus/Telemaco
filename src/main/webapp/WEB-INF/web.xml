@@ -38,7 +38,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>Index.jsp</welcome-file>
+        <welcome-file>Overview.jsp</welcome-file>
     </welcome-file-list>
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
