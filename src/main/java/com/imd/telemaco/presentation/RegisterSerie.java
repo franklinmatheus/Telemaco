@@ -44,7 +44,7 @@ public class RegisterSerie extends HttpServlet {
                 serie.setName(name);
                 
                 FacadeDAO facade = FacadeDAO.getInstance();
-                facade.cadastrarSerie(serie);
+                //facade.cadastrarSerie(serie);
                 
                 response.sendRedirect("Logged.jsp");
             } 

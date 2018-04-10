@@ -17,7 +17,7 @@ import java.util.Date;
  *
  * @author franklin
  */
-public class UserDAO {
+public class UserDAO implements DAO<User>{
     private Connection connection;
     private static UserDAO userDAO = null;
     
@@ -50,6 +50,7 @@ public class UserDAO {
      * @param user
      * @throws SQLException 
      */
+    @Override
     public void insert(User user) throws SQLException {
         String sql = "INSERT INTO telemaco.user (name, email, password, lastname, birth, gender) VALUES (?,?,?,?,?,?)";
         try {
@@ -71,6 +72,114 @@ public class UserDAO {
             try {
                 connection.close();
             } catch (SQLException e) { /* empty */ }
+        }
+    }
+    
+    
+    /**
+     * TODO
+     * @param id
+     * @return 
+     */
+    @Override
+    public User select(int id) throws SQLException {
+        String sql = "SELECT * FROM telemaco.user WHERE id='" + id + "'";
+        User user = new User();
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            boolean existe = resultSet.next();
+            
+            if(existe) {
+                String nome = resultSet.getString("name");
+                String lastname = resultSet.getString("lastname");
+                String gender = resultSet.getString("gender");
+                Date birth = resultSet.getDate("birth");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                
+                user.setEmail(email);
+                user.setName(nome);
+                user.setPassword(password);
+                user.setId(id);
+                user.setGender(gender);
+                user.setLastName(lastname);
+                user.setBirth(birth);
+            } else
+                user = null;
+            
+            return user;
+            
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch(SQLException e) { /* empty */ }
+        }
+    }
+    
+    /**
+     * TODO
+     * @param user 
+     */
+    @Override
+    public void update(User user) throws SQLException {
+        String sql = "UPDATE telemaco.user SET "
+                + "name=?, "
+                + "email=?, "
+                + "password=?, "
+                + "lastname=?, "
+                + "birth=?, "
+                + "gender=? "
+                + "WHERE id=?";
+        try {
+            this.startsConnection();
+            
+            java.sql.Date date = new java.sql.Date(user.getBirth().getTime());
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getLastName());
+            statement.setDate(5, date);
+            statement.setString(6, user.getGender());
+            statement.setInt(7, user.getId());
+            
+            statement.execute();
+            System.out.println("SUCESS");
+        } catch (SQLException e) {
+            System.out.println("EXCEPTION");
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                System.out.println("FINALLY");
+                connection.close();
+            } catch (SQLException e) { /* empty */ }
+        }
+    }
+    
+    /**
+     * TODO
+     * @param user 
+     */
+    @Override
+    public void delete(User user) {
+        String sql = "REMOVE FROM telemaco.user WHERE id='" + user.getId() + "'";
+        
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch(SQLException e) {
+            throw new RuntimeException();
+        } finally {
+            try { 
+                connection.close();
+            } catch(SQLException e) { /* empty */ }
         }
     }
     
@@ -114,28 +223,6 @@ public class UserDAO {
             throw new RuntimeException(e);
         } finally {
             try {
-                connection.close();
-            } catch(SQLException e) { /* empty */ }
-        }
-    }
-    
-    /**
-     * TODO
-     * @param user
-     * @param newPassword
-     */
-    public void updatePassword(User user, String newPassword) {
-        String sql = "UPDATE telemaco.user SET password=" + newPassword + " WHERE id=" + user.getId();
-        
-        try {
-            this.startsConnection();
-            Statement statement = connection.createStatement();
-            user.setPassword(newPassword);
-            statement.execute(sql);
-        } catch(SQLException e) {
-            
-        } finally {
-            try{
                 connection.close();
             } catch(SQLException e) { /* empty */ }
         }

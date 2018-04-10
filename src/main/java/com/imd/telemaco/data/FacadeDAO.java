@@ -6,7 +6,6 @@
 package com.imd.telemaco.data;
 
 import com.imd.telemaco.entity.User;
-import com.imd.telemaco.entity.Serie;
 import java.sql.SQLException;
 
 /**
@@ -34,9 +33,24 @@ public class FacadeDAO {
      */
     public void insertUser(User user) {
         try {
-            UserDAO usuarioDAO = UserDAO.getInstance();
-            usuarioDAO.insert(user);
+            UserDAO userDAO = UserDAO.getInstance();
+            userDAO.insert(user);
         } catch(SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+    
+    /**
+     * TODO
+     * @param id
+     * @return 
+     */
+    public User selectUser(int id) {
+        try {
+            UserDAO userDAO = UserDAO.getInstance();
+            User user = userDAO.select(id);
+            return user;
+        } catch (SQLException ex) {
             throw new RuntimeException();
         }
     }
@@ -58,28 +72,38 @@ public class FacadeDAO {
     }
     
     /**
-     * TODO
-     * @param user
-     * @param newPassword 
+     * 
+     * @param user 
      */
-    public void updatePassword(User user, String newPassword) {
+    public void updateUser(User user) {
         try {
             UserDAO userDAO = UserDAO.getInstance();
-            userDAO.updatePassword(user, newPassword);
+            userDAO.update(user);
         } catch(SQLException e) {
             throw new RuntimeException();
         }
     }
     
-    public void cadastrarSerie(Serie serie) {
-        
+    /**
+     * TODO
+     * @param user
+     * @param newPassword 
+     */
+    public void updatePassword(User user, String newPassword) {
+        user.setPassword(newPassword);
+        this.updateUser(user);
+    }
+    
+    /**
+     * TODO
+     * @param user 
+     */
+    public void removeUser(User user) {
         try {
-            SerieDAO serieDAO;
-            serieDAO = SerieDAO.getInstance();
-            serieDAO.cadastrarSerie(serie);
+            UserDAO userDAO = UserDAO.getInstance();
+            userDAO.delete(user);
         } catch(SQLException e) {
-            
+            throw new RuntimeException();
         }
-        
     }
 }

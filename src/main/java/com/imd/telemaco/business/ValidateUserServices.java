@@ -96,7 +96,7 @@ public class ValidateUserServices {
     }
     
     /**
-     * 
+     * TODO
      * @param user
      * @param cOldPassword
      * @param newPassword
@@ -110,6 +110,21 @@ public class ValidateUserServices {
                 facade.updatePassword(user, newPassword);
                 return true;
             }
+        return false;
+    }
+    
+    /**
+     * TODO
+     * @param user
+     * @return 
+     */
+    public boolean removeUser(User user) {
+        if(this.userExists(user)) {
+            FacadeDAO facade = FacadeDAO.getInstance();
+            facade.removeUser(user);
+            
+            return true;
+        }
         return false;
     }
 }
