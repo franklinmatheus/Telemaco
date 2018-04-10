@@ -26,11 +26,57 @@ public class ValidateUserServices {
     public boolean validUserInsert(User user, String cemail, String cpassword) {
         if(this.valid(user))
             if(this.confirmPassword(user.getPassword(), cpassword) && this.confirmEmail(user.getEmail(), cemail))
-                if(!this.userExists(user)) {
+                if(!this.emailAlreadyExists(user)) {
                     FacadeDAO facade = FacadeDAO.getInstance();
                     facade.insertUser(user);
                     return true;
                 }
+        return false;
+    }
+    
+    /**
+     * TODO
+     * @param email
+     * @param password
+     * @return 
+     */
+    public User validUserLogin(String email, String password) {
+        FacadeDAO facade = FacadeDAO.getInstance();
+        User user = facade.selectUser(email, password);
+        
+        return user;
+    }
+    
+    /**
+     * TODO
+     * @param user
+     * @param cOldPassword
+     * @param newPassword
+     * @param cNewPassword
+     * @return 
+     */
+    public boolean validUserPasswordUpdate(User user, String cOldPassword, String newPassword, String cNewPassword) {
+        if(this.confirmPassword(newPassword, cNewPassword))
+            if(this.confirmPassword(user.getPassword(), cOldPassword)) {
+                FacadeDAO facade = FacadeDAO.getInstance();
+                facade.updateUser(user, newPassword);
+                return true;
+            }
+        return false;
+    }
+    
+    /**
+     * TODO
+     * @param user
+     * @return 
+     */
+    public boolean removeUser(User user) {
+        if(this.userExists(user)) {
+            FacadeDAO facade = FacadeDAO.getInstance();
+            facade.removeUser(user);
+            
+            return true;
+        }
         return false;
     }
     
@@ -75,56 +121,20 @@ public class ValidateUserServices {
      */
     private boolean userExists(User user) {
         FacadeDAO facade = FacadeDAO.getInstance();
-        User exists = facade.selectUser(user.getEmail(), user.getPassword());
+        User exists = facade.selectUser(user.getId());
         
-        if(exists == null)
-            return false;
-        return true;
+        return exists != null;
     }
     
     /**
      * TODO
-     * @param email
-     * @param password
+     * @param user
      * @return 
      */
-    public User validUserLogin(String email, String password) {
+    private boolean emailAlreadyExists(User user) {
         FacadeDAO facade = FacadeDAO.getInstance();
-        User user = facade.selectUser(email, password);
+        User exists = facade.selectUser(user.getEmail());
         
-        return user;
-    }
-    
-    /**
-     * TODO
-     * @param user
-     * @param cOldPassword
-     * @param newPassword
-     * @param cNewPassword
-     * @return 
-     */
-    public boolean validUserPasswordUpdate(User user, String cOldPassword, String newPassword, String cNewPassword) {
-        if(this.confirmPassword(newPassword, cNewPassword))
-            if(this.confirmPassword(user.getPassword(), cOldPassword)) {
-                FacadeDAO facade = FacadeDAO.getInstance();
-                facade.updatePassword(user, newPassword);
-                return true;
-            }
-        return false;
-    }
-    
-    /**
-     * TODO
-     * @param user
-     * @return 
-     */
-    public boolean removeUser(User user) {
-        if(this.userExists(user)) {
-            FacadeDAO facade = FacadeDAO.getInstance();
-            facade.removeUser(user);
-            
-            return true;
-        }
-        return false;
+        return exists != null;
     }
 }

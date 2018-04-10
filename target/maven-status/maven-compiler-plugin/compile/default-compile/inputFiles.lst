@@ -3,6 +3,7 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateSerieServices.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/DAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Rating.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/DAOUserSpecialOperations.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/User.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateUserServices.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/UpdatePassword.java

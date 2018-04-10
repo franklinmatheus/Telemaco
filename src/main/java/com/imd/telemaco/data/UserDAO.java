@@ -17,7 +17,7 @@ import java.util.Date;
  *
  * @author franklin
  */
-public class UserDAO implements DAO<User>{
+public class UserDAO implements DAO<User>, DAOUserSpecialOperations {
     private Connection connection;
     private static UserDAO userDAO = null;
     
@@ -45,11 +45,6 @@ public class UserDAO implements DAO<User>{
                connection = ConnectionFactory.getConnection();
     }
     
-    /**
-     * TODO
-     * @param user
-     * @throws SQLException 
-     */
     @Override
     public void insert(User user) throws SQLException {
         String sql = "INSERT INTO telemaco.user (name, email, password, lastname, birth, gender) VALUES (?,?,?,?,?,?)";
@@ -75,12 +70,6 @@ public class UserDAO implements DAO<User>{
         }
     }
     
-    
-    /**
-     * TODO
-     * @param id
-     * @return 
-     */
     @Override
     public User select(int id) throws SQLException {
         String sql = "SELECT * FROM telemaco.user WHERE id='" + id + "'";
@@ -121,10 +110,6 @@ public class UserDAO implements DAO<User>{
         }
     }
     
-    /**
-     * TODO
-     * @param user 
-     */
     @Override
     public void update(User user) throws SQLException {
         String sql = "UPDATE telemaco.user SET "
@@ -161,10 +146,6 @@ public class UserDAO implements DAO<User>{
         }
     }
     
-    /**
-     * TODO
-     * @param user 
-     */
     @Override
     public void delete(User user) {
         String sql = "REMOVE FROM telemaco.user WHERE id='" + user.getId() + "'";
@@ -183,13 +164,7 @@ public class UserDAO implements DAO<User>{
         }
     }
     
-    /**
-     * TODO
-     * @param email
-     * @param password
-     * @return
-     * @throws SQLException 
-     */
+    @Override
     public User select(String email, String password) throws SQLException {
         String sql = "SELECT * FROM telemaco.user WHERE email='" + email + "' AND password='" + password + "'";
         User user = new User();
@@ -204,6 +179,46 @@ public class UserDAO implements DAO<User>{
                 String nome = resultSet.getString("name");
                 String lastname = resultSet.getString("lastname");
                 String gender = resultSet.getString("gender");
+                Date birth = resultSet.getDate("birth");
+                int id = resultSet.getInt("id");
+                
+                user.setEmail(email);
+                user.setName(nome);
+                user.setPassword(password);
+                user.setId(id);
+                user.setGender(gender);
+                user.setLastName(lastname);
+                user.setBirth(birth);
+            } else
+                user = null;
+            
+            return user;
+            
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch(SQLException e) { /* empty */ }
+        }
+    }
+
+    @Override
+    public User select(String email) throws SQLException {
+        String sql = "SELECT * FROM telemaco.user WHERE email='" + email + "'";
+        User user = new User();
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            boolean existe = resultSet.next();
+            
+            if(existe) {
+                String nome = resultSet.getString("name");
+                String lastname = resultSet.getString("lastname");
+                String gender = resultSet.getString("gender");
+                String password = resultSet.getString("password");
                 Date birth = resultSet.getDate("birth");
                 int id = resultSet.getInt("id");
                 

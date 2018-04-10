@@ -33,7 +33,7 @@ public class FacadeDAO {
      */
     public void insertUser(User user) {
         try {
-            UserDAO userDAO = UserDAO.getInstance();
+            DAO<User> userDAO = UserDAO.getInstance();
             userDAO.insert(user);
         } catch(SQLException e) {
             throw new RuntimeException();
@@ -47,7 +47,7 @@ public class FacadeDAO {
      */
     public User selectUser(int id) {
         try {
-            UserDAO userDAO = UserDAO.getInstance();
+            DAO<User> userDAO = UserDAO.getInstance();
             User user = userDAO.select(id);
             return user;
         } catch (SQLException ex) {
@@ -63,8 +63,23 @@ public class FacadeDAO {
      */
     public User selectUser(String email, String password) {
         try {
-            UserDAO userDAO = UserDAO.getInstance();
+            DAOUserSpecialOperations userDAO = UserDAO.getInstance();
             User user = userDAO.select(email, password);
+            return user;
+        } catch(SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+    
+    /**
+     * 
+     * @param email
+     * @return 
+     */
+    public User selectUser(String email) {
+        try {
+            DAOUserSpecialOperations userDAO = UserDAO.getInstance();
+            User user = userDAO.select(email);
             return user;
         } catch(SQLException e) {
             throw new RuntimeException();
@@ -77,7 +92,7 @@ public class FacadeDAO {
      */
     public void updateUser(User user) {
         try {
-            UserDAO userDAO = UserDAO.getInstance();
+            DAO<User> userDAO = UserDAO.getInstance();
             userDAO.update(user);
         } catch(SQLException e) {
             throw new RuntimeException();
@@ -89,7 +104,7 @@ public class FacadeDAO {
      * @param user
      * @param newPassword 
      */
-    public void updatePassword(User user, String newPassword) {
+    public void updateUser(User user, String newPassword) {
         user.setPassword(newPassword);
         this.updateUser(user);
     }
@@ -100,7 +115,7 @@ public class FacadeDAO {
      */
     public void removeUser(User user) {
         try {
-            UserDAO userDAO = UserDAO.getInstance();
+            DAO<User> userDAO = UserDAO.getInstance();
             userDAO.delete(user);
         } catch(SQLException e) {
             throw new RuntimeException();
