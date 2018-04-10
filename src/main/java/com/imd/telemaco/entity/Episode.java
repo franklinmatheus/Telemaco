@@ -9,7 +9,7 @@ package com.imd.telemaco.entity;
  *
  * @author valmir
  */
-class Episode {
+public class Episode {
     private String name;
     private boolean completed;
     

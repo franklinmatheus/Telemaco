@@ -1,18 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.imd.telemaco.entity;
 
 import java.util.ArrayList;
 
 /**
  *
- * @author valmir
+ * @author  Valmir Correia
+ * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
+ * @version 10.04.2018
  */
-class Season {
-    private String name;
+public class Season {
+    private int number;
+    private int epAmount;
     private ArrayList<Episode> episodes;
     
     /**
@@ -23,23 +21,34 @@ class Season {
     /**
      * Parametric constructor 
      */
-    public Season(String name, ArrayList<Episode> episodes) { 
-        this.name = name;
+    public Season(int number, ArrayList<Episode> episodes) { 
+        this.number   = number;
         this.episodes = episodes;
+        this.epAmount = episodes.size();
     }
 
     /**
-     * @return the name
+     * Returns the number season
+     * @return number
      */
-    public String getName() {
-        return name;
+    public int getNumber () {
+        return number;
+    }
+    
+    /**
+     * Returns the season episodes amount
+     * @return epAmount
+     */
+    public int getEpAmount () {
+    	return epAmount;
     }
 
     /**
-     * @param name the name to set
+     * Change the season number
+     * @param number
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setNumber (int number) {
+        this.number = number;
     }
 
     /**
@@ -54,26 +63,25 @@ class Season {
      */
     public void setEpisodes(ArrayList<Episode> episodes) {
         this.episodes = episodes;
+        this.epAmount = episodes.size();
     }
     
      /**
-     * Verifica todo array de series para ver se esta compelto
-     * @return the completed
-     */
-    public boolean isCompleted() {
-        
+      * Verify all series array to identify if is full 
+      * @return the completed
+      */
+    public boolean isCompleted () {
         for (Episode e : episodes) {
             if (e.isCompleted() == false) {
                 return false;
             }
         }
-        
         return true;
     }
     
     @Override
-    public String toString() {
-        return "Temporada{" + "nome=" + name + '}';
+    public String toString () {
+        return "Temporada{" + "nome=" + number + '}';
     }
     
 }
