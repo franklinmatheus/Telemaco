@@ -22,14 +22,23 @@ public class EpisodeDAO implements DAO<Episode> {
 		return epDAO;
 	}
 	
-	public void insert (Episode epsiode) {
-		String sql = "INSERT INTO epsiode (id) VALUES (?)";
+	public void insert (Episode episode) throws SQLException {
+		String sql = "INSERT INTO epsiode (id, name, number, time, synopsis) VALUES (?, ?, ?, ?, ?)";
+		
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
-			// TODO
+			statement.setInt(1, episode.getId());
+			statement.setString(2, episode.getName());
+			statement.setInt(3, episode.getNumber());
+			statement.setInt(4, episode.getTime());
+			statement.setString(5, episode.getSynopsis());
+
+			statement.execute();
 			
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
+		} finally {
+			connection.close();
 		}
 	}
 
@@ -65,14 +74,42 @@ public class EpisodeDAO implements DAO<Episode> {
 	}
 
 	@Override
-	public void delete(Episode object) throws SQLException {
-		// TODO Auto-generated method stub
+	public void delete(Episode episode) throws SQLException {
+		String sql = "REMOVE * FROM telemaco.episode WHERE id='" + episode.getId() + "'";
 		
+		try {
+			stm = connection.createStatement();
+			stm.execute(sql);
+		} catch (SQLException e) {
+			throw new RuntimeException (e);
+		} finally {
+			connection.close();
+		}
 	}
 
 	@Override
-	public void update(Episode object) throws SQLException {
-		// TODO Auto-generated method stub
+	public void update(Episode episode) throws SQLException {
+		String sql = "UPDATE telemaco.episode SET "
+				+ "name=?, "
+				+ "number=?, "
+				+ "time=?, "
+				+ "synopsis=?, "
+				+ "WHERE id='" + episode.getId() + "'";
+		
+		try {
+			PreparedStatement pStm = connection.prepareStatement(sql);
+			pStm.setString(1, episode.getName());
+			pStm.setInt(2, episode.getNumber());
+			pStm.setInt(3, episode.getTime());
+			pStm.setString(4, episode.getSynopsis());
+			
+			pStm.execute();
+			System.out.println("SUCESS");
+		} catch (SQLException e) {
+			System.out.println("EXCEPTION");
+		} finally {
+			connection.close();
+		}
 		
 	}
 }
