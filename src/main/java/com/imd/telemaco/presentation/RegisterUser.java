@@ -54,7 +54,7 @@ public class RegisterUser extends HttpServlet {
             
             User user = new User(name, lastname, email, password, parsedDate, gender);
             if(validate.validUserInsert(user, cemail, cpassword))
-                response.sendRedirect("Index.jsp");
+                response.sendRedirect("Overview.jsp");
             else
                 response.sendRedirect("Register.jsp");
         } catch(ParseException e) {

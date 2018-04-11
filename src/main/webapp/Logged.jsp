@@ -27,12 +27,14 @@
         <a href="RegisterSerie.jsp">Register serie</a><br/>
         <a href="UpdatePassword.jsp">Update password</a><br/>
         <a href="Series.jsp">See all series</a><br/>
-        <%=logged.getBirth()%><br/>
-        <%=logged.getId()%><br/>
-        <%=logged.getLastName()%><br/>
-        <%=logged.getEmail()%><br/>
-        <%=logged.getPassword()%><br/>
-        <%=logged.getGender()%><br/>
+        <br/>
+        <h2>Your informations:</h2>
+        <b>Birth: </b><%=logged.getBirth()%><br/>
+        <b>Id: </b><%=logged.getId()%><br/>
+        <b>Last name: </b><%=logged.getLastName()%><br/>
+        <b>Email: </b><%=logged.getEmail()%><br/>
+        <b>Password: </b><%=logged.getPassword()%><br/>
+        <b>Gender: </b><%=logged.getGender()%><br/>
         
         <form name="logout" action="LogoutUser" method="POST">
             <input type="submit" value="Logout" />
