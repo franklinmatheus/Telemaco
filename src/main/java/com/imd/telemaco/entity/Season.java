@@ -3,12 +3,15 @@ package com.imd.telemaco.entity;
 import java.util.ArrayList;
 
 /**
- *
+ * Class to represent a season of a series. A season has the
+ * following fields: id, number and episodes amount.
+ * 
  * @author  Valmir Correia
  * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
  * @version 10.04.2018
  */
 public class Season {
+	private int id;
     private int number;
     private int epAmount;
     private ArrayList<Episode> episodes;
@@ -20,13 +23,24 @@ public class Season {
     
     /**
      * Parametric constructor 
+     * @param number
+     * @param episodes
      */
-    public Season(int number, ArrayList<Episode> episodes) { 
-        this.number   = number;
+    public Season(int id, int number, ArrayList<Episode> episodes) { 
+        this.id = id;
+    	this.number   = number;
         this.episodes = episodes;
         this.epAmount = episodes.size();
     }
 
+    /**
+     * Returns the season id
+     * @return id
+     */
+    public int getId () {
+    	return id;
+    }
+    
     /**
      * Returns the number season
      * @return number
@@ -66,22 +80,9 @@ public class Season {
         this.epAmount = episodes.size();
     }
     
-     /**
-      * Verify all series array to identify if is full 
-      * @return the completed
-      */
-    public boolean isCompleted () {
-        for (Episode e : episodes) {
-            if (e.isCompleted() == false) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
     @Override
     public String toString () {
-        return "Temporada{" + "nome=" + number + '}';
+        return "Temporada " +  number;
     }
     
 }

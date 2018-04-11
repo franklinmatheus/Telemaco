@@ -40,8 +40,8 @@
     <welcome-file-list>
         <welcome-file>Overview.jsp</welcome-file>
     </welcome-file-list>
-    <error-page>
+    <!-- <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>Erro.jsp</location>
-    </error-page>
+    </error-page> -->
 </web-app>
