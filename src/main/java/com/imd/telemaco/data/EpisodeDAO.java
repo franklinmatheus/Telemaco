@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class EpisodeDAO implements DAO<Episode> {
 	private Connection connection;
@@ -23,7 +24,7 @@ public class EpisodeDAO implements DAO<Episode> {
 	}
 	
 	public void insert (Episode episode) throws SQLException {
-		String sql = "INSERT INTO epsiode (id, name, number, time, synopsis) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO epsiode (id, name, number, time, synopsis, fkIdSeason) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -32,6 +33,7 @@ public class EpisodeDAO implements DAO<Episode> {
 			statement.setInt(3, episode.getNumber());
 			statement.setInt(4, episode.getTime());
 			statement.setString(5, episode.getSynopsis());
+			statement.setInt(6, episode.getIdSeason());
 
 			statement.execute();
 			
@@ -56,12 +58,9 @@ public class EpisodeDAO implements DAO<Episode> {
 				int number  	= result.getInt("number");
 				int time 		= result.getInt("time");
 				String synopsis = result.getString("synopsis");
+				int fkIdSeason  = result.getInt("fkIdSeason");
 				
-				episode.setId(id);
-				episode.setName(name);
-				episode.setNumber(number);
-				episode.setTime(time);
-				episode.setSynopsis(synopsis);
+				episode = new Episode (id, name, number, time, synopsis, fkIdSeason);
 			}
 			
 			return episode;
@@ -69,6 +68,29 @@ public class EpisodeDAO implements DAO<Episode> {
 			throw new RuntimeException (e);
 		} finally {
 			stm.close();
+			connection.close();
+		}
+	}
+	
+	public ArrayList<Episode> selectAllEpisodes (int idSeason) throws SQLException {
+		String sql = "SELECT * FROM telemaco.episode WHERE fkIdSeason='" + idSeason + "'";
+		
+		try {
+			stm = connection.createStatement();
+			ResultSet result = stm.executeQuery(sql);
+			
+			ArrayList <Episode> episodes = new ArrayList<Episode>();
+			
+			while (result.next()) {
+				int idEp = result.getInt("id");
+				Episode e = select(idEp);
+				episodes.add(e);
+			}
+
+			return episodes;
+		} catch (SQLException e) {
+			throw new RuntimeException (e);
+		} finally {
 			connection.close();
 		}
 	}
@@ -94,7 +116,8 @@ public class EpisodeDAO implements DAO<Episode> {
 				+ "number=?, "
 				+ "time=?, "
 				+ "synopsis=?, "
-				+ "WHERE id='" + episode.getId() + "'";
+				+ "fkIdSeason=? "
+				+ "WHERE id=?";
 		
 		try {
 			PreparedStatement pStm = connection.prepareStatement(sql);
@@ -102,14 +125,16 @@ public class EpisodeDAO implements DAO<Episode> {
 			pStm.setInt(2, episode.getNumber());
 			pStm.setInt(3, episode.getTime());
 			pStm.setString(4, episode.getSynopsis());
+			pStm.setInt(5, episode.getIdSeason());
+			pStm.setInt(6, episode.getId());
 			
 			pStm.execute();
+			
 			System.out.println("SUCESS");
 		} catch (SQLException e) {
 			System.out.println("EXCEPTION");
 		} finally {
 			connection.close();
 		}
-		
 	}
 }

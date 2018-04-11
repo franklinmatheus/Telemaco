@@ -14,6 +14,7 @@ public class Episode {
     private int 	number;   /*< The number of the Episode */
     private int 	time;	  /*< The time (in minutes) of the Episode */
     private String 	synopsis; /*< The synopsis of the Episode */
+    private int 	idSeason; /*< The season id that the episode belongs */
     
     /**
      * Default constructor
@@ -28,12 +29,13 @@ public class Episode {
      * @param time
      * @param synopsis
      */
-    public Episode(int id, String name, int number, int time, String synopsis) { 
+    public Episode(int id, String name, int number, int time, String synopsis, int idSeason) { 
         this.id 	  = id;
     	this.name 	  = name;
         this.number   = number;
         this.time     = time;
         this.synopsis = synopsis;
+        this.idSeason = idSeason;
     }
 
     /**
@@ -70,13 +72,20 @@ public class Episode {
 
     /**
      * Returns the episode synopsis 
-     * @return
+     * @return synopsis
      */
     public String getSynopsis () {
     	return synopsis;
     }
     
-    // TODO is it necessary this method?
+    /**
+     * Returns the idSerie value
+     * @return idSerie
+     */
+    public int getIdSeason () {
+    	return idSeason;
+    }
+    
     /**
      * Change the id value
      * @param id
@@ -117,6 +126,13 @@ public class Episode {
     	this.synopsis = synopsis;
     }
     
+    /**
+     * Change the idSerie value 
+     * @param idSeason
+     */
+    public void setIdSeries (int idSeason) {
+    	this.idSeason = idSeason;
+    }
     @Override
     public String toString() {
         return "Episódio " + this.number + ": " + name;

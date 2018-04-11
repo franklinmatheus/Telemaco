@@ -15,6 +15,7 @@ public class Season {
     private int number;
     private int epAmount;
     private ArrayList<Episode> episodes;
+    private int idSerie;
     
     /**
      * Default constructor 
@@ -25,10 +26,12 @@ public class Season {
      * Parametric constructor 
      * @param number
      * @param episodes
+     * @param idSerie
      */
-    public Season(int id, int number, ArrayList<Episode> episodes) { 
+    public Season(int id, int number, ArrayList<Episode> episodes, int idSerie) { 
         this.id = id;
     	this.number   = number;
+    	this.idSerie  = idSerie;
         this.episodes = episodes;
         this.epAmount = episodes.size();
     }
@@ -50,11 +53,26 @@ public class Season {
     }
     
     /**
+     * Returns the id of the series that the episode belongs.
+     * @return idSerie
+     */
+    public int getIdSerie () {
+    	return idSerie;
+    }
+    
+    /**
      * Returns the season episodes amount
      * @return epAmount
      */
     public int getEpAmount () {
     	return epAmount;
+    }
+
+    /**
+     * @return the episodes
+     */
+    public ArrayList<Episode> getEpisodes() {
+        return episodes;
     }
 
     /**
@@ -64,12 +82,13 @@ public class Season {
     public void setNumber (int number) {
         this.number = number;
     }
-
+    
     /**
-     * @return the episodes
+     * Change the idSerie value
+     * @param idSerie
      */
-    public ArrayList<Episode> getEpisodes() {
-        return episodes;
+    public void setIdSerie (int idSerie) {
+    	this.idSerie = idSerie;
     }
 
     /**
