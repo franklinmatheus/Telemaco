@@ -5,6 +5,7 @@
  */
 package com.imd.telemaco.data;
 
+import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
 import java.sql.SQLException;
 
@@ -117,6 +118,19 @@ public class FacadeDAO {
         try {
             DAO<User> userDAO = UserDAO.getInstance();
             userDAO.delete(user);
+        } catch(SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+    
+    /**
+     * TODO
+     * @param serie 
+     */
+    public void insertSerie(Serie serie) {
+        try {
+            DAO<Serie> serieDAO = SerieDAO.getInstance();
+            serieDAO.insert(serie);
         } catch(SQLException e) {
             throw new RuntimeException();
         }

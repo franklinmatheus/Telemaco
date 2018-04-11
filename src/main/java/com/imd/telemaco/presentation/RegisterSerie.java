@@ -5,14 +5,17 @@
  */
 package com.imd.telemaco.presentation;
 
+import com.imd.telemaco.business.ValidateSerieServices;
 import com.imd.telemaco.data.FacadeDAO;
 import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,19 +35,23 @@ public class RegisterSerie extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         try (PrintWriter out = response.getWriter()) {            
             String name = request.getParameter("name");
             
             if( ( name == null || name.isEmpty() ) ) {
                 response.sendRedirect("RegisterSerie.jsp");
             } else {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("logged");
+                
+                
                 Serie serie;
                 serie = new Serie();
                 serie.setName(name);
+                serie.setId_creator(user.getId());
                 
-                FacadeDAO facade = FacadeDAO.getInstance();
-                //facade.cadastrarSerie(serie);
+                ValidateSerieServices validate = new ValidateSerieServices();
+                validate.validSerieRegister(serie);
                 
                 response.sendRedirect("Logged.jsp");
             } 

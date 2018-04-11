@@ -16,6 +16,10 @@
         <servlet-name>UpdatePassword</servlet-name>
         <servlet-class>com.imd.telemaco.presentation.UpdatePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterSerie</servlet-name>
+        <servlet-class>com.imd.telemaco.presentation.RegisterSerie</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterUser</servlet-name>
         <url-pattern>/RegisterUser</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>UpdatePassword</servlet-name>
         <url-pattern>/UpdatePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterSerie</servlet-name>
+        <url-pattern>/RegisterSerie</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

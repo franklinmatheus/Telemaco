@@ -1,4 +1,5 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Season.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/enums/Classification.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/EpisodeDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/FacadeDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateSerieServices.java
