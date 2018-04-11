@@ -5,21 +5,10 @@
  */
 package com.imd.telemaco.business;
 
-import com.imd.telemaco.data.FacadeDAO;
-import com.imd.telemaco.entity.Serie;
-
 /**
  *
  * @author franklin
  */
 public class ValidateSerieServices {
-    
-    /**
-     * TODO
-     * @param serie 
-     */
-    public void validSerieRegister(Serie serie) {
-        FacadeDAO facade = FacadeDAO.getInstance();
-        facade.insertSerie(serie);
-    }
+   
 }

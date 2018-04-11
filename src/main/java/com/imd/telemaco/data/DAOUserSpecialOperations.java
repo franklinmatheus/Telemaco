@@ -12,7 +12,7 @@ import java.sql.SQLException;
  *
  * @author franklin
  */
-public interface DAOUserSpecialOperations {
+public interface DAOUserSpecialOperations extends DAO<User> {
     /**
      * Select an user by email and password, special method to login.
      * @param email

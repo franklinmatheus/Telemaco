@@ -17,7 +17,7 @@ import java.util.Date;
  *
  * @author franklin
  */
-public class UserDAO implements DAO<User>, DAOUserSpecialOperations {
+public class UserDAO implements DAOUserSpecialOperations {
     private Connection connection;
     private static UserDAO userDAO = null;
     
