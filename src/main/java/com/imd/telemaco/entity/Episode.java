@@ -1,17 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.imd.telemaco.entity;
 
 /**
- *
- * @author valmir
+ * Class to represent an episode of a series. An episode has the
+ * following fields: id, name, number, time and synopsis.
+ * 
+ * @author  Valmir Correa
+ * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
+ * @version 10.04.2018
  */
 public class Episode {
-    private String name;
-    private boolean completed;
+	private int 	id; 	  /*< The identify of the Episode */
+    private String 	name;	  /*< The name of the Episode */
+    private int 	number;   /*< The number of the Episode */
+    private int 	time;	  /*< The time (in minutes) of the Episode */
+    private String 	synopsis; /*< The synopsis of the Episode */
+    private int 	idSeason; /*< The season id that the episode belongs */
     
     /**
      * Default constructor
@@ -19,43 +22,119 @@ public class Episode {
     public Episode() { }
     
     /**
-     * Parametric constructor
+     * Parametric constructor 
+     * @param id
+     * @param name
+     * @param number
+     * @param time
+     * @param synopsis
      */
-    public Episode(String name, boolean completed, int rating) { 
-        this.name = name;
-        this.completed = completed;
+    public Episode(int id, String name, int number, int time, String synopsis, int idSeason) { 
+        this.id 	  = id;
+    	this.name 	  = name;
+        this.number   = number;
+        this.time     = time;
+        this.synopsis = synopsis;
+        this.idSeason = idSeason;
     }
 
     /**
-     * @return the name
+     * Returns the episode id
+     * @return id
+     */
+    public int getId () { 
+    	return id; 
+    }
+    
+    /**
+     * Returns the episode name
+     * @return name
      */
     public String getName() {
         return name;
     }
-
+    
     /**
-     * @param name the name to set
+     * Returns the episode number
+     * @return number
      */
-    public void setName(String name) {
-        this.name = name;
+    public int getNumber () {
+    	return number;
+    }
+        
+    /**
+     * Returns the episode time
+     * @return time
+     */
+    public int getTime () {
+    	return time;
     }
 
     /**
-     * @return the completed
+     * Returns the episode synopsis 
+     * @return synopsis
      */
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    /**
-     * @param completed the completed to set
-     */
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public String getSynopsis () {
+    	return synopsis;
     }
     
-     @Override
+    /**
+     * Returns the idSerie value
+     * @return idSerie
+     */
+    public int getIdSeason () {
+    	return idSeason;
+    }
+    
+    /**
+     * Change the id value
+     * @param id
+     */
+    public void setId (int id) {
+    	this.id = id;
+    }
+
+    /**
+     * Change the name value 
+     * @param name
+     */
+    public void setName (String name) {
+        this.name = name;
+    }
+    
+    /**
+     * Change the number value
+     * @param number
+     */
+    public void setNumber (int number) {
+    	this.number = number;
+    }
+    
+    /**
+     * Change the time value
+     * @param time
+     */
+    public void setTime (int time) {
+    	this.time = time;
+    }
+    
+    /**
+     * Change the synopsis value
+     * @param synopsis
+     */
+    public void setSynopsis (String synopsis) {
+    	this.synopsis = synopsis;
+    }
+    
+    /**
+     * Change the idSerie value 
+     * @param idSeason
+     */
+    public void setIdSeries (int idSeason) {
+    	this.idSeason = idSeason;
+    }
+    @Override
     public String toString() {
-        return "Episódio{" + "nome=" + name + '}';
+        return "Episódio " + this.number + ": " + name;
     }
 }
