@@ -17,7 +17,7 @@ import java.util.Date;
  *
  * @author franklin
  */
-public class UserDAO implements DAO<User>, DAOUserSpecialOperations {
+public class UserDAO implements DAOUserSpecialOperations {
     private Connection connection;
     private static UserDAO userDAO = null;
     
@@ -37,12 +37,12 @@ public class UserDAO implements DAO<User>, DAOUserSpecialOperations {
     }
     
     /**
-     * 
+     * TODO
      * @throws SQLException 
      */
     private void startsConnection() throws SQLException {
-        if(connection.isClosed())
-               connection = ConnectionFactory.getConnection();
+        if(this.connection.isClosed())
+               this.connection = ConnectionFactory.getConnection();
     }
     
     @Override
@@ -79,9 +79,9 @@ public class UserDAO implements DAO<User>, DAOUserSpecialOperations {
             
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            boolean existe = resultSet.next();
+            boolean exists = resultSet.next();
             
-            if(existe) {
+            if(exists) {
                 String nome = resultSet.getString("name");
                 String lastname = resultSet.getString("lastname");
                 String gender = resultSet.getString("gender");
@@ -134,13 +134,10 @@ public class UserDAO implements DAO<User>, DAOUserSpecialOperations {
             statement.setInt(7, user.getId());
             
             statement.execute();
-            System.out.println("SUCESS");
         } catch (SQLException e) {
-            System.out.println("EXCEPTION");
-            throw new RuntimeException(e);
+             new RuntimeException();
         } finally {
             try {
-                System.out.println("FINALLY");
                 connection.close();
             } catch (SQLException e) { /* empty */ }
         }

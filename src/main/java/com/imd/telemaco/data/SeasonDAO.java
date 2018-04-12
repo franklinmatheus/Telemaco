@@ -13,10 +13,10 @@ import com.imd.telemaco.entity.Episode;
 /**
  * 
  * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
- * @version 10.04.2018
+ * @version 11 de abr de 2018 | 23:29:36
  */
 public class SeasonDAO implements DAO<Season> {
-    private Connection connection;
+	private Connection connection;
     private Statement stm;
     private static SeasonDAO seasonDAO = null;
     
@@ -51,7 +51,7 @@ public class SeasonDAO implements DAO<Season> {
     }
     
     /**
-     * Select a season from the database since the name
+     * Select a season from the database since the name.
      * @param  id
      * @return season
      * @throws SQLException 
@@ -67,10 +67,10 @@ public class SeasonDAO implements DAO<Season> {
     		boolean isThere = result.next();
     		
     		if (isThere) {
-    			int number	  = result.getInt("number");
-    			EpisodeDAO epDAO = new EpisodeDAO();
+    			int number	    			 = result.getInt("number");
+    			EpisodeDAO epDAO 			 = new EpisodeDAO();
     			ArrayList <Episode> episodes = epDAO.selectAllEpisodes(id);
-    			int fkIdSerie = result.getInt("fkIdSerie");
+    			int fkIdSerie 				 = result.getInt("fkIdSerie");
     			
     			season = new Season (id, number, episodes, fkIdSerie);
     		} else season = null;
@@ -80,6 +80,34 @@ public class SeasonDAO implements DAO<Season> {
     		throw new RuntimeException(e);
     	} finally {
     		stm.close();
+    		connection.close();
+    	}
+    }
+    
+    /**
+     * Select a season from the database since the number and idSerie values. 
+     * @param  number
+     * @param  idSerie
+     * @return season
+     * @throws SQLException
+     */
+    public Season select (int number, int idSerie) throws SQLException {
+    	String sql = "SELECT * FROM telemaco.season WHERE fkIdSerie='" + idSerie + "' AND number='" + number + "'";
+    	Season season = new Season();
+    	
+    	try {
+    		stm = connection.createStatement();
+    		ResultSet result = stm.executeQuery(sql);
+    		
+    		if (result.next()) {
+    			int id = result.getInt("id");
+    			season = select (id);
+    		} else season = null;
+    		
+    		return season;
+    	} catch (SQLException e) {
+    		throw new RuntimeException (e);
+    	} finally {
     		connection.close();
     	}
     }
@@ -115,7 +143,7 @@ public class SeasonDAO implements DAO<Season> {
 
 	@Override
 	public void delete(Season season) throws SQLException {
-		String sql = "REMOVE FROM telemaco.season WHERE id ='" + season.getId() + "'";
+		String sql = "DELETE FROM telemaco.season WHERE id ='" + season.getId() + "'";
 		
 		try {
 			stm = connection.createStatement();

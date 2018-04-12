@@ -9,6 +9,7 @@ import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -31,9 +32,10 @@ public class RegisterUser extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws SQLException 
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
         PrintWriter out = response.getWriter();
@@ -54,7 +56,7 @@ public class RegisterUser extends HttpServlet {
             
             User user = new User(name, lastname, email, password, parsedDate, gender);
             if(validate.validUserInsert(user, cemail, cpassword))
-                response.sendRedirect("Index.jsp");
+                response.sendRedirect("Overview.jsp");
             else
                 response.sendRedirect("Register.jsp");
         } catch(ParseException e) {

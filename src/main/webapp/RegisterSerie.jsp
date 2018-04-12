@@ -26,7 +26,7 @@
         <p>
         <form name="RegisterSerie" action="RegisterSerie" method="POST">
             <p><span>Name</span><input type="text" name="name" required /></p>
-            <p><input type="submit" name="Submit" /></p>
+            <p><input type="submit" name="Submit" value="submit" /></p>
         </form>
         </p>
     </body>

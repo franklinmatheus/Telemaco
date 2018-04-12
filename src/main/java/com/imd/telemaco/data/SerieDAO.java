@@ -16,74 +16,118 @@ import java.sql.Statement;
  *
  * @author franklin
  */
-public class SerieDAO {
+public class SerieDAO implements DAO<Serie> {
     
-    private final Connection connection;
-    private static final Serie serieDAO = null;
+    private Connection connection;
+    private static SerieDAO serieDAO = null;
     
     private SerieDAO() throws SQLException {
         this.connection = ConnectionFactory.getConnection();
     }
     
-    public static synchronized SerieDAO getInstance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @return
+     * @throws SQLException 
+     */
+    public static synchronized SerieDAO getInstance() throws SQLException {
+        if(serieDAO == null)
+            serieDAO = new SerieDAO();
+        return serieDAO;
     }
     
-    public void cadastrarSerie(Serie serie) throws SQLException {
-        String sql = "INSERT INTO serie (nome) VALUES (?)";
-        try {//, ano, Temporadas, avaliacao
+    private void statsConnection() throws SQLException {
+        if(this.connection.isClosed())
+            this.connection = ConnectionFactory.getConnection();
+    }
+    
+    @Override
+    public void insert(Serie serie) throws SQLException {
+        String sql = "INSERT INTO telemaco.serie (name, id_creator) VALUES (?, ?)";
+        try {
+            this.statsConnection();
+            
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, serie.getName());
-//            statement.setString(2, serie.getYear());
-//            statement.setArray(3, (Array) serie.getSeasons());
-//            statement.setInt(4, serie.stars());
-            
+            statement.setInt(2, serie.getId_creator());
             statement.execute();
-            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) { /* empty */ }
         }
     }
-        /**
-         * Testando com nome!!!!
-         * @param nome
-         * @return
-         * @throws SQLException 
-         */
-        public Serie select(String nome) throws SQLException {
-        String sql;
-        sql = "SELECT * FROM serie WHERE nome='" + nome  + "'";
+    
+    @Override
+    public Serie select(int id) throws SQLException {
+        String sql = "SELEC * FROM telemaco.serie WHERE id='" + id + "'";
         Serie serie = new Serie();
         try {
+            this.statsConnection();
+            
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(sql);
-            boolean existe = result.next();
+            ResultSet resultSet = statement.executeQuery(sql);
+            boolean exists = resultSet.next();
             
-            if(existe) {
-                serie.setName(nome);
-            } else {
+            if(exists) {
+                String name = resultSet.getString("name");
+                int id_creator = resultSet.getInt("id_creator");
+                
+                serie.setId(id);
+                serie.setName(name);
+                serie.setId_creator(id_creator);
+            } else
                 serie = null;
-            }
-            return serie;
             
+            return serie;
         } catch(SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
+        } finally {
+            try {
+                connection.close();
+            } catch(SQLException e) { /* emtpy */ }
         }
     }
 
-//    public void insert(Usuario usuario) throws SQLException {
-//        String sql = "INSERT INTO serie (nome) VALUES (?)";
-//        try {
-//            PreparedStatement statement = connection.prepareStatement(sql);
-//            statement.setString(1, usuario.getNome());
-//            statement.setString(2, usuario.getEmail());
-//            statement.setString(3, usuario.getSenha());
-//            
-//            statement.execute();
-//            connection.close();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-    
+    @Override
+    public void delete(Serie serie) throws SQLException {
+        String sql = "DELETE FROM telemaco.user WHERE id='" + serie.getId() + "'";
+        try {
+            this.statsConnection();
+            
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch(SQLException e) {
+            throw new RuntimeException();
+        } finally {
+            try {
+                connection.close();
+            } catch(SQLException e) { /* emtpy */ }
+        }
+    }
+   
+    @Override
+    public void update(Serie serie) throws SQLException {
+        String sql = "UPDATE telemaco.user SET "
+                + "name=? "
+                + "id_creator=? "
+                + "WHERE id=?";
+        try {
+            this.statsConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, serie.getName());
+            statement.setInt(2, serie.getId_creator());
+            statement.setInt(3, serie.getId());
+            
+            statement.execute();
+        } catch(SQLException e) {
+            throw new RuntimeException();
+        } finally {
+            try {
+                connection.close();
+            } catch(SQLException e) { /* empty */ }
+        }
+    }
 }

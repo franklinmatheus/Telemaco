@@ -5,8 +5,10 @@
  */
 package com.imd.telemaco.business;
 
-import com.imd.telemaco.data.FacadeDAO;
+import com.imd.telemaco.data.DAOUserSpecialOperations;
+import com.imd.telemaco.data.UserDAO;
 import com.imd.telemaco.entity.User;
+import java.sql.SQLException;
 
 /**
  *
@@ -22,13 +24,14 @@ public class ValidateUserServices {
      * @param cemail
      * @param cpassword
      * @return 
+     * @throws java.sql.SQLException 
      */
-    public boolean validUserInsert(User user, String cemail, String cpassword) {
+    public boolean validUserInsert(User user, String cemail, String cpassword) throws SQLException {
         if(this.valid(user))
             if(this.confirmPassword(user.getPassword(), cpassword) && this.confirmEmail(user.getEmail(), cemail))
                 if(!this.emailAlreadyExists(user)) {
-                    FacadeDAO facade = FacadeDAO.getInstance();
-                    facade.insertUser(user);
+                    DAOUserSpecialOperations dao = UserDAO.getInstance();
+                    dao.insert(user);
                     return true;
                 }
         return false;
@@ -39,10 +42,11 @@ public class ValidateUserServices {
      * @param email
      * @param password
      * @return 
+     * @throws java.sql.SQLException 
      */
-    public User validUserLogin(String email, String password) {
-        FacadeDAO facade = FacadeDAO.getInstance();
-        User user = facade.selectUser(email, password);
+    public User validUserLogin(String email, String password) throws SQLException {
+        DAOUserSpecialOperations dao = UserDAO.getInstance();
+        User user = dao.select(email, password);
         
         return user;
     }
@@ -54,12 +58,14 @@ public class ValidateUserServices {
      * @param newPassword
      * @param cNewPassword
      * @return 
+     * @throws java.sql.SQLException 
      */
-    public boolean validUserPasswordUpdate(User user, String cOldPassword, String newPassword, String cNewPassword) {
+    public boolean validUserPasswordUpdate(User user, String cOldPassword, String newPassword, String cNewPassword) throws SQLException {
         if(this.confirmPassword(newPassword, cNewPassword))
             if(this.confirmPassword(user.getPassword(), cOldPassword)) {
-                FacadeDAO facade = FacadeDAO.getInstance();
-                facade.updateUser(user, newPassword);
+                DAOUserSpecialOperations dao = UserDAO.getInstance();
+                user.setPassword(newPassword);
+                dao.update(user);
                 return true;
             }
         return false;
@@ -69,11 +75,12 @@ public class ValidateUserServices {
      * TODO
      * @param user
      * @return 
+     * @throws java.sql.SQLException 
      */
-    public boolean removeUser(User user) {
+    public boolean removeUser(User user) throws SQLException {
         if(this.userExists(user)) {
-            FacadeDAO facade = FacadeDAO.getInstance();
-            facade.removeUser(user);
+            DAOUserSpecialOperations dao = UserDAO.getInstance();
+            dao.delete(user);
             
             return true;
         }
@@ -119,9 +126,9 @@ public class ValidateUserServices {
      * @param user
      * @return 
      */
-    private boolean userExists(User user) {
-        FacadeDAO facade = FacadeDAO.getInstance();
-        User exists = facade.selectUser(user.getId());
+    private boolean userExists(User user) throws SQLException {
+        DAOUserSpecialOperations dao = UserDAO.getInstance();
+        User exists = dao.select(user.getId());
         
         return exists != null;
     }
@@ -131,9 +138,9 @@ public class ValidateUserServices {
      * @param user
      * @return 
      */
-    private boolean emailAlreadyExists(User user) {
-        FacadeDAO facade = FacadeDAO.getInstance();
-        User exists = facade.selectUser(user.getEmail());
+    private boolean emailAlreadyExists(User user) throws SQLException {
+        DAOUserSpecialOperations dao = UserDAO.getInstance();
+        User exists = dao.select(user.getEmail());
         
         return exists != null;
     }

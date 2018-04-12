@@ -97,7 +97,7 @@ public class EpisodeDAO implements DAO<Episode> {
 
 	@Override
 	public void delete(Episode episode) throws SQLException {
-		String sql = "REMOVE * FROM telemaco.episode WHERE id='" + episode.getId() + "'";
+		String sql = "DELETE * FROM telemaco.episode WHERE id='" + episode.getId() + "'";
 		
 		try {
 			stm = connection.createStatement();
