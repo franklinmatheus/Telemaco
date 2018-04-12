@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public interface DAO<Type> {
     
     /**
-     * Recieves an object as parameter and inserts into database.
+     * Receives an object as parameter and inserts into database.
      * @param object 
      * @throws java.sql.SQLException 
      */
@@ -30,14 +30,14 @@ public interface DAO<Type> {
     public Type select(int id) throws SQLException;
     
     /**
-     * Recieves an object and remove it from database.
+     * Receives an object and remove it from database.
      * @param object 
      * @throws java.sql.SQLException 
      */
     public void delete(Type object) throws SQLException;
     
     /**
-     * Recieves an object with the new values and update then by id in database.
+     * Receives an object with the new values and update then by id in database.
      * @param object 
      * @throws java.sql.SQLException 
      */

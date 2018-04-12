@@ -16,7 +16,7 @@ import com.imd.telemaco.entity.Episode;
  * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
  * @version 11 de abr de 2018 | 23:29:36
  */
-public class SeasonDAO implements DAO<Season> {
+public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
 	private Connection connection;
     private Statement stm;
     private static SeasonDAO seasonDAO = null;
@@ -39,11 +39,7 @@ public class SeasonDAO implements DAO<Season> {
     	return seasonDAO;
     }
     
-    /**
-     * Register a season in the database
-     * @param  season
-     * @throws SQLException
-     */
+    @Override
     public void insert (Season season) throws SQLException {
     	String sql = "INSERT INTO telemaco.season (number, fkIdSerie, amountEp) VALUES (?, ?, ?)";
     	try {
@@ -59,12 +55,7 @@ public class SeasonDAO implements DAO<Season> {
     	}
     }
     
-    /**
-     * Select a season from the database since the name.
-     * @param  id
-     * @return season
-     * @throws SQLException 
-     */
+    @Override
     public Season select (int id) throws SQLException {
     	String sql = "SELECT * FROM telemaco.season WHERE id = '" + id + "'";
     	Season season = new Season();
@@ -93,13 +84,7 @@ public class SeasonDAO implements DAO<Season> {
     	}
     }
     
-    /**
-     * Select a season from the database since the number and idSerie values. 
-     * @param  number
-     * @param  idSerie
-     * @return season
-     * @throws SQLException
-     */
+    @Override
     public Season select (int number, int idSerie) throws SQLException {
     	String sql = "SELECT * FROM telemaco.season WHERE fkIdSerie='" + idSerie + "' AND number='" + number + "'";
     	Season season = new Season();
@@ -121,12 +106,7 @@ public class SeasonDAO implements DAO<Season> {
     	}
     }
     
-    /**
-     * Returns all the episodes of the Season
-     * @param  id
-     * @return episodes
-     * @throws SQLException
-     */
+    @Override
     public ArrayList<Season> selectAllSeasons (int idSerie) throws SQLException {
     	ArrayList <Season> seasons = new ArrayList <Season>();
     	String sql = "SELECT * FROM telemaco.season WHERE fkIdSerie = '" + idSerie + "'";
