@@ -8,21 +8,36 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * Class that represent the table episode of the database telemaco
+ * 
+ * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
+ * @version 10 de abr de 2018 | 22:36:15
+ */
 public class EpisodeDAO implements DAO<Episode> {
 	private Connection connection;
 	private Statement stm;
 	private static EpisodeDAO epDAO = null;	
 	
+	/**
+	 * Default constructor 
+	 * @throws SQLException
+	 */
 	public EpisodeDAO () throws SQLException{
 		this.connection = ConnectionFactory.getConnection();
 	}
 	
+	/**
+	 * @return epDAO
+	 * @throws SQLException
+	 */
 	public static synchronized EpisodeDAO getInstance () throws SQLException {
 		if (epDAO == null)
 			epDAO = new EpisodeDAO();
 		return epDAO;
-	}
+	}	
 	
+	@Override
 	public void insert (Episode episode) throws SQLException {
 		String sql = "INSERT INTO epsiode (id, name, number, time, synopsis, fkIdSeason) VALUES (?, ?, ?, ?, ?, ?)";
 		
@@ -72,6 +87,70 @@ public class EpisodeDAO implements DAO<Episode> {
 		}
 	}
 	
+	/**
+	 * Select a episode from the database since the name and idSeason values.
+	 * @param 	name
+	 * @param 	idSeason
+	 * @return	episode
+	 * @throws 	SQLException
+	 */
+	public Episode select(String name, int idSeason) throws SQLException {
+		String sql = "SELECT * FROM telemaco.episode WHERE name='" + name + "' AND fkIdSeason='" + idSeason + "'";
+		Episode episode = new Episode();
+		
+		try {
+			stm = connection.createStatement();
+			ResultSet result = stm.executeQuery(sql);
+			
+			if (result.next()) {
+				int id = result.getInt("id");
+				episode = select (id);
+			} else episode = null;
+			
+			return episode;
+		} catch (SQLException e) {
+			throw new RuntimeException (e);
+		} finally {
+			stm.close();
+			connection.close();
+		}
+	}
+	
+	/**
+	 * Select a episode from the database since the number and idSeason values.
+	 * @param 	name
+	 * @param 	idSeason
+	 * @return	episode
+	 * @throws 	SQLException
+	 */
+	public Episode select(int number, int idSeason) throws SQLException {
+		String sql = "SELECT * FROM telemaco.episode WHERE number='" + number + "' AND fkIdSeason='" + idSeason + "'";
+		Episode episode = new Episode();
+		
+		try {
+			stm = connection.createStatement();
+			ResultSet result = stm.executeQuery(sql);
+			
+			if (result.next()) {
+				int id = result.getInt("id");
+				episode = select (id);
+			} else episode = null;
+			
+			return episode;
+		} catch (SQLException e) {
+			throw new RuntimeException (e);
+		} finally {
+			stm.close();
+			connection.close();
+		}
+	}
+	
+	/**
+	 * Select all episodes of a season
+	 * @param idSeason
+	 * @return episodes
+	 * @throws SQLException
+	 */
 	public ArrayList<Episode> selectAllEpisodes (int idSeason) throws SQLException {
 		String sql = "SELECT * FROM telemaco.episode WHERE fkIdSeason='" + idSeason + "'";
 		

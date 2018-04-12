@@ -7,10 +7,16 @@ import com.imd.telemaco.entity.Season;
 
 /**
  * Class to validate all services offered by Season class
+ * 
  * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
  * @version 11 de abr de 2018 | 23:28:20
  */
 public class ValidateSeasonServices {
+	/**
+	 * Default constructor
+	 */
+	public ValidateSeasonServices () {  }
+	
 	/**
 	 * Valid the data of the season
 	 * @param season
@@ -39,7 +45,7 @@ public class ValidateSeasonServices {
 	}
 	
 	/**
-	 * Verify if the season insertion is valide
+	 * Verify if the season insertion is valid
 	 * @param season
 	 * @throws SeasonExistsException
 	 * @throws SQLException

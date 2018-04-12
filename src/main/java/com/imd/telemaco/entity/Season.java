@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * 
  * @author  Valmir Correia
  * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
- * @version 10.04.2018
+ * @version 10 de abr de 2018 | 23:32:02
  */
 public class Season {
 	private int id;

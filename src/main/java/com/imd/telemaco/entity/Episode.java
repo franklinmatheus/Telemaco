@@ -28,6 +28,7 @@ public class Episode {
      * @param number
      * @param time
      * @param synopsis
+     * @param idSeason
      */
     public Episode(int id, String name, int number, int time, String synopsis, int idSeason) { 
         this.id 	  = id;

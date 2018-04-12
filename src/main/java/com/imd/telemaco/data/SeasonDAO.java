@@ -11,6 +11,7 @@ import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Episode;
 
 /**
+ * Class that represent the table season of the database telemaco
  * 
  * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
  * @version 11 de abr de 2018 | 23:29:36
@@ -20,10 +21,18 @@ public class SeasonDAO implements DAO<Season> {
     private Statement stm;
     private static SeasonDAO seasonDAO = null;
     
+    /**
+     * Default constructor
+     * @throws SQLException
+     */
     public SeasonDAO () throws SQLException {
     	this.connection = ConnectionFactory.getConnection();
     }
     
+    /**
+     * @return seasonDAO
+     * @throws SQLException
+     */
     public static synchronized SeasonDAO getInstance () throws SQLException {
     	if (seasonDAO == null) 
     		seasonDAO = new SeasonDAO();
