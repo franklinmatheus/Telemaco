@@ -50,9 +50,14 @@ public class RegisterSerie extends HttpServlet {
                 serie.setId_creator(user.getId());
                 
                 ValidateSerieServices validate = new ValidateSerieServices();
-                validate.validSerieRegister(serie);
                 
-                response.sendRedirect("Logged.jsp");
+                // Verificar esssa inserção!!
+                if (validate.validSerieRegister(serie)) {
+                    //mensagem que foi insedira com sucesso
+                    response.sendRedirect("Logged.jsp");
+                } else { // sed não foi....
+                    response.sendRedirect("Logged.jsp");
+                }
             } 
         } catch(Exception e) {
             e.getMessage();

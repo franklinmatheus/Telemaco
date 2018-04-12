@@ -5,10 +5,26 @@
  */
 package com.imd.telemaco.business;
 
+import com.imd.telemaco.entity.Serie;
+
 /**
  *
- * @author franklin
+ * @author valmir
  */
 public class ValidateSerieServices {
-   
+    
+    public ValidateSerieServices() { }
+    
+    public boolean validateSerieInsert (Serie serie) {
+        return this.valid(serie);
+    }
+    
+    public boolean valid(Serie serie) {
+        return !(serie.getName().isEmpty() || serie.getName() == null);
+    }
+
+    public boolean validSerieRegister(Serie serie) {
+        return this.validateSerieInsert(serie);
+    }
+
 }

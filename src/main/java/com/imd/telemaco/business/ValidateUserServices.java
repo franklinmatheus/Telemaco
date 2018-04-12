@@ -93,12 +93,9 @@ public class ValidateUserServices {
      * @return 
      */
     private boolean valid(User user) {
-        if((user.getName() == null || user.getName().isEmpty() || user.getName().trim().equals("")) || 
-                (user.getEmail() == null || user.getEmail().isEmpty() || user.getEmail().trim().equals("")) || 
-                (user.getPassword()== null || user.getPassword().isEmpty() || user.getPassword().trim().equals(""))) {
-            return false;
-        }
-        return true;
+        return !((user.getName() == null || user.getName().isEmpty() || user.getName().trim().equals("")) || 
+                (user.getEmail() == null || user.getEmail().isEmpty() || user.getEmail().trim().equals("")) ||
+                (user.getPassword()== null || user.getPassword().isEmpty() || user.getPassword().trim().equals("")));
     }
     
     /**
