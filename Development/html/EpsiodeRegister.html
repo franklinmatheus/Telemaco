@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cadastrar Episódio</title>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/styleEpisodeRegister.css">
+	<link rel="icon" type="png" href="../media/images/icon.png">
+</head>
+<body>
+	<header>
+		<a href="./Index.html">
+			<img src="../media/images/icon.png" height="80%"> 
+			Telemaco
+		</a>
+	</header>
+
+	<div id="middle">
+		<label id="title">Cadastrar Episódio</label>
+
+		<form action="" method="post">
+			<label>Série Pertencente</label>
+			<select name="serieName">
+				<option value="1"> 1 </option>
+				<option value="2"> 2 </option>
+			</select>
+
+			<label>Temporada Pertencente</label>
+			<select name="time">
+				<option value="1"> 1 </option>
+				<option value="2"> 2 </option>
+			</select>
+
+			<label>Name</label>
+			<input type="input" name="epName">
+
+			<label>Number</label>
+			<input type="number" min="1" name="epNumber">
+
+			<label>Sinopse</label>
+			<input type="input" name="epSynopsis">
+
+			<label>Tempo (minutos)</label>
+			<input type="number" min="1" name="epTime">
+
+			<div id="buttons">
+				<button class="button" id="btnCancel"><a href="./Index.html">Cancelar</a></button>
+				<button class="button" id="btnConfirm">Confirmar</button>
+			</div>
+		</form>
+
+		<footer></footer>
+	</div>
+</body>
+</html>

@@ -11,6 +11,11 @@ button {
 	font-size: 100%;
 }
 
+button a {
+	color: #fff;
+	text-decoration: none;
+}
+
 @font-face {
     font-family: sfGalaxy;
     src: local("SF_Distant_Galaxy");
