@@ -18,7 +18,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register serie</title>
+        <title>Cadastrar serie</title>
     </head>
     <body>
        <p><a href="Logged.jsp">Home </a>></p>
