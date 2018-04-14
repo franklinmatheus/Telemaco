@@ -1,13 +1,13 @@
 function disableSeasons () {
 	var selectSerie = document.getElementById("serieName");
-	var selectSeason = document.getElementById("seasonsOptions");
+	var selectSeason = document.getElementById("seasonNumber");
 	
 	if (selectSerie.value != "") 
 		selectSeason.disabled = false;
 }
 
 function enableAllInputs () {
-	var selectSeason = document.getElementById("seasonsOptions");
+	var selectSeason = document.getElementById("seasonNumber");
 	
 	var epName = document.getElementById("epName");
 	var epNumber = document.getElementById("epNumber");

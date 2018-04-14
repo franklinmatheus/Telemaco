@@ -13,7 +13,7 @@
         <title>Register</title>
     </head>
     <body>
-        <p><a href="Overview.jsp">Home </a>></p>
+        <p><a href="Overview.jsp">Home </a></p>
         <h1>Register</h1>
         <p>
         <form name="register" action="RegisterUser" method="POST">

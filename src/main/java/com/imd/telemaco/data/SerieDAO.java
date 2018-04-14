@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +22,7 @@ public class SerieDAO implements DAO<Serie> {
     private Connection connection;
     private static SerieDAO serieDAO = null;
     
-    private SerieDAO() throws SQLException {
+    public SerieDAO() throws SQLException {
         this.connection = ConnectionFactory.getConnection();
     }
     
@@ -89,6 +90,25 @@ public class SerieDAO implements DAO<Serie> {
                 connection.close();
             } catch(SQLException e) { /* emtpy */ }
         }
+    }
+    
+    public ArrayList<Serie> selectAllSeries () {
+    	ArrayList <Serie> series = new ArrayList<Serie>();
+    	String sql = "SELECT * FROM telemaco.serie";
+    	
+    	try {
+    		this.statsConnection();
+    		
+    		Statement stm = connection.createStatement();
+    		ResultSet result = stm.executeQuery(sql);
+    		
+    		while (result.next()) {
+    			cd Te
+    		}
+    		
+    		return series;
+    	}
+    	
     }
 
     @Override

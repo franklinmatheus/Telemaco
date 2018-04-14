@@ -29,24 +29,24 @@
 	<div id="middle">
 		<label id="title">Cadastrar Episódio</label>
 
-		<form name="register" action="" method="post">
+		<form name="register" action="ResgisterEpisode" method="post">
 			<label>Série Pertencente</label>
 			<select id="serieName" name="serieName" onchange="disableSeasons()">
 				<%
-				//SerieDAO serieDAO = new SerieDAO();*/
-				//ArrayList <Serie> series = serieDAO.selectAllSeries(); -- It's the correct */
+				SerieDAO serieDAO = new SerieDAO();
+				ArrayList <Serie> series = serieDAO.selectAllSeries();
 				//TODO try catch
 				
 				// -------------------------------------------------------------------------------
 				/* It's just a test */
-				ArrayList <Serie> series = new ArrayList <Serie>();   
+				/* ArrayList <Serie> series = new ArrayList <Serie>();   
 				Classification classification = Classification.P18;
 				ArrayList <Season> seasons = new ArrayList<Season>();
 				seasons.add(new Season(123, 1, new ArrayList<Episode>(), 1));
 				series.add(new Serie(1, "Game of Thrones", "2011", seasons, new Rating(), 1, classification));
 				seasons.clear();
 				seasons.add(new Season(123, 1, new ArrayList<Episode>(), 2));
-				series.add(new Serie(2, "Breaking Bad", "2011", seasons, new Rating(), 1, classification));
+				series.add(new Serie(2, "Breaking Bad", "2011", seasons, new Rating(), 1, classification)); */
 				//--------------------------------------------------------------------------------
 				
 				%>
@@ -59,7 +59,7 @@
 			</select>
 
 			<label>Temporada Pertencente</label>
-			<select id="seasonsOptions" name="seasonsOptions" disabled onchange="enableAllInputs()">
+			<select id="seasonNumber" name="seasonNumber" disabled onchange="enableAllInputs()">
 				<% //TODO escolher os episódios a partir da série escolhida %>
 				<option value="" selected disabled> -- </option>
 				
@@ -76,16 +76,16 @@
 				<!-- ------------ The real implementation ------------ -->
 			</select>
 
-			<label><%=idSerieChosen %></label>
+			<label> Nome </label>
 			<input id="epName" type="input" name="epName" placeholder="ex.: Pilot" disabled>
 
-			<label>Number</label>
+			<label>Número</label>
 			<input id="epNumber" type="number" min="1" name="epNumber" disabled>
 
 			<label>Sinopse</label>
 			<textarea id="epSynopsis" name="epSynopsis" disabled></textarea>
 
-			<label>Tempo (minutos)</label>
+			<label>Temokpo (minutos)</label>
 			<input id="epTime" type="number" min="1" name="epTime" disabled>
 
 			<div id="buttons">
