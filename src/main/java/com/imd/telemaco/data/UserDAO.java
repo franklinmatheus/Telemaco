@@ -21,7 +21,7 @@ public class UserDAO implements DAOUserSpecialOperations {
     private Connection connection;
     private static UserDAO userDAO = null;
     
-    private UserDAO() throws SQLException {
+    public UserDAO() throws SQLException {
         this.connection = ConnectionFactory.getConnection();
     }
     
@@ -47,7 +47,7 @@ public class UserDAO implements DAOUserSpecialOperations {
     
     @Override
     public void insert(User user) throws SQLException {
-        String sql = "INSERT INTO telemaco.user (name, email, password, lastname, birth, gender) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO telemaco.user (name, email, password, lastname, birthday, gender) VALUES (?,?,?,?,?,?)";
         try {
             this.startsConnection();
             
@@ -85,7 +85,7 @@ public class UserDAO implements DAOUserSpecialOperations {
                 String nome = resultSet.getString("name");
                 String lastname = resultSet.getString("lastname");
                 String gender = resultSet.getString("gender");
-                Date birth = resultSet.getDate("birth");
+                Date birth = resultSet.getDate("birthday");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
                 
@@ -117,7 +117,7 @@ public class UserDAO implements DAOUserSpecialOperations {
                 + "email=?, "
                 + "password=?, "
                 + "lastname=?, "
-                + "birth=?, "
+                + "birthday=?, "
                 + "gender=? "
                 + "WHERE id=?";
         try {
@@ -145,7 +145,7 @@ public class UserDAO implements DAOUserSpecialOperations {
     
     @Override
     public void delete(User user) {
-        String sql = "REMOVE FROM telemaco.user WHERE id='" + user.getId() + "'";
+        String sql = "DELETE FROM telemaco.user WHERE id='" + user.getId() + "'";
         
         try {
             this.startsConnection();
@@ -176,7 +176,7 @@ public class UserDAO implements DAOUserSpecialOperations {
                 String nome = resultSet.getString("name");
                 String lastname = resultSet.getString("lastname");
                 String gender = resultSet.getString("gender");
-                Date birth = resultSet.getDate("birth");
+                Date birth = resultSet.getDate("birthday");
                 int id = resultSet.getInt("id");
                 
                 user.setEmail(email);
