@@ -40,7 +40,7 @@ form {
 	margin: 0 auto;
 }
 
-form input, select {
+form input, select, textarea {
 	width: 100%;
 	margin-top: 5px;
 	margin-bottom: 20px;
@@ -59,8 +59,58 @@ form label{
 	color: #E9872A;
 }
 
+textarea {
+	resize: vertical;
+	border: none !important;
+	border-radius: 1px !important;
+	font-family: arial;
+	height: 50px;
+	min-height: 30px;
+	max-height: 150px;
+	white-space: "nowrap"
+}
+
+.inputfile {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	background: #fff;
+	padding: 10px;
+	width: 100%;
+	border-radius: 1px;
+	margin-top: 5px;
+}
+
+.inputfile input {
+	position: absolute;
+	cursor: pointer;
+	width: 30px;
+	height: 100%;
+	right: 10px;
+	top: -10px;
+	background: none;
+	font-size: 30px;
+	filter: alpha(100);
+	-moz-opacity: 0.0;
+	opacity: 0.0;
+}
+
+.inputfile img {
+	cursor: pointer;
+	height: 30px;
+	width: 30px;
+	float: right;
+	background: #fff;
+}
+
+.inputfile span {
+	position: relative;
+	top: 5px;
+}
+
 #buttons {
-	width: 97%;
+	padding: 0;
+	width: calc(100% + 20px);
 	margin-top: 50px;
 }
 

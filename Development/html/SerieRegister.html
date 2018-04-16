@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/styleSerieRegister.css">
 	<link rel="icon" type="png" href="../media/images/icon.png">
+	<script type="text/javascript" src="../js/inputOperations.js"></script>
 </head>
 <body>
 	<header>
@@ -16,20 +17,21 @@
 	</header>
 
 	<div id="middle">
-		<label id="title">Cadastrar Episódio</label>
+		<label id="title">Cadastrar Série</label>
 
 		<form action="" method="post">
 			<label>Name</label>
 			<input type="input" name="name">
 
 			<label>Ano</label>
-			<input type="number" min="1960" max="2018" name="number">
+			<input type="number" min="1970" max="2018" name="number">
+			<!-- Ajeitar para pegar o ano atual -->
 
 			<label>Sinopse</label>
 			<input type="input" name="synopsis">
 
 			<label>Status</label>
-			<input type="input" name="status">
+			<input type="input" name="status" placeholder="ex.: Em adamento...">
 
 			<label>Criador</label>
 			<input type="input" name="creator">
@@ -46,29 +48,39 @@
 
 			<label>Categoria</label>
 			<select name="classification" id="classification">
-				<option value="ação"> Ação </option>
-				<option value="animação"> Animação </option>
-				<option value="aventura"> Aventura </option>
-				<option value="biografia"> Biografia </option>
-				<option value="comédia"> Comédia </option>
-				<option value="comédiaR"> Comédia Romântica </option>
-				<option value="documentário"> Documentário </option>
-				<option value=""> </option>
-				<option value=""> </option>
-				<option value=""> </option>
-				<option value=""> </option>
-				<option value=""> </option>
-				<option value=""> </option>
-				<option value=""> </option>
-				<option value=""> </option>
+				<option value="action"> Ação </option>
+				<option value="animation"> Animação </option>
+				<option value="adventure"> Aventura </option>
+				<option value="biograph"> Biografia </option>
+				<option value="comedy"> Comédia </option>
+				<option value="romanticComedy"> Comédia Romântica </option>
+				<option value="documentary"> Documentário </option>
+				<option value="drama"> Drama </option>
+				<option value="sports"> Esportes </option>
+				<option value="sci-fi"> Ficção Científica </option>
+				<option value="childlike"> Infantil </option>
+				<option value="musical"> Musical </option>
+				<option value="romance"> Romance </option>
+				<option value="thriller"> Suspense </option>
+				<option value="horror"> Terror </option>
 			
 			</select>
+
+			<label>Sinopse</label>
+			<textarea name="synopsis"></textarea>
+
+			<label>Imagem</label>
+			<span class="inputfile">
+				<span id="txtImgFile">Nenhum arquivo inserido</span>
+				<input id="imgFile" type="file" name="imagem" accept="image/*" onchange="changeImgNameFile()">
+				<img src="../media/images/upload.png">
+			</span>
 
 			<div id="buttons">
 				<button class="button" id="btnCancel"><a href="./Index.html">Cancelar</a></button>
 				<button class="button" id="btnConfirm">Confirmar</button>
 			</div>
-		</form>d
+		</form>
 
 		<footer></footer>
 	</div>
