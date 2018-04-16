@@ -1,6 +1,6 @@
-package com.imd.telemaco.business;
+package com.imd.telemaco.business.exception;
 
-public class SeasonExistsException extends RuntimeException {
+public class SeasonExistsException extends Exception {
 	private static final long serialVersionUID = 1L;
 	
 	public SeasonExistsException () {

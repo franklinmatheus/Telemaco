@@ -1,4 +1,4 @@
-package com.imd.telemaco.business;
+package com.imd.telemaco.business.exception;
 
 public class SeasonIncompleteException extends Exception {
 	private static final long serialVersionUID = 1L;

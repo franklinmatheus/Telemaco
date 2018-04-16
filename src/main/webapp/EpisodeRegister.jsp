@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.imd.telemaco.entity.enums.Classification"%>
 <%@page import="com.imd.telemaco.entity.Rating"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>

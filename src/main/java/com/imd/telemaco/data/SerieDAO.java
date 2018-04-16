@@ -92,6 +92,25 @@ public class SerieDAO implements DAO<Serie> {
         }
     }
     
+    public Serie select (String name) {
+    	String sql = "SELECT FROM telemaco.serie WHERE name='" + name + "'";
+    	Serie serie = null;    	
+    	try {
+    		Statement stm = connection.createStatement();
+    		ResultSet result = stm.executeQuery(sql);
+    		
+    		if (result.next()) {
+    			int id = result.getInt("id");
+    			
+    			serie = select(id);
+    		}
+    		
+    		return serie;
+    	} catch (SQLException e) {
+			throw new RuntimeException (e);
+		}
+    }
+    
     public ArrayList<Serie> selectAllSeries () {
     	ArrayList <Serie> series = new ArrayList<Serie>();
     	String sql = "SELECT * FROM telemaco.serie";
@@ -103,12 +122,16 @@ public class SerieDAO implements DAO<Serie> {
     		ResultSet result = stm.executeQuery(sql);
     		
     		while (result.next()) {
-    			cd Te
+    			int id = result.getInt("id");
+    			Serie serie = select(id);
+    			
+    			series.add(serie);
     		}
     		
     		return series;
+    	} catch (SQLException e) {
+    		throw new RuntimeException (e);
     	}
-    	
     }
 
     @Override
