@@ -44,13 +44,17 @@ public class SerieDAO implements DAO<Serie> {
     
     @Override
     public void insert(Serie serie) throws SQLException {
-        String sql = "INSERT INTO telemaco.serie (name, id_creator) VALUES (?, ?)";
+        /*String sql = "INSERT INTO telemaco.serie (name, id_creator) VALUES (?, ?)";*/
+        String sql = "INSERT INTO telemaco.serie (name, year, status, creator, classification, genre, synopsis, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
         try {
             this.statsConnection();
             
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, serie.getName());
-            statement.setInt(2, serie.getId_creator());
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, serie.getName());
+            stm.setInt(2, serie.get);
+            //statement.setInt(2, serie.getId_creator());
+            
             statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

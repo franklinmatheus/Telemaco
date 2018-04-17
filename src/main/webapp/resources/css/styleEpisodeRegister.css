@@ -64,7 +64,7 @@ form label{
 
 form textarea {
 	resize: vertical;
-	boder: none !important;
+	border: none !important;
 	border-radius: 1px !important;
 	font-family: arial;
 	height: 50px;
