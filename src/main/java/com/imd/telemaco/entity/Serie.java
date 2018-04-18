@@ -17,16 +17,16 @@ public class Serie {
     private int year;
     private String status;
     private String creator;
+    private Classification classification;
     private String genre;
     private String synopsis;
-    private Classification classification;
     private String image;
     private ArrayList<Season> seasons;
     private ArrayList<Rating> ratings;
     
     public Serie() { }
 
-    public Serie(String name, int year, String status, String creator, String genre, String synopsis, Classification classification, String image) { 
+    public Serie(String name, int year, String status, String creator, Classification classification, String genre, String synopsis, String image) { 
     	this.name = name;
     	this.year = year;
     	this.status = status;
@@ -39,7 +39,7 @@ public class Serie {
     	this.ratings = null;
     }
     
-    public Serie(int id, String name, int year, String status, String creator, String genre, String synopsis, Classification classification, String image, ArrayList<Season> seasons) {
+    public Serie(int id, String name, int year, String status, String creator, Classification classification, String genre, String synopsis, String image, ArrayList<Season> seasons) {
     	this.name = name;
     	this.year = year;
     	this.status = status;
@@ -140,6 +140,58 @@ public class Serie {
         this.ratings = ratings;
     }
     
+	public String classifToString () {
+		String cString;
+		switch (classification) {
+			case GENERAL:
+				cString = "L";
+				break;
+			case P10:
+				cString = "10";
+				break;
+			case P12:
+				cString = "12";
+				break;
+			case P14:
+				cString = "14";
+				break;
+			case P16:
+				cString = "16";
+				break;
+			default:
+				cString = "18";
+		}
+		return cString;
+	}
+    
+	public Classification stringToClassif (String classif) {
+		Classification classification;
+		
+		switch (classif) {
+			case "L":
+				classification = Classification.GENERAL;
+				break;
+			case "10":
+				classification = Classification.P10;
+				break;
+			case "12":
+				classification = Classification.P12;
+				break;
+			case "14":
+				classification = Classification.P14;
+				break;
+			case "16":
+				classification = Classification.P16;
+				break;
+			default:
+				classification = Classification.P18;
+				break;
+				
+		}
+		
+		return classification;
+	}
+	
     @Override
     public String toString() {
         return "Serie{" + "nome=" + name + ", Ano=" + year + '}';

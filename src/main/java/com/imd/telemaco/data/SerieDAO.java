@@ -5,7 +5,10 @@
  */
 package com.imd.telemaco.data;
 
+import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.enums.Classification;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,7 +47,6 @@ public class SerieDAO implements DAO<Serie> {
     
     @Override
     public void insert(Serie serie) throws SQLException {
-        /*String sql = "INSERT INTO telemaco.serie (name, id_creator) VALUES (?, ?)";*/
         String sql = "INSERT INTO telemaco.serie (name, year, status, creator, classification, genre, synopsis, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
@@ -52,16 +54,19 @@ public class SerieDAO implements DAO<Serie> {
             
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, serie.getName());
-            stm.setInt(2, serie.get);
-            //statement.setInt(2, serie.getId_creator());
+            stm.setInt(2, serie.getYear());
+            stm.setString(3, serie.getStatus());
+            stm.setString(4,  serie.getCreator());
+            stm.setString(5, serie.classifToString());
+            stm.setString(6, serie.getGenre());
+            stm.setString(7, serie.getSynopsis());
+            stm.setString(8, serie.getImage());
             
-            statement.execute();
+            stm.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) { /* empty */ }
+        	connection.close();
         }
     }
     
@@ -73,16 +78,24 @@ public class SerieDAO implements DAO<Serie> {
             this.statsConnection();
             
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            boolean exists = resultSet.next();
+            ResultSet result = statement.executeQuery(sql);
             
-            if(exists) {
-                String name = resultSet.getString("name");
-                int id_creator = resultSet.getInt("id_creator");
+            if(result.next()) {
+                String name     = result.getString("name");
+                int    year     = result.getInt("year");
+                String status   = result.getString("status");
+                String creator  = result.getString("creator");
+                String classif  = result.getString("classification");
+                String genre    = result.getString("genre");
+                String synopsis = result.getString("synopsis");
+                String image    = result.getString("image");
                 
-                serie.setId(id);
-                serie.setName(name);
-                serie.setId_creator(id_creator);
+                SeasonDAO seasonDAO = new SeasonDAO();
+                ArrayList<Season> seasons = seasonDAO.selectAllSeasons(id);
+                
+                Classification classification = serie.stringToClassif(classif);
+                
+                serie = new Serie(id, name, year, status, creator, classification, genre, synopsis, image, seasons);
             } else
                 serie = null;
             
@@ -105,7 +118,6 @@ public class SerieDAO implements DAO<Serie> {
     		
     		if (result.next()) {
     			int id = result.getInt("id");
-    			
     			serie = select(id);
     		}
     		
@@ -115,7 +127,7 @@ public class SerieDAO implements DAO<Serie> {
 		}
     }
     
-    public ArrayList<Serie> selectAllSeries () {
+    public ArrayList<Serie> selectAllSeries () throws SQLException {
     	ArrayList <Serie> series = new ArrayList<Serie>();
     	String sql = "SELECT * FROM telemaco.serie";
     	
@@ -135,7 +147,9 @@ public class SerieDAO implements DAO<Serie> {
     		return series;
     	} catch (SQLException e) {
     		throw new RuntimeException (e);
-    	}
+    	} finally {
+        	connection.close();
+        }
     }
 
     @Override
@@ -149,32 +163,40 @@ public class SerieDAO implements DAO<Serie> {
         } catch(SQLException e) {
             throw new RuntimeException();
         } finally {
-            try {
-                connection.close();
-            } catch(SQLException e) { /* emtpy */ }
+        	connection.close();
         }
     }
    
     @Override
     public void update(Serie serie) throws SQLException {
         String sql = "UPDATE telemaco.user SET "
-                + "name=? "
-                + "id_creator=? "
+                + "name=?, "
+                + "year=?, "
+                + "status=?, "
+                + "creator=?, "
+                + "classification=?, "
+                + "genre=?, "
+                + "synopsis=? ,"
+                + "image=? "
                 + "WHERE id=?";
         try {
             this.statsConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, serie.getName());
-            statement.setInt(2, serie.getId_creator());
-            statement.setInt(3, serie.getId());
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, serie.getName());
+            stm.setInt(2, serie.getYear());
+            stm.setString(3, serie.getStatus());
+            stm.setString(4,  serie.getCreator());
+            stm.setString(5, serie.classifToString());
+            stm.setString(6, serie.getGenre());
+            stm.setString(7, serie.getSynopsis());
+            stm.setString(8, serie.getImage());
+            stm.setInt(9, serie.getId());
             
-            statement.execute();
+            stm.execute();
         } catch(SQLException e) {
             throw new RuntimeException();
         } finally {
-            try {
-                connection.close();
-            } catch(SQLException e) { /* empty */ }
+            connection.close();
         }
     }
 }
