@@ -27,7 +27,7 @@
     <form name="register" action="LoginUser" method="post">
         <label id="title"><b>Login</b></label>
 
-	<div id="form">
+		<div id="form">
             <label for="email">Email</label>
             <input type="email" name="email" class="inputText" placeholder="user@email.me" required>
 
@@ -35,7 +35,7 @@
             <input type="password" name="password" class="inputText" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
         </div>
 
-	<div id="formObs">
+		<div id="formObs">
             <input type="checkbox" name="cbKeepConcected">
             <label for="cbKeepConcected"> Mantenha-me Conectado </label>
             <br>

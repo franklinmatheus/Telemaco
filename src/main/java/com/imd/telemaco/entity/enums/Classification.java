@@ -10,5 +10,5 @@ package com.imd.telemaco.entity.enums;
  * @author franklin
  */
 public enum Classification {
-    GENERAL, P12, P14, P16, P18; 
+    GENERAL, P10, P12, P14, P16, P18; 
 }

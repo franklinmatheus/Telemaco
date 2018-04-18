@@ -18,7 +18,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register serie</title>
+        <title>Cadastrar serie</title>
     </head>
     <body>
        <p><a href="Logged.jsp">Home </a>></p>
@@ -26,7 +26,7 @@
         <p>
         <form name="RegisterSerie" action="RegisterSerie" method="POST">
             <p><span>Name</span><input type="text" name="name" required /></p>
-            <p><input type="submit" name="Submit" /></p>
+            <p><input type="submit" name="Submit" value="submit" /></p>
         </form>
         </p>
     </body>

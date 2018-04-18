@@ -2,6 +2,8 @@ package com.imd.telemaco.business;
 
 import java.sql.SQLException;
 
+import com.imd.telemaco.business.exception.EpisodeExistsException;
+import com.imd.telemaco.business.exception.EpisodeInvalidException;
 import com.imd.telemaco.data.EpisodeDAO;
 import com.imd.telemaco.entity.Episode;
 

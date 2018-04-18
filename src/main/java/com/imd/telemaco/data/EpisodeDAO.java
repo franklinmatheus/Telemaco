@@ -43,7 +43,6 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setInt(1, episode.getId());
 			statement.setString(2, episode.getName());
 			statement.setInt(3, episode.getNumber());
 			statement.setInt(4, episode.getTime());

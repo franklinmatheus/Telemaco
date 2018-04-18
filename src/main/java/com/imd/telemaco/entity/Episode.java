@@ -40,6 +40,23 @@ public class Episode {
     }
 
     /**
+     * Parametric constructor 
+     * @param name
+     * @param number
+     * @param time
+     * @param synopsis
+     * @param idSeason
+     */
+    public Episode(String name, int number, int time, String synopsis, int idSeason) { 
+    	this.name 	  = name;
+        this.number   = number;
+        this.time     = time;
+        this.synopsis = synopsis;
+        this.idSeason = idSeason;
+    }
+
+    
+    /**
      * Returns the episode id
      * @return id
      */
@@ -131,7 +148,7 @@ public class Episode {
      * Change the idSerie value 
      * @param idSeason
      */
-    public void setIdSeries (int idSeason) {
+    public void setIdSeason (int idSeason) {
     	this.idSeason = idSeason;
     }
     @Override

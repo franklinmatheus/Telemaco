@@ -16,10 +16,10 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     private static final String bd = "telemaco";
     //*  mudar se estiver com host e porta diferente
-    private static final String url = "jdbc:postgresql://localhost:5432/" + bd;
-    private static final String usuario = "postgres";
-    private static final String senha = "admin";
-    private static final String driver = "org.postgresql.Driver";
+    private static final String url = "jdbc:mysql://localhost:3306/" + bd;
+    private static final String usuario = "root";
+    private static final String senha = "telemaco98";
+    private static final String driver = "com.mysql.jdbc.Driver";
     
     /**
      * TODO
@@ -36,4 +36,10 @@ public class ConnectionFactory {
             throw new SQLException(e.getMessage());
         }
     }
+    
+    /*public static void main(String[] args) throws SQLException {
+		System.out.println(ConnectionFactory.getConnection());
+		UserDAO u = new UserDAO();
+		System.out.println(u.select(1));
+	}*/
 }

@@ -1,3 +1,9 @@
 *.class
 target/*
+/.gitignore
+/.project
+/.settings/
+/diagrams/
+/pom.xml
+/src/
 /target/

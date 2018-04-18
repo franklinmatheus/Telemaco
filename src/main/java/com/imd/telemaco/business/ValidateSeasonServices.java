@@ -2,6 +2,8 @@ package com.imd.telemaco.business;
 
 import java.sql.SQLException;
 
+import com.imd.telemaco.business.exception.SeasonExistsException;
+import com.imd.telemaco.business.exception.SeasonIncompleteException;
 import com.imd.telemaco.data.SeasonDAO;
 import com.imd.telemaco.entity.Season;
 
