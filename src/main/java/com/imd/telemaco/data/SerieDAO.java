@@ -11,12 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
  * @author franklin
  */
-public class SerieDAO implements DAO<Serie> {
+public class SerieDAO implements DAOSerieSpecialOperations {
     
     private Connection connection;
     private static SerieDAO serieDAO = null;
@@ -89,6 +90,12 @@ public class SerieDAO implements DAO<Serie> {
                 connection.close();
             } catch(SQLException e) { /* emtpy */ }
         }
+    }
+    
+    @Override
+    public ArrayList<Serie> select() {
+        String sql = "SELECT * FROM telemaco.serie";
+        return null;
     }
 
     @Override

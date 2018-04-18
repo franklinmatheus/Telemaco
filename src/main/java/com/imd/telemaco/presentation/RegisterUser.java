@@ -61,7 +61,7 @@ public class RegisterUser extends HttpServlet {
                 response.sendRedirect("Overview.jsp");
             else
                 response.sendRedirect("Register.jsp");
-        } catch(ParseException e) {
+        } catch(ParseException | SQLException e) {
             response.sendRedirect("Register.jsp");
         } finally {
             out.close();
@@ -98,7 +98,11 @@ public class RegisterUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
