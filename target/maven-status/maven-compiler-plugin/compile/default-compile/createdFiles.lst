@@ -1,0 +1,7 @@
+com/imd/telemaco/presentation/UpdatePassword.class
+com/imd/telemaco/entity/User.class
+com/imd/telemaco/data/DAOUserSpecialOperations.class
+com/imd/telemaco/data/DAO.class
+com/imd/telemaco/data/DAOSeasonSpecialOperations.class
+com/imd/telemaco/presentation/LoginUser.class
+com/imd/telemaco/presentation/LogoutUser.class

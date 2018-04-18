@@ -1,0 +1,59 @@
+body {
+	background-image: linear-gradient(135deg, rgba(40,40,40,.95), rgba(10,10,10,.7), rgba(0,0,0,1)), url(../media/images/overviewBg.png);
+	background-size: 103%;
+	background-repeat: no-repeat, repeat-y;
+	height: 100vh;
+}
+
+header {
+	width: 100%;
+	height: 150px;
+}
+
+header img {
+	margin-top: 1%;
+	margin-left: 3%;
+}
+
+#btnLogin {
+	background: #11C4A5;
+	position: absolute;
+	font-size: 1.2em;
+	top: 40px;
+	right: 7%;
+}
+
+#btnLogin:hover { background: #0ea48b }
+
+#adversiment {
+	width: 50%;
+	position: fixed;
+	top: 50%;
+	left: 3%;
+}
+
+#adTitle {
+	font-size: 3em;
+	color: #FFF;
+}
+
+#adBody {
+	font-size: 1.2em;
+	color: #E9872A;
+}
+
+#adBody span {
+	font-family: sfGalaxy;
+}
+
+#btnRegister {
+	font-family: sfGalaxy;
+	background: #E9872A;
+	font-size: 1.5em;
+	position: fixed;
+	bottom: 7%;
+	right: 7%;
+	padding: 15px 25px 15px 25px;
+}
+
+#btnRegister:hover { background: #e57912 }
