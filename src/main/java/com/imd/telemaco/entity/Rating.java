@@ -10,28 +10,28 @@ package com.imd.telemaco.entity;
  * @author valmir
  */
 public class Rating {
-    public String rating;
+    public String comment;
     public double stars;
     
-    public void rating() { }
+    public void Rating() { }
     
-    public void rating(String rating, int stars) { 
-        this.setRating(rating);
+    public void Rating(String comment, int stars) { 
+        this.setComment(comment);
         this.setStars(stars);
     }
 
     /**
      * @return the rating
      */
-    public String getRating() {
-        return rating;
+    public String getComment() {
+        return comment;
     }
 
     /**
      * @param rating the rating to set
      */
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Rating {
     
      @Override
     public String toString() {
-        return "Avaliação{" + "Comentario=" + rating + "estrelas" + stars + '}';
+        return "Avaliação{" + "Comentario=" + comment + "estrelas" + stars + '}';
     }
     
 }
