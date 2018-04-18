@@ -80,21 +80,21 @@ public class SerieDAO implements DAO<Serie> {
             ResultSet result = statement.executeQuery(sql);
             
             if(result.next()) {
-//                String name     = result.getString("name");
-//                int    year     = result.getInt("year");
-//                String status   = result.getString("status");
-//                String creator  = result.getString("creator");
-//                String classif  = result.getString("classification");
-//                String genre    = result.getString("genre");
-//                String synopsis = result.getString("synopsis");
-//                String image    = result.getString("image");
-//                
-//                SeasonDAO seasonDAO = new SeasonDAO();
-//                ArrayList<Season> seasons = seasonDAO.selectAllSeasons(id);
-//                
-//                Classification classification = serie.stringToClassif(classif);
-//                
-//                serie = new Serie(id, name, year, status, creator, classification, genre, synopsis, image, seasons);
+                String name     = result.getString("name");
+                int    year     = result.getInt("year");
+                String status   = result.getString("status");
+                String creator  = result.getString("creator");
+                String classif  = result.getString("classification");
+                String genre    = result.getString("genre");
+                String synopsis = result.getString("synopsis");
+                String image    = result.getString("image");
+                
+                SeasonDAO seasonDAO = new SeasonDAO();
+                ArrayList<Season> seasons = seasonDAO.selectAllSeasons(id);
+                
+                Classification classification = serie.stringToClassif(classif);
+                
+                serie = new Serie(id, name, year, status, creator, classification, genre, synopsis, image, seasons);
             } else
                 serie = null;
             
@@ -136,7 +136,7 @@ public class SerieDAO implements DAO<Serie> {
 
     		while (result.next()) {
     			int id = result.getInt("id");
-    			Serie serie = select(id);	
+    			Serie serie = select(id);
     			series.add(serie);
     		}
 

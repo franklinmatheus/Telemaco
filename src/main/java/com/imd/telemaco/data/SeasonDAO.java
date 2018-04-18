@@ -70,9 +70,9 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
     			int number	    			 = result.getInt("number");
     			EpisodeDAO epDAO 			 = new EpisodeDAO();
     			ArrayList <Episode> episodes = epDAO.selectAllEpisodes(id);
-    			int fkIdSerie 				 = result.getInt("fkIdSerie");
+    			int idFkSerie 				 = result.getInt("idFkSerie");
     			
-    			season = new Season (id, number, episodes, fkIdSerie);
+    			season = new Season (id, number, episodes, idFkSerie);
     		} else season = null;
     		
     		return season;
@@ -86,7 +86,7 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
     
     @Override
     public Season select (int number, int idSerie) throws SQLException {
-    	String sql = "SELECT * FROM telemaco.season WHERE fkIdSerie='" + idSerie + "' AND number='" + number + "'";
+    	String sql = "SELECT * FROM telemaco.season WHERE idFkSerie='" + idSerie + "' AND number='" + number + "'";
     	Season season = new Season();
     	
     	try {
@@ -109,7 +109,7 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
     @Override
     public ArrayList<Season> selectAllSeasons (int idSerie) throws SQLException {
     	ArrayList <Season> seasons = new ArrayList <Season>();
-    	String sql = "SELECT * FROM telemaco.season WHERE fkIdSerie = '" + idSerie + "'";
+    	String sql = "SELECT * FROM telemaco.season WHERE idFkSerie = '" + idSerie + "'";
     	
     	try {
     		stm = connection.createStatement();
