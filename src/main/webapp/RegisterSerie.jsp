@@ -39,7 +39,7 @@
 			<input type="input" name="name" required>
 
 			<label>Ano</label>
-			<input type="number" max="2018" min="1970" name="number" required>
+			<input type="number" name="year" max="2018" min="1970" required>
 			<!-- Ajeitar para pegar o ano atual -->
 
 			<label>Status</label>
@@ -59,7 +59,7 @@
 			</select>
 
 			<label>Categoria</label>
-			<select name="classification" id="classification" required>
+			<select name="genre" id="classification" required>
 				<option value="action"> Ação </option>
 				<option value="animation"> Animação </option>
 				<option value="adventure"> Aventura </option>

@@ -86,13 +86,14 @@ public class ValidateSerieServices {
      * @throws SerieExistsException
      */
     public void validSerieRegister(Serie serie) throws SerieInvalidException, SerieExistsException {
+        //this.validSerieName(serie);
+        //this.serieExist(serie);
         try {
-            this.validSerieName(serie);
-            this.serieExist(serie);
-        } catch (SerieExistsException s) {
-            throw new SerieExistsException (s.getMessage());
-        } catch (SerieInvalidException s) {
-            throw new SerieInvalidException();
+            SerieDAO serieDAO = new SerieDAO();
+            serieDAO.insert(serie);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         
     }

@@ -26,7 +26,9 @@
         Welcome, <%=logged.getName()%><br/>
         <a href="RegisterSerie.jsp">Register serie</a><br/>
         <a href="UpdatePassword.jsp">Update password</a><br/>
-        <a href="Series.jsp">See all series</a><br/>
+        <form action="SelectAllSeries" method="post">
+        	<button type="submit"> ver series </button>
+        </form>
         <br/>
         <h2>Your informations:</h2>
         <b>Birth: </b><%=logged.getBirth()%><br/>

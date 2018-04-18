@@ -72,30 +72,29 @@ public class SerieDAO implements DAO<Serie> {
     
     @Override
     public Serie select(int id) throws SQLException {
-        String sql = "SELEC * FROM telemaco.serie WHERE id='" + id + "'";
+        String sql = "SELECT * FROM telemaco.serie WHERE id='" + id + "'";
         Serie serie = new Serie();
+        
         try {
-            this.statsConnection();
-            
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
             
             if(result.next()) {
-                String name     = result.getString("name");
-                int    year     = result.getInt("year");
-                String status   = result.getString("status");
-                String creator  = result.getString("creator");
-                String classif  = result.getString("classification");
-                String genre    = result.getString("genre");
-                String synopsis = result.getString("synopsis");
-                String image    = result.getString("image");
-                
-                SeasonDAO seasonDAO = new SeasonDAO();
-                ArrayList<Season> seasons = seasonDAO.selectAllSeasons(id);
-                
-                Classification classification = serie.stringToClassif(classif);
-                
-                serie = new Serie(id, name, year, status, creator, classification, genre, synopsis, image, seasons);
+//                String name     = result.getString("name");
+//                int    year     = result.getInt("year");
+//                String status   = result.getString("status");
+//                String creator  = result.getString("creator");
+//                String classif  = result.getString("classification");
+//                String genre    = result.getString("genre");
+//                String synopsis = result.getString("synopsis");
+//                String image    = result.getString("image");
+//                
+//                SeasonDAO seasonDAO = new SeasonDAO();
+//                ArrayList<Season> seasons = seasonDAO.selectAllSeasons(id);
+//                
+//                Classification classification = serie.stringToClassif(classif);
+//                
+//                serie = new Serie(id, name, year, status, creator, classification, genre, synopsis, image, seasons);
             } else
                 serie = null;
             
@@ -110,7 +109,7 @@ public class SerieDAO implements DAO<Serie> {
     }
     
     public Serie select (String name) {
-    	String sql = "SELECT FROM telemaco.serie WHERE name='" + name + "'";
+    	String sql = "SELECT * FROM telemaco.serie WHERE name='" + name + "'";
     	Serie serie = null;    	
     	try {
     		Statement stm = connection.createStatement();
@@ -131,19 +130,16 @@ public class SerieDAO implements DAO<Serie> {
     	ArrayList <Serie> series = new ArrayList<Serie>();
     	String sql = "SELECT * FROM telemaco.serie";
     	
-    	try {
-    		this.statsConnection();
-    		
+    	try {    		
     		Statement stm = connection.createStatement();
     		ResultSet result = stm.executeQuery(sql);
-    		
+
     		while (result.next()) {
     			int id = result.getInt("id");
-    			Serie serie = select(id);
-    			
+    			Serie serie = select(id);	
     			series.add(serie);
     		}
-    		
+
     		return series;
     	} catch (SQLException e) {
     		throw new RuntimeException (e);
