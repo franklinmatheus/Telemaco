@@ -6,6 +6,8 @@
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateUserServices;
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,7 +63,7 @@ public class RegisterUser extends HttpServlet {
                 response.sendRedirect("Overview.jsp");
             else
                 response.sendRedirect("Register.jsp");
-        } catch(ParseException | SQLException e) {
+        } catch(ParseException | DatabaseException | CloseConnectionException e) {
             response.sendRedirect("Register.jsp");
         } finally {
             out.close();
@@ -85,6 +87,7 @@ public class RegisterUser extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**
@@ -103,6 +106,7 @@ public class RegisterUser extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**

@@ -5,8 +5,9 @@
  */
 package com.imd.telemaco.data;
 
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.entity.User;
-import java.sql.SQLException;
 
 /**
  *
@@ -18,15 +19,17 @@ public interface DAOUserSpecialOperations extends DAO<User> {
      * @param email
      * @param password
      * @return 
-     * @throws java.sql.SQLException 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException 
      */
-    public User select(String email, String password) throws SQLException;
+    public User select(String email, String password) throws DatabaseException, CloseConnectionException;
     
     /**
      * Select an user by email, special method to register.
      * @param email
-     * @return
-     * @throws SQLException 
+     * @return 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException 
      */
-    public User select(String email) throws SQLException;
+    public User select(String email) throws DatabaseException, CloseConnectionException;
 }

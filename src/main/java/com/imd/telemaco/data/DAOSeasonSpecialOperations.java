@@ -1,6 +1,7 @@
 package com.imd.telemaco.data;
 
-import java.sql.SQLException;
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import java.util.ArrayList;
 
 import com.imd.telemaco.entity.Season;
@@ -16,15 +17,17 @@ public interface DAOSeasonSpecialOperations extends DAO<Season> {
      * @param  number
      * @param  idSerie
      * @return season
-     * @throws SQLException
+     * @throws com.imd.telemaco.business.exception.DatabaseException
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException
      */
-    public Season select (int number, int idSerie) throws SQLException;
+    public Season select (int number, int idSerie) throws DatabaseException, CloseConnectionException;
     
     /**
      * Returns all the episodes of the Season
-     * @param  id
+     * @param idSerie
      * @return episodes
-     * @throws SQLException
+     * @throws com.imd.telemaco.business.exception.DatabaseException
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException
      */
-    public ArrayList<Season> selectAllSeasons (int idSerie) throws SQLException;
+    public ArrayList<Season> selectAllSeasons (int idSerie) throws DatabaseException, CloseConnectionException;
 }

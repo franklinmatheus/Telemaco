@@ -5,10 +5,11 @@
  */
 package com.imd.telemaco.business;
 
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.data.DAOUserSpecialOperations;
 import com.imd.telemaco.data.UserDAO;
 import com.imd.telemaco.entity.User;
-import java.sql.SQLException;
 
 /**
  *
@@ -24,9 +25,10 @@ public class ValidateUserServices {
      * @param cemail
      * @param cpassword
      * @return 
-     * @throws java.sql.SQLException 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException 
      */
-    public boolean validUserInsert(User user, String cemail, String cpassword) throws SQLException {
+    public boolean validUserInsert(User user, String cemail, String cpassword) throws DatabaseException, CloseConnectionException {
         if(this.valid(user))
             if(this.confirmPassword(user.getPassword(), cpassword) && this.confirmEmail(user.getEmail(), cemail))
                 if(!this.emailAlreadyExists(user)) {
@@ -42,9 +44,10 @@ public class ValidateUserServices {
      * @param email
      * @param password
      * @return 
-     * @throws java.sql.SQLException 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException 
      */
-    public User validUserLogin(String email, String password) throws SQLException {
+    public User validUserLogin(String email, String password) throws DatabaseException, CloseConnectionException {
         DAOUserSpecialOperations dao = UserDAO.getInstance();
         User user = dao.select(email, password);
         
@@ -58,9 +61,11 @@ public class ValidateUserServices {
      * @param newPassword
      * @param cNewPassword
      * @return 
-     * @throws java.sql.SQLException 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException 
      */
-    public boolean validUserPasswordUpdate(User user, String cOldPassword, String newPassword, String cNewPassword) throws SQLException {
+    public boolean validUserPasswordUpdate(User user, String cOldPassword, String newPassword, String cNewPassword) 
+            throws DatabaseException, CloseConnectionException {
         if(this.confirmPassword(newPassword, cNewPassword))
             if(this.confirmPassword(user.getPassword(), cOldPassword)) {
                 DAOUserSpecialOperations dao = UserDAO.getInstance();
@@ -75,9 +80,10 @@ public class ValidateUserServices {
      * TODO
      * @param user
      * @return 
-     * @throws java.sql.SQLException 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException 
      */
-    public boolean removeUser(User user) throws SQLException {
+    public boolean removeUser(User user) throws DatabaseException, CloseConnectionException {
         if(this.userExists(user)) {
             DAOUserSpecialOperations dao = UserDAO.getInstance();
             dao.delete(user);
@@ -123,7 +129,7 @@ public class ValidateUserServices {
      * @param user
      * @return 
      */
-    private boolean userExists(User user) throws SQLException {
+    private boolean userExists(User user) throws DatabaseException, CloseConnectionException {
         DAOUserSpecialOperations dao = UserDAO.getInstance();
         User exists = dao.select(user.getId());
         
@@ -134,8 +140,10 @@ public class ValidateUserServices {
      * TODO
      * @param user
      * @return 
+     * @throws DatabaseException
+     * @throws CloseConnectionException
      */
-    private boolean emailAlreadyExists(User user) throws SQLException {
+    private boolean emailAlreadyExists(User user) throws DatabaseException, CloseConnectionException {
         DAOUserSpecialOperations dao = UserDAO.getInstance();
         User exists = dao.select(user.getEmail());
         

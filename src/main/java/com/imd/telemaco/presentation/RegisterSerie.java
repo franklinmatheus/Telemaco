@@ -6,8 +6,14 @@
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateSerieServices;
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
+import com.imd.telemaco.business.exception.SerieExistsException;
+import com.imd.telemaco.business.exception.SerieInvalidException;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
+import com.imd.telemaco.entity.enums.Classification;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,9 +25,10 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author valmir
+ * @author Shirley Ohara (shirleyohara@ufrn.edu.br)
  */
 public class RegisterSerie extends HttpServlet {
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,34 +41,44 @@ public class RegisterSerie extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {            
+        PrintWriter out = response.getWriter();
+
+        try {
+            Serie serie = new Serie();
+
             String name = request.getParameter("name");
-            
-            if( ( name == null || name.isEmpty() ) ) {
+            String year = request.getParameter("year");
+            String status = request.getParameter("status");
+            String creator = request.getParameter("creator");
+            String classif = request.getParameter("classification");
+            String genre = request.getParameter("genre");
+            String synopsis = request.getParameter("synopsis");
+            String image = request.getParameter("image");
+            int yearInt = Integer.parseInt(year);
+            Classification classification = serie.stringToClassif(classif);
+
+            serie = new Serie(name, yearInt, status, creator, classification, genre, synopsis, image);
+
+            if ((name == null || name.isEmpty())) {
                 response.sendRedirect("RegisterSerie.jsp");
             } else {
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute("logged");
-                
-                
-                Serie serie;
-                serie = new Serie();
-                serie.setName(name);
-                serie.setId_creator(user.getId());
-                
-                ValidateSerieServices validate = new ValidateSerieServices();
-                
-                // Verificar esssa inserção!!
-                if (validate.validSerieRegister(serie)) {
+
+                try {
+                    ValidateSerieServices validate = new ValidateSerieServices();
+                    validate.validSerieRegister(serie);
                     //mensagem que foi insedira com sucesso
                     response.sendRedirect("Logged.jsp");
-                } else { // sed não foi....
-                    response.sendRedirect("Logged.jsp");
+                } catch (SerieExistsException | SerieInvalidException e) {
+                    response.sendRedirect("Error.jsp");
                 }
-            } 
-        } catch(Exception e) {
+            }
+        } catch (DatabaseException | CloseConnectionException e) {
             e.getMessage();
             response.sendRedirect("Error.jsp");
+        } finally {
+            out.close();
         }
     }
 
@@ -105,4 +122,3 @@ public class RegisterSerie extends HttpServlet {
     }// </editor-fold>
 
 }
-

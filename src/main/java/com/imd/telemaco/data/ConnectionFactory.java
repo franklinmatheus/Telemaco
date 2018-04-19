@@ -5,6 +5,7 @@
  */
 package com.imd.telemaco.data;
 
+import com.imd.telemaco.business.exception.DatabaseException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,16 +25,20 @@ public class ConnectionFactory {
     /**
      * TODO
      * @return
-     * @throws SQLException 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
      */
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws DatabaseException {
         try {
             Class.forName(driver);
             return DriverManager.getConnection(url, usuario, senha);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-            throw new SQLException(e.getMessage());
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new DatabaseException();
         }
     }
+    
+    /*public static void main(String[] args) throws SQLException {
+		System.out.println(ConnectionFactory.getConnection());
+		UserDAO u = new UserDAO();
+		System.out.println(u.select(1));
+	}*/
 }

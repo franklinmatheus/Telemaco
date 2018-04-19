@@ -1,7 +1,7 @@
 package com.imd.telemaco.data;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import java.util.ArrayList;
 
 import com.imd.telemaco.entity.Episode;
@@ -17,24 +17,27 @@ public interface DAOEpisodeSpecialOperations extends DAO <Episode> {
 	 * @param 	name
 	 * @param 	idSeason
 	 * @return	episode
-	 * @throws 	SQLException
+         * @throws com.imd.telemaco.business.exception.DatabaseException
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException
 	 */
-	public Episode select(String name, int idSeason) throws SQLException;
+	public Episode select(String name, int idSeason) throws DatabaseException, CloseConnectionException;
 	
 	/**
 	 * Select a episode from the database since the number and idSeason values.
-	 * @param 	name
+         * @param number
 	 * @param 	idSeason
 	 * @return	episode
-	 * @throws 	SQLException
+         * @throws com.imd.telemaco.business.exception.DatabaseException
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException
 	 */
-	public Episode select(int number, int idSeason) throws SQLException;
+	public Episode select(int number, int idSeason) throws DatabaseException, CloseConnectionException;
 	
 	/**
 	 * Select all episodes of a season
 	 * @param idSeason
 	 * @return episodes
-	 * @throws SQLException
+         * @throws com.imd.telemaco.business.exception.DatabaseException
+     * @throws com.imd.telemaco.business.exception.CloseConnectionException
 	 */
-	public ArrayList<Episode> selectAllEpisodes (int idSeason) throws SQLException;
+	public ArrayList<Episode> selectAllEpisodes (int idSeason) throws DatabaseException, CloseConnectionException;
 }
