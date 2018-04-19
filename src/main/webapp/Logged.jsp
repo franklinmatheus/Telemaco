@@ -25,7 +25,9 @@
         <h1>This is your logged page! </h1><br/>
         Welcome, <%=logged.getName()%><br/>
         <a href="RegisterSerie.jsp">Register serie</a><br/>
+        <a href="RegisterSeason.jsp">Register season</a><br>
         <a href="UpdatePassword.jsp">Update password</a><br/>
+        
         <form action="SelectAllSeries" method="post">
         	<button type="submit"> ver series </button>
         </form>

@@ -88,6 +88,7 @@ public class ValidateSerieServices {
     public void validSerieRegister(Serie serie) throws SerieInvalidException, SerieExistsException {
         //this.validSerieName(serie);
         //this.serieExist(serie);
+    	//FIXME
         try {
             SerieDAO serieDAO = new SerieDAO();
             serieDAO.insert(serie);

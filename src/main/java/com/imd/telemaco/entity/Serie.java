@@ -40,6 +40,7 @@ public class Serie {
     }
     
     public Serie(int id, String name, int year, String status, String creator, Classification classification, String genre, String synopsis, String image, ArrayList<Season> seasons) {
+    	this.id = id;
     	this.name = name;
     	this.year = year;
     	this.status = status;

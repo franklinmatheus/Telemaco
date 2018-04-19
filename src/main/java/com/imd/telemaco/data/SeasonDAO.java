@@ -40,7 +40,7 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
     
     @Override
     public void insert (Season season) throws SQLException {
-    	String sql = "INSERT INTO telemaco.season (number, fkIdSerie, amountEp) VALUES (?, ?, ?)";
+    	String sql = "INSERT INTO telemaco.season (number, idFkSerie, epAmount) VALUES (?, ?, ?)";
     	try {
     		PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setInt(1, season.getNumber());
@@ -79,7 +79,7 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
     	} catch (SQLException e) {
     		throw new RuntimeException(e);
     	} finally {
-    		connection.close();
+//    		connection.close();
     	}
     }
     

@@ -108,7 +108,7 @@ public class SerieDAO implements DAO<Serie> {
     }
     
     public Serie select (String name) throws SQLException {
-    	String sql = "SELECT * FROM telemaco.serie WHERE name='" + name + "'";
+    	String sql = "SELECT id FROM telemaco.serie WHERE name=\"" + name + "\"";
     	Serie serie = null;
     	
     	try {
@@ -139,7 +139,7 @@ public class SerieDAO implements DAO<Serie> {
 
     		while (result.next()) {
     			int id = result.getInt("id");
-    			Serie serie = this.select(id);
+    			Serie serie = select(id);
     			series.add(serie);
     		}
     		

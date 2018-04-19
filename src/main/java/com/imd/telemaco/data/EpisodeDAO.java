@@ -133,7 +133,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 	
 	@Override
 	public ArrayList<Episode> selectAllEpisodes (int idSeason) throws SQLException {
-		String sql = "SELECT * FROM telemaco.episode WHERE fkIdSeason='" + idSeason + "'";
+		String sql = "SELECT * FROM telemaco.episode WHERE idFkSeason='" + idSeason + "'";
 		
 		try {
 			Statement stm = connection.createStatement();

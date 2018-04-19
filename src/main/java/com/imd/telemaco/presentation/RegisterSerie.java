@@ -66,7 +66,7 @@ public class RegisterSerie extends HttpServlet {
                 try {
 	                ValidateSerieServices validate = new ValidateSerieServices();
 	                validate.validSerieRegister(serie);
-                    //mensagem que foi insedira com sucesso
+                    //TODO mensagem que foi insedira com sucesso
                     response.sendRedirect("Logged.jsp");
                 } catch (SerieExistsException e) {
                 	response.sendRedirect("Error.jsp");

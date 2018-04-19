@@ -42,7 +42,7 @@ public class ValidateSeasonServices {
 			if (sExisting != null)
 				throw new SeasonExistsException("Esta temporada já existe");
 		}  catch (SQLException e) {
-			e.printStackTrace();
+			e.printStackTrace(); //FIXME
 		}
 	}
 	
@@ -53,8 +53,14 @@ public class ValidateSeasonServices {
 	 * @throws SQLException
 	 */
 	public void validSeasonInsert (Season season) throws SeasonExistsException, SeasonIncompleteException {
-		validSeason (season);
+//		validSeason (season); FIXME
 		validSeasonExistence (season);
+		try {
+			SeasonDAO seasonDAO = new SeasonDAO();
+			seasonDAO.insert(season);
+		} catch (SQLException e) {
+			e.printStackTrace(); //FIXME
+		}
 	}
 	
 	/**
@@ -71,7 +77,7 @@ public class ValidateSeasonServices {
 			if (sExisting == null)
 				throw new SeasonExistsException("Esta temporada não existe");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.printStackTrace(); //FIXME
 		}
 	}
 	
@@ -90,7 +96,7 @@ public class ValidateSeasonServices {
 			if (sExisting == null)
 				throw new SeasonExistsException("Imposível atualizar, esta temporada não existe!");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.printStackTrace(); //FIXME
 		}
 	}
 }
