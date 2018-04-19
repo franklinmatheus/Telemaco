@@ -14,7 +14,7 @@
 	<meta charset="utf-8">
 	<title>Cadastrar Episódio</title>
 	<link rel="stylesheet" type="text/css" href="./resources/css/style.css">
-	<link rel="stylesheet" type="text/css" href="./resources/css/styleEpisodeRegister.css">
+	<link rel="stylesheet" type="text/css" href="./resources/css/styleRegisterEpisode.css">
 	<link rel="icon" type="png" href="./resources/media/images/icon.png">
 	<script type="text/javascript" src="./resources/js/inputsOperations.js"></script>
 </head>
@@ -33,28 +33,8 @@
 			<label>Série Pertencente</label>
 			<select id="serieName" name="serieName" onchange="disableSeasons()">
 				<%
-				SerieDAO serieDAO = new SerieDAO();
-				ArrayList <Serie> series = serieDAO.selectAllSeries();
-				//TODO try catch
-				
-				// -------------------------------------------------------------------------------
-				/* It's just a test */
-				/* ArrayList <Serie> series = new ArrayList <Serie>();   
-				Classification classification = Classification.P18;
-				ArrayList <Season> seasons = new ArrayList<Season>();
-				seasons.add(new Season(123, 1, new ArrayList<Episode>(), 1));
-				series.add(new Serie(1, "Game of Thrones", "2011", seasons, new Rating(), 1, classification));
-				seasons.clear();
-				seasons.add(new Season(123, 1, new ArrayList<Episode>(), 2));
-				series.add(new Serie(2, "Breaking Bad", "2011", seasons, new Rating(), 1, classification)); */
-				//--------------------------------------------------------------------------------
-				
-				%>
-				<option value="" selected disabled> -- </option> 
-				<%
-				for (Serie s: series) {
-					%> <option value=<%=s.getId()%>> <%=s.getName()%> </option><%
-				}
+				/* SerieDAO serieDAO = new SerieDAO();
+				ArrayList <Serie> series = serieDAO.selectAllSeries(); */
 				%>
 			</select>
 
@@ -71,7 +51,7 @@
 				
 				<!-- ------------ The real implementation ------------ -->
 				<%
-				String idSerieChosen = request.getParameter("serieName");
+				//String idSerieChosen = request.getParameter("serieName");
 				%>
 				<!-- ------------ The real implementation ------------ -->
 			</select>
