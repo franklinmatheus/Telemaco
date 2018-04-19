@@ -195,7 +195,6 @@ public class UserDAO implements DAOUserSpecialOperations {
                 user.setGender(gender);
                 user.setLastName(lastname);
                 user.setBirth(birth);
-                System.out.println("MAIS UMA");
             } else
                 user = null;
             

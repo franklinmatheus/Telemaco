@@ -9,6 +9,7 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Rating.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateUserServices.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/UpdatePassword.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/ValidateException.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/SelectAllSeries.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/UserDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Episode.java
@@ -17,8 +18,10 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/ConnectionFactory.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/RegisterEpisode.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/EpisodeExistsException.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/UserAlreadyExistsException.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Season.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/SerieInvalidException.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/UserNotExistsException.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateSerieServices.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/SeasonDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/DAOUserSpecialOperations.java
@@ -30,6 +33,7 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/LoginUser.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Serie.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/LogoutUser.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/ConfirmInputsException.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/RegisterSerie.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/SerieDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/DAOSeasonSpecialOperations.java

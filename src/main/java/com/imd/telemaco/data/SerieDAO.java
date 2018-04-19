@@ -103,7 +103,6 @@ public class SerieDAO implements DAOSerieSpecialOperations {
                 
                 SeasonDAO seasonDAO = new SeasonDAO();
                 ArrayList<Season> seasons = seasonDAO.selectAllSeasons(id);
-                
                 Classification classification = serie.stringToClassif(classif);
                 
                 serie = new Serie(id, name, year, status, creator, classification, genre, synopsis, image, seasons);
@@ -162,7 +161,8 @@ public class SerieDAO implements DAOSerieSpecialOperations {
 
             while (result.next()) {
     		int id = result.getInt("id");
-    		Serie serie = select(id);
+                Serie serie = select(id);
+                
                 series.add(serie);
             }
 

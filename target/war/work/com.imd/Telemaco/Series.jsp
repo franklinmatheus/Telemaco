@@ -18,18 +18,20 @@
     <body>
         <h1>Hello World!</h1>
         <%
-        ArrayList<Serie> series;
-        if(session.getAttribute("series") == null)
-            response.sendRedirect("SelectAllSeries");
-        else {
-            series = (ArrayList<Serie>) session.getAttribute("series");
-        
-            for (Serie s : series) {
-                %> <p> Nome: <%=s.getName() %> </p> <%
-                %> <p> Ano: <%=s.getYear() %> </p> <%
-                %> <p> ------------------------------------ </p> <%
-            }
-        }   
+            ArrayList<Serie> series;
+            if (session.getAttribute("series") == null)
+                response.sendRedirect("SelectAllSeries");
+            else {
+                series = (ArrayList<Serie>) session.getAttribute("series");
+
+                for (Serie s : series) {
+                %> <p> Nome: <%=s.getName()%> </p> <%
+                %> <p> Ano: <%=s.getYear()%> </p> <%
+                %> <p> Criador: <%=s.getCreator()%> </p> <%
+                %> <p> Sinopse: <%=s.getSynopsis()%> </p> <%
+
+                %> <p> ------------------------------------ </p> <%                        }
+                }
         %>
     </body>
 </html>

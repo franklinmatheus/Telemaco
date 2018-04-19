@@ -35,10 +35,4 @@ public class ConnectionFactory {
             throw new DatabaseException();
         }
     }
-    
-    /*public static void main(String[] args) throws SQLException {
-		System.out.println(ConnectionFactory.getConnection());
-		UserDAO u = new UserDAO();
-		System.out.println(u.select(1));
-	}*/
 }

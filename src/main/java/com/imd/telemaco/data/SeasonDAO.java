@@ -8,11 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Episode;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Class that represent the table season of the database telemaco
@@ -23,7 +20,6 @@ import java.util.logging.Logger;
 public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
 
     private Connection connection;
-    private Statement stm;
     private static SeasonDAO seasonDAO = null;
 
     /**
@@ -57,7 +53,7 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
 
     @Override
     public void insert(Season season) throws DatabaseException, CloseConnectionException {
-        String sql = "INSERT INTO telemaco.season (number, fkIdSerie, amountEp) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO telemaco.season (number, idfkserie, amountep) VALUES (?, ?, ?)";
         try {
             this.startsConnection();
             
@@ -85,7 +81,7 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
         try {
             this.startsConnection();
             
-            stm = connection.createStatement();
+            Statement stm = connection.createStatement();
             ResultSet result = stm.executeQuery(sql);
 
             boolean isThere = result.next();
@@ -94,7 +90,7 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
                 int number = result.getInt("number");
                 EpisodeDAO epDAO = new EpisodeDAO();
                 ArrayList<Episode> episodes = epDAO.selectAllEpisodes(id);
-                int idFkSerie = result.getInt("idFkSerie");
+                int idFkSerie = result.getInt("idfkserie");
 
                 season = new Season(id, number, episodes, idFkSerie);
             } else {
@@ -106,9 +102,6 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
             throw new RuntimeException(e);
         } finally {
             try {
-                stm.close();
-            } catch (SQLException ex) { /* emtpy */ }
-            try {
                 connection.close();
             } catch (SQLException ex) {
                 throw new CloseConnectionException();
@@ -118,13 +111,13 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
 
     @Override
     public Season select(int number, int idSerie) throws DatabaseException, CloseConnectionException {
-        String sql = "SELECT * FROM telemaco.season WHERE idFkSerie='" + idSerie + "' AND number='" + number + "'";
+        String sql = "SELECT * FROM telemaco.season WHERE idfkserie='" + idSerie + "' AND number='" + number + "'";
         Season season = new Season();
 
         try {
             this.startsConnection();
             
-            stm = connection.createStatement();
+            Statement stm = connection.createStatement();
             ResultSet result = stm.executeQuery(sql);
 
             if (result.next()) {
@@ -149,12 +142,12 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
     @Override
     public ArrayList<Season> selectAllSeasons(int idSerie) throws DatabaseException, CloseConnectionException {
         ArrayList<Season> seasons = new ArrayList<Season>();
-        String sql = "SELECT * FROM telemaco.season WHERE idFkSerie = '" + idSerie + "'";
+        String sql = "SELECT * FROM telemaco.season WHERE idfkserie='" + idSerie +"'";
 
         try {
             this.startsConnection();
             
-            stm = connection.createStatement();
+            Statement stm = connection.createStatement();
             ResultSet result = stm.executeQuery(sql);
 
             while (result.next()) {
@@ -162,14 +155,11 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
                 Season s = select(idSeason);
                 seasons.add(s);
             }
-
+            
             return seasons;
         } catch (SQLException e) {
             throw new DatabaseException();
         } finally {
-            try {
-                stm.close();
-            } catch (SQLException ex) { /* empty */ }
             try {
                 connection.close();
             } catch (SQLException ex) {
@@ -185,14 +175,11 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
         try {
             this.startsConnection();
             
-            stm = connection.createStatement();
+            Statement stm = connection.createStatement();
             stm.execute(sql);
         } catch (SQLException e) {
             throw new DatabaseException();
         } finally {
-            try {
-                stm.close();
-            } catch (SQLException ex) { /* empty */ }
             try {
                 connection.close();
             } catch (SQLException ex) {
@@ -205,8 +192,8 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
     public void update(Season season) throws DatabaseException, CloseConnectionException {
         String sql = "UPDATE FROM telemaco.season "
                 + "number=?, "
-                + "amountEp=?, "
-                + "fkIdSeason=? "
+                + "amountep=?, "
+                + "idfkseason=? "
                 + "WHERE id=?";
 
         try {

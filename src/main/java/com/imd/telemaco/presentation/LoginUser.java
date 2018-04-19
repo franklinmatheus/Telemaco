@@ -8,6 +8,7 @@ package com.imd.telemaco.presentation;
 import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
+import com.imd.telemaco.business.exception.UserNotExistsException;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,16 +39,14 @@ public class LoginUser extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             ValidateUserServices validate = new ValidateUserServices();
-            User user = validate.validUserLogin(request.getParameter("email"), request.getParameter("password"));
-            if(user == null)
-                response.sendRedirect("Login.jsp");
-            else {
-                HttpSession session = request.getSession(true); 
-                session.setAttribute("logged", user); 
-                response.sendRedirect("Logged.jsp");
-            }
-        } catch(DatabaseException | CloseConnectionException e) {
-            response.sendRedirect("Error.jsp");
+            User user = validate.login(request.getParameter("email"), request.getParameter("password"));
+
+            HttpSession session = request.getSession(true);
+            session.setAttribute("logged", user);
+            response.sendRedirect("Logged.jsp");
+
+        } catch (DatabaseException | CloseConnectionException | UserNotExistsException e) {
+            response.sendRedirect("Login.jsp");
         }
     }
 

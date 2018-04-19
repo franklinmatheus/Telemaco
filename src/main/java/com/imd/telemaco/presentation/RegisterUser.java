@@ -7,7 +7,10 @@ package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.ConfirmInputsException;
 import com.imd.telemaco.business.exception.DatabaseException;
+import com.imd.telemaco.business.exception.UserAlreadyExistsException;
+import com.imd.telemaco.business.exception.ValidateException;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,11 +62,9 @@ public class RegisterUser extends HttpServlet {
             ValidateUserServices validate = new ValidateUserServices();
             
             User user = new User(name, lastname, email, password, parsedDate, gender);
-            if(validate.validUserInsert(user, cemail, cpassword))
-                response.sendRedirect("Overview.jsp");
-            else
-                response.sendRedirect("Register.jsp");
-        } catch(ParseException | DatabaseException | CloseConnectionException e) {
+            validate.insert(user, cemail, cpassword);
+            response.sendRedirect("Overview.jsp");
+        } catch(ParseException | DatabaseException | CloseConnectionException | ConfirmInputsException | UserAlreadyExistsException | ValidateException e) {
             response.sendRedirect("Register.jsp");
         } finally {
             out.close();
