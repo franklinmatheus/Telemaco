@@ -27,6 +27,7 @@
             for (Serie s : series) {
                 %> <p> Nome: <%=s.getName() %> </p> <%
                 %> <p> Ano: <%=s.getYear() %> </p> <%
+                %> <p> Sinopse: <%=s.getSynopsis() %> </p> <%
                 %> <p> ------------------------------------ </p> <%
             }
         }   

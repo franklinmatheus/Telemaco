@@ -16,7 +16,6 @@ import java.util.ArrayList;
  */
 public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 	private Connection connection;
-	private Statement stm;
 	private static EpisodeDAO epDAO = null;	
 	
 	/**
@@ -50,7 +49,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 			statement.setInt(6, episode.getIdSeason());
 
 			statement.execute();
-			
+			statement.close();
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
@@ -64,7 +63,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		Episode episode = null;
 		
 		try {
-			stm = connection.createStatement();
+			Statement stm = connection.createStatement();
 			ResultSet result = stm.executeQuery(sql);
 			
 			if (result.next()) {
@@ -77,11 +76,11 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 				episode = new Episode (id, name, number, time, synopsis, fkIdSeason);
 			}
 			
+			stm.close();
 			return episode;
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
-			stm.close();
 			connection.close();
 		}
 	}
@@ -92,7 +91,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		Episode episode = new Episode();
 		
 		try {
-			stm = connection.createStatement();
+			Statement stm = connection.createStatement();
 			ResultSet result = stm.executeQuery(sql);
 			
 			if (result.next()) {
@@ -100,11 +99,11 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 				episode = select (id);
 			} else episode = null;
 			
+			stm.close();
 			return episode;
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
-			stm.close();
 			connection.close();
 		}
 	}
@@ -115,7 +114,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		Episode episode = new Episode();
 		
 		try {
-			stm = connection.createStatement();
+			Statement stm = connection.createStatement();
 			ResultSet result = stm.executeQuery(sql);
 			
 			if (result.next()) {
@@ -123,11 +122,11 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 				episode = select (id);
 			} else episode = null;
 			
+			stm.close();
 			return episode;
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
-			stm.close();
 			connection.close();
 		}
 	}
@@ -137,7 +136,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		String sql = "SELECT * FROM telemaco.episode WHERE fkIdSeason='" + idSeason + "'";
 		
 		try {
-			stm = connection.createStatement();
+			Statement stm = connection.createStatement();
 			ResultSet result = stm.executeQuery(sql);
 			
 			ArrayList <Episode> episodes = new ArrayList<Episode>();
@@ -161,8 +160,9 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		String sql = "DELETE * FROM telemaco.episode WHERE id='" + episode.getId() + "'";
 		
 		try {
-			stm = connection.createStatement();
+			Statement stm = connection.createStatement();
 			stm.execute(sql);
+			stm.close();
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
@@ -190,7 +190,8 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 			pStm.setInt(6, episode.getId());
 			
 			pStm.execute();
-			
+			pStm.close();
+
 			System.out.println("SUCESS");
 		} catch (SQLException e) {
 			System.out.println("EXCEPTION");

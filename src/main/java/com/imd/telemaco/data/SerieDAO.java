@@ -21,7 +21,6 @@ import java.util.ArrayList;
  * @author franklin
  */
 public class SerieDAO implements DAO<Serie> {
-    
     private Connection connection;
     private static SerieDAO serieDAO = null;
     
@@ -76,8 +75,8 @@ public class SerieDAO implements DAO<Serie> {
         Serie serie = new Serie();
         
         try {
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(sql);
+            Statement stm = connection.createStatement();
+            ResultSet result = stm.executeQuery(sql);
             
             if(result.next()) {
                 String name     = result.getString("name");
@@ -98,19 +97,20 @@ public class SerieDAO implements DAO<Serie> {
             } else
                 serie = null;
             
+            result.close();
+            stm.close();
             return serie;
         } catch(SQLException e) {
             throw new RuntimeException();
         } finally {
-            try {
-                connection.close();
-            } catch(SQLException e) { /* emtpy */ }
+//        	connection.close();
         }
     }
     
-    public Serie select (String name) {
+    public Serie select (String name) throws SQLException {
     	String sql = "SELECT * FROM telemaco.serie WHERE name='" + name + "'";
-    	Serie serie = null;    	
+    	Serie serie = null;
+    	
     	try {
     		Statement stm = connection.createStatement();
     		ResultSet result = stm.executeQuery(sql);
@@ -120,9 +120,12 @@ public class SerieDAO implements DAO<Serie> {
     			serie = select(id);
     		}
     		
+    		stm.close();
     		return serie;
     	} catch (SQLException e) {
 			throw new RuntimeException (e);
+		} finally {
+			connection.close();
 		}
     }
     
@@ -136,15 +139,17 @@ public class SerieDAO implements DAO<Serie> {
 
     		while (result.next()) {
     			int id = result.getInt("id");
-    			Serie serie = select(id);
+    			Serie serie = this.select(id);
     			series.add(serie);
     		}
-
+    		
+     		result.close();
+    		stm.close();
     		return series;
     	} catch (SQLException e) {
     		throw new RuntimeException (e);
     	} finally {
-        	connection.close();
+    		connection.close();
         }
     }
 
