@@ -19,22 +19,6 @@
     <body>
         <h1>Séries</h1>
         <%
-<<<<<<< HEAD
-            ArrayList<Serie> series;
-            if (session.getAttribute("series") == null)
-                response.sendRedirect("SelectAllSeries");
-            else {
-                series = (ArrayList<Serie>) session.getAttribute("series");
-
-                for (Serie s : series) {
-                %> <p> Nome: <%=s.getName()%> </p> <%
-                %> <p> Ano: <%=s.getYear()%> </p> <%
-                %> <p> Criador: <%=s.getCreator()%> </p> <%
-                %> <p> Sinopse: <%=s.getSynopsis()%> </p> <%
-
-                %> <p> ------------------------------------ </p> <%                        }
-                }
-=======
         ArrayList<Serie> series;
         if(session.getAttribute("series") == null)
             response.sendRedirect("SelectAllSeries");
@@ -58,8 +42,7 @@
 				<p> Sinopse: <%=s.getSynopsis() %> </p>
                 <p> ------------------------------------ </p> <%
             }
-        }   
->>>>>>> shirley
+        }
         %>
     </body>
 </html>
