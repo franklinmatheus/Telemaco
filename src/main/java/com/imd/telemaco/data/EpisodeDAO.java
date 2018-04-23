@@ -99,11 +99,11 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
         } catch (SQLException e) {
             throw new DatabaseException(e.getMessage());
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                throw new CloseConnectionException();
-            }
+//            try {
+//                connection.close();
+//            } catch (SQLException ex) {
+//                throw new CloseConnectionException();
+//            }
         }
     }
 
@@ -127,11 +127,11 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		} catch (SQLException e) {
             throw new DatabaseException(e.getMessage());
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                throw new CloseConnectionException();
-            }
+//            try {
+//                connection.close();
+//            } catch (SQLException ex) {
+//                throw new CloseConnectionException();
+//            }
         }
     }
 
@@ -155,11 +155,11 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		} catch (SQLException e) {
             throw new DatabaseException(e.getMessage());
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                throw new CloseConnectionException();
-            }
+//            try {
+//                connection.close();
+//            } catch (SQLException ex) {
+//                throw new CloseConnectionException();
+//            }
         }
     }
 
@@ -183,7 +183,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 
 			return episodes;
 		} catch (SQLException e) {
-            throw new DatabaseException();
+            throw new DatabaseException(e.getMessage());
         } finally {
             try {
                 connection.close();
@@ -247,3 +247,9 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
         }
     }
 }
+
+//Walter White (Bryan Cranston) é um professor de química na casa dos 50 anos que trabalha em uma escola secundéria no Novo México. Para atender às necessidades de Skyler (Anna Gunn), sua esposa grávida, e Walt Junior (RJ Mitte), seu filho deficiente físico, ele tem que trabalhar duplamente. Sua vida fica ainda mais complicada quando descobre que está sofrendo de um câncer de pulmão incurável. Para aumentar rapidamente a quantidade de dinheiro que deixaria para sua famália após sua morte, Walter usa seu conhecimento de química para fazer e vender metanfetamina, uma droga sintética. Ele conta com a ajuda do ex-aluno e pequeno traficante Jesse (Aaron Paul) e enfrenta vários desafios, incluindo o fato de seu concunhado ser um importante nome dentro da Agência Anti-Drogas da região.
+
+
+
+

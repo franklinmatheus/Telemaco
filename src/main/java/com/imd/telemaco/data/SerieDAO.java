@@ -112,11 +112,11 @@ public class SerieDAO implements DAOSerieSpecialOperations {
         } catch(SQLException e) {
             throw new DatabaseException();
         } finally {
-            try {
-                connection.close();
-            } catch(SQLException e) {
-                throw new CloseConnectionException();
-            }
+//            try {
+//                connection.close();
+//            } catch(SQLException e) {
+//                throw new CloseConnectionException();
+//            }
         }
     }
     
@@ -168,7 +168,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
 
             return series;
     	} catch (SQLException e) {
-            throw new DatabaseException();
+            throw new DatabaseException(e.getMessage());
     	} finally {
             try {
                 connection.close();

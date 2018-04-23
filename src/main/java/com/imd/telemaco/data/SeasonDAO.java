@@ -97,11 +97,11 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                throw new CloseConnectionException();
-            }
+//            try {
+//                connection.close();
+//            } catch (SQLException ex) {
+//                throw new CloseConnectionException();
+//            }
         }
     }
 
@@ -152,7 +152,7 @@ public class SeasonDAO implements DAO<Season>, DAOSeasonSpecialOperations {
             
             return seasons;
         } catch (SQLException e) {
-            throw new DatabaseException();
+            throw new DatabaseException(e.getMessage());
         } finally {
             try {
                 connection.close();
