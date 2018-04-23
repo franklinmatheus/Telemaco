@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.imd.telemaco.business.ValidateSeasonServices;
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.business.exception.SeasonExistsException;
 import com.imd.telemaco.business.exception.SeasonIncompleteException;
 import com.imd.telemaco.data.SerieDAO;
@@ -32,6 +34,9 @@ public class ResgisterSeason extends HttpServlet {
 		request.setCharacterEncoding("UTF8");
 		PrintWriter out = response.getWriter();
 		
+		HttpSession session = request.getSession();
+		session.getAttribute("logged");
+		
 		try {
 			Season season = new Season();
 			
@@ -41,25 +46,18 @@ public class ResgisterSeason extends HttpServlet {
 			SerieDAO serieDAO = new SerieDAO();
 			Serie serie = serieDAO.select(serieName);
 			
-			int numberInt = Integer.parseInt(number);
-			
-			HttpSession session = request.getSession();
-			User user = (User) session.getAttribute("logged");
+			int numberInt = Integer.parseInt(number);			
 
 			season = new Season (numberInt, serie.getId());
 			
-			try {
-				ValidateSeasonServices validate = new ValidateSeasonServices();
-				validate.validSeasonInsert(season);
-				response.sendRedirect("Logged.jsp");
-				
-			} catch (SeasonExistsException e) {
-				System.out.println(e.getMessage()); //FIXME exibir msg p usuário
-			} catch (SeasonIncompleteException e) {
-				System.out.println(e.getMessage()); //FIXME exibir msg p usuário
-			} 
+			ValidateSeasonServices validate = new ValidateSeasonServices();
+			validate.validSeasonInsert(season);
+			response.sendRedirect("Logged.jsp");
+			// TODO fazer mensagem de cadastrado com sucesso
 			
-		} catch (SQLException e) {
+		} catch (SeasonExistsException | SeasonIncompleteException | DatabaseException | CloseConnectionException e) {
+			e.printStackTrace();
+			response.sendRedirect("Error.jsp");
 			new RuntimeException (e); //FIXME
 		} finally {
 			out.close();

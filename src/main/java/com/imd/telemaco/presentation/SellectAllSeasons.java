@@ -2,7 +2,6 @@ package com.imd.telemaco.presentation;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -11,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.data.SeasonDAO;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Season;
@@ -38,8 +39,11 @@ public class SellectAllSeasons extends HttpServlet {
             session.setAttribute("seasons", seasons);
             response.sendRedirect("RegisterEpisode.jsp");
 
-		} catch (SQLException e) { //FIXME
-			response.sendRedirect("...");
+		} catch (DatabaseException | CloseConnectionException e) {
+			e.printStackTrace();
+			response.sendRedirect("Error.jsp");
+		}  finally {
+			out.close();
 		}
 	}
 	

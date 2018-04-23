@@ -58,17 +58,11 @@ public class ValidateSeasonServices {
      * @throws com.imd.telemaco.business.exception.DatabaseException
      * @throws com.imd.telemaco.business.exception.CloseConnectionException
      */
-    public void validSeasonInsert(Season season) throws SeasonExistsException, SeasonIncompleteException {
-		try {
-			validSeason(season);
-	        validSeasonExistence(season);
-			SeasonDAO seasonDAO = new SeasonDAO();
-			seasonDAO.insert(season);
-		} catch (DatabaseException e) {
-			e.printStackTrace();
-		} catch (CloseConnectionException e) {
-			e.printStackTrace();
-		}
+    public void validSeasonInsert(Season season) throws SeasonExistsException, SeasonIncompleteException, DatabaseException, CloseConnectionException {
+		validSeason(season);
+        validSeasonExistence(season);
+		SeasonDAO seasonDAO = new SeasonDAO();
+		seasonDAO.insert(season);
     }
 
     /**

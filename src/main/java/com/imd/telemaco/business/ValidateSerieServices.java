@@ -86,18 +86,12 @@ public class ValidateSerieServices {
      * @throws com.imd.telemaco.business.exception.DatabaseException
      * @throws com.imd.telemaco.business.exception.CloseConnectionException
      */
-    public void validSerieInsert (Serie serie) throws SerieInvalidException, SerieExistsException {
-        try {
-        	//FIXME tirar os comentários da validação
-        	//this.validSerieName(serie);
-            //this.serieExist(serie);
-            SerieDAO serieDAO = new SerieDAO();
-            serieDAO.insert(serie);
-        } catch (DatabaseException e) {
-            e.printStackTrace();
-        } catch (CloseConnectionException e) {
-            e.printStackTrace();
-        }
+    public void validSerieInsert (Serie serie) throws SerieInvalidException, SerieExistsException, DatabaseException, CloseConnectionException {
+    	//FIXME tirar os comentários da validação
+    	//this.validSerieName(serie);
+        //this.serieExist(serie);
+        SerieDAO serieDAO = new SerieDAO();
+        serieDAO.insert(serie);
     }
 
     /**

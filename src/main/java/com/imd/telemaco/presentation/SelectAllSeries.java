@@ -11,10 +11,7 @@ import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Serie;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +23,9 @@ import javax.servlet.http.HttpSession;
  * @author franklin
  */
 public class SelectAllSeries extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
-    /**
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -46,16 +44,9 @@ public class SelectAllSeries extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("series", series);
                 response.sendRedirect("Series.jsp");
-<<<<<<< HEAD
             } catch (DatabaseException | CloseConnectionException e) {
                 response.sendRedirect("Error.jsp");
             }
-            
-=======
-            } catch (SQLException ex) {
-            	//TODO
-            }   
->>>>>>> shirley
         }
     }
 
