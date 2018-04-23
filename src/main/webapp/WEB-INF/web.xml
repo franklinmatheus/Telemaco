@@ -81,7 +81,7 @@
     <url-pattern>/WatchEpisodes</url-pattern>
   </servlet-mapping>
   <session-config>
-    <session-timeout>3000</session-timeout>
+    <session-timeout>30</session-timeout>
   </session-config>
   <welcome-file-list>
     <welcome-file>Overview.jsp</welcome-file>

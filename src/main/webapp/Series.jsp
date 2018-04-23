@@ -5,11 +5,19 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="com.imd.telemaco.entity.User" %>
 <%@ page import="com.imd.telemaco.entity.Serie" %>
 <%@ page import="com.imd.telemaco.entity.Season" %>
 <%@ page import="com.imd.telemaco.entity.Episode" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.SQLException" %>
+<% 
+    User logged = new User();
+    if(session.getAttribute("logged") == null)
+        response.sendRedirect("Login.jsp");
+    else
+        logged = (User) (session.getAttribute("logged"));
+%>
 <!DOCTYPE html>
 <html> 
     <head>

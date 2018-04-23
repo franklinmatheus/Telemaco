@@ -9,6 +9,8 @@ import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.User;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,10 +39,12 @@ public class SelectAllSeries extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        
+	    try (PrintWriter out = response.getWriter()) {
             try {
                 SerieDAO dao = new SerieDAO();
                 ArrayList<Serie> series = dao.selectAllSeries();
+                
                 HttpSession session = request.getSession(true);
                 session.setAttribute("series", series);
                 response.sendRedirect("Series.jsp");
