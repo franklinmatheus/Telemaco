@@ -10,7 +10,6 @@ import com.imd.telemaco.business.exception.SerieInvalidException;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
-import java.sql.SQLException;
 
 /**
  * Class to validate all services referent to the Series Class.

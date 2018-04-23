@@ -71,15 +71,11 @@ public class SerieDAO implements DAOSerieSpecialOperations {
         } catch (SQLException e) {
             throw new DatabaseException();
         } finally {
-<<<<<<< HEAD
             try {
                 connection.close();
             } catch (SQLException e) {
                 throw new CloseConnectionException();
             }
-=======
-//        	connection.close();
->>>>>>> shirley
         }
     }
     
@@ -89,16 +85,11 @@ public class SerieDAO implements DAOSerieSpecialOperations {
         Serie serie = new Serie();
         
         try {
-<<<<<<< HEAD
             this.startsConnection();
             
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
-=======
-            Statement stm = connection.createStatement();
-            ResultSet result = stm.executeQuery(sql);
->>>>>>> shirley
-            
+
             if(result.next()) {
                 String name     = result.getString("name");
                 int    year     = result.getInt("year");
@@ -117,13 +108,10 @@ public class SerieDAO implements DAOSerieSpecialOperations {
             } else
                 serie = null;
             
-            result.close();
-            stm.close();
             return serie;
         } catch(SQLException e) {
             throw new DatabaseException();
         } finally {
-<<<<<<< HEAD
             try {
                 connection.close();
             } catch(SQLException e) {
@@ -137,27 +125,18 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     public Serie select (String name) throws DatabaseException, CloseConnectionException {
     	String sql = "SELECT * FROM telemaco.serie WHERE name='" + name + "'";
     	Serie serie = null;    	
-=======
-//        	connection.close();
-        }
-    }
-    
-    public Serie select (String name) throws SQLException {
-    	String sql = "SELECT id FROM telemaco.serie WHERE name=\"" + name + "\"";
-    	Serie serie = null;
-    	
->>>>>>> shirley
+
     	try {
             this.startsConnection();
             
             Statement stm = connection.createStatement();
             ResultSet result = stm.executeQuery(sql);
     		
-<<<<<<< HEAD
             if (result.next()) {
     		int id = result.getInt("id");
                 serie = select(id);
             }
+            
             return serie;
     	} catch (SQLException e) {
             throw new DatabaseException();
@@ -168,15 +147,6 @@ public class SerieDAO implements DAOSerieSpecialOperations {
                 throw new CloseConnectionException();
             }
         }
-=======
-    		stm.close();
-    		return serie;
-    	} catch (SQLException e) {
-			throw new RuntimeException (e);
-		} finally {
-//			connection.close();
-		}
->>>>>>> shirley
     }
     
     @Override
@@ -190,40 +160,22 @@ public class SerieDAO implements DAOSerieSpecialOperations {
             Statement stm = connection.createStatement();
             ResultSet result = stm.executeQuery(sql);
 
-<<<<<<< HEAD
             while (result.next()) {
-    		int id = result.getInt("id");
+            	int id = result.getInt("id");
                 Serie serie = select(id);
-                
                 series.add(serie);
             }
 
             return series;
-=======
-    		while (result.next()) {
-    			int id = result.getInt("id");
-    			Serie serie = select(id);
-    			series.add(serie);
-    		}
-    		
-     		result.close();
-    		stm.close();
-    		return series;
->>>>>>> shirley
     	} catch (SQLException e) {
             throw new DatabaseException();
     	} finally {
-<<<<<<< HEAD
             try {
                 connection.close();
             } catch (SQLException e) {
                 throw new CloseConnectionException();
             }
-        } 
-=======
-//    		connection.close();
         }
->>>>>>> shirley
     }
 
     @Override
