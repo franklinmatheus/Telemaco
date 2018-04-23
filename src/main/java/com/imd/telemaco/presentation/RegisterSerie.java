@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateSerieServices;
@@ -11,7 +6,6 @@ import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.business.exception.SerieExistsException;
 import com.imd.telemaco.business.exception.SerieInvalidException;
 import com.imd.telemaco.entity.Serie;
-import com.imd.telemaco.entity.User;
 import com.imd.telemaco.entity.enums.Classification;
 
 import java.io.IOException;
@@ -28,8 +22,9 @@ import javax.servlet.http.HttpSession;
  * @author Shirley Ohara (shirleyohara@ufrn.edu.br)
  */
 public class RegisterSerie extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
-    /**
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -41,6 +36,7 @@ public class RegisterSerie extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF8");
         PrintWriter out = response.getWriter();
 
         try {
@@ -63,18 +59,14 @@ public class RegisterSerie extends HttpServlet {
                 response.sendRedirect("RegisterSerie.jsp");
             } else {
                 HttpSession session = request.getSession();
-                User user = (User) session.getAttribute("logged");
-
-                try {
-                    ValidateSerieServices validate = new ValidateSerieServices();
-                    validate.validSerieRegister(serie);
-                    //mensagem que foi insedira com sucesso
-                    response.sendRedirect("Logged.jsp");
-                } catch (SerieExistsException | SerieInvalidException e) {
-                    response.sendRedirect("Error.jsp");
-                }
+                session.getAttribute("logged");
+               
+                ValidateSerieServices validate = new ValidateSerieServices();
+                validate.validSerieInsert(serie);
+                //TODO mensagem que foi insedira com sucesso
+                response.sendRedirect("Logged.jsp");
             }
-        } catch (DatabaseException | CloseConnectionException e) {
+        } catch (SerieExistsException | SerieInvalidException | DatabaseException | CloseConnectionException e) {
             e.getMessage();
             response.sendRedirect("Error.jsp");
         } finally {

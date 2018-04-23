@@ -23,7 +23,6 @@ import java.util.ArrayList;
  * @author franklin
  */
 public class SerieDAO implements DAOSerieSpecialOperations {
-    
     private Connection connection;
     private static SerieDAO serieDAO = null;
     
@@ -90,7 +89,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
             
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
-            
+
             if(result.next()) {
                 String name     = result.getString("name");
                 int    year     = result.getInt("year");
@@ -113,11 +112,11 @@ public class SerieDAO implements DAOSerieSpecialOperations {
         } catch(SQLException e) {
             throw new DatabaseException();
         } finally {
-            try {
-                connection.close();
-            } catch(SQLException e) {
-                throw new CloseConnectionException();
-            }
+//            try {
+//                connection.close();
+//            } catch(SQLException e) {
+//                throw new CloseConnectionException();
+//            }
         }
     }
     
@@ -126,6 +125,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     public Serie select (String name) throws DatabaseException, CloseConnectionException {
     	String sql = "SELECT * FROM telemaco.serie WHERE name='" + name + "'";
     	Serie serie = null;    	
+
     	try {
             this.startsConnection();
             
@@ -136,6 +136,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     		int id = result.getInt("id");
                 serie = select(id);
             }
+            
             return serie;
     	} catch (SQLException e) {
             throw new DatabaseException();
@@ -160,22 +161,21 @@ public class SerieDAO implements DAOSerieSpecialOperations {
             ResultSet result = stm.executeQuery(sql);
 
             while (result.next()) {
-    		int id = result.getInt("id");
+            	int id = result.getInt("id");
                 Serie serie = select(id);
-                
                 series.add(serie);
             }
 
             return series;
     	} catch (SQLException e) {
-            throw new DatabaseException();
+            throw new DatabaseException(e.getMessage());
     	} finally {
             try {
                 connection.close();
             } catch (SQLException e) {
                 throw new CloseConnectionException();
             }
-        } 
+        }
     }
 
     @Override

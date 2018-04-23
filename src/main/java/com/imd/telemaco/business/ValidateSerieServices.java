@@ -10,7 +10,6 @@ import com.imd.telemaco.business.exception.SerieInvalidException;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
-import java.sql.SQLException;
 
 /**
  * Class to validate all services referent to the Series Class.
@@ -22,8 +21,7 @@ public class ValidateSerieServices {
     /**
      * Default constructor
      */
-    public ValidateSerieServices() {
-    }
+    public ValidateSerieServices() { }
 
     /**
      * Verify if the series parameters are corrects.
@@ -72,7 +70,6 @@ public class ValidateSerieServices {
      * @throws SerieExistsException
      */
     private void serieExist(Serie serie) throws SerieExistsException, DatabaseException, CloseConnectionException {
-
         SerieDAO dao = SerieDAO.getInstance();
         Serie exists = dao.select(serie.getId());
         if (null == exists) {
@@ -89,12 +86,12 @@ public class ValidateSerieServices {
      * @throws com.imd.telemaco.business.exception.DatabaseException
      * @throws com.imd.telemaco.business.exception.CloseConnectionException
      */
-    public void validSerieRegister(Serie serie) throws SerieInvalidException, SerieExistsException, DatabaseException, CloseConnectionException {
-        //this.validSerieName(serie);
+    public void validSerieInsert (Serie serie) throws SerieInvalidException, SerieExistsException, DatabaseException, CloseConnectionException {
+    	//FIXME tirar os comentários da validação
+    	//this.validSerieName(serie);
         //this.serieExist(serie);
         SerieDAO serieDAO = new SerieDAO();
         serieDAO.insert(serie);
-
     }
 
     /**

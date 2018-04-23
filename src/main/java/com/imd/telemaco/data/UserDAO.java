@@ -42,7 +42,7 @@ public class UserDAO implements DAOUserSpecialOperations {
             if(this.connection.isClosed())
                 this.connection = ConnectionFactory.getConnection();
         } catch (SQLException ex) {
-            throw new DatabaseException();
+            throw new DatabaseException(ex.getMessage());
         }
     }
     
@@ -63,7 +63,7 @@ public class UserDAO implements DAOUserSpecialOperations {
             
             statement.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseException(e.getMessage());
         } finally {
             try {
                 connection.close();

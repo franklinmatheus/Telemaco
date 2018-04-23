@@ -25,10 +25,10 @@
 	<div id="middle">
 		<label id="title">Cadastrar Episódio</label>
 
-		<form name="register" action="ResgisterEpisode" method="post">
+		<form name="registerEpisode" action="RegisterEpisode" method="post">
 			<label>Série Pertencente</label>
-			<select id="serieName" name="serieName" onchange="disableSeasons()">
-				<option value="" selected disabled> -- </option>
+			<select id="serieName" name="serieName">
+				<option name="" value="" selected disabled> -- </option>
 				<%
 					ArrayList<Serie> series;
 					if (session.getAttribute("series") == null)
@@ -37,41 +37,43 @@
 						series = (ArrayList<Serie>) session.getAttribute("series");
 						
 						for (Serie s : series) {
-							%><option value="<%=s.getName()%>"><%=s.getName()%> </option><%
+
+							%> <option value="<%=s.getName()%>"><%=s.getName()%> </option> <%
 						}
 					}
 				%>
 			</select>
 
 			<label>Temporada Pertencente</label>
-			<select id="seasonNumber" name="seasonNumber" disabled onchange="enableAllInputs()" required>
+			<input name="seasonNumber" type="number" min="1" value="1"  required>
+			
+			<%-- <select id="seasonNumber" name="seasonNumber" disabled onchange="enableAllInputs()" required>
 				<option value="" selected disabled> -- </option>
-				<%
-					//FIXME
+			
 					ArrayList<Season> seasons;
 					if (session.getAttribute("seasons") == null)
-						response.sendRedirect("SelectSeasonsAtSerie");
+						response.sendRedirect("RegisterEpisode");
 					else {
 						seasons = (ArrayList<Season>) session.getAttribute("seasons");
 						
 						for (Season s : seasons) {
-							%><option value="<%=s.getNumber()%>"> Temporada <%=s.getNumber()%> </option><%
+							%><option value="<%=s.getNumber()%>"><%=s.getNumber()%> </option><%
 						}
 					}
-				%>
-			</select>
+			// FIXME 
+			</select> --%>
 
 			<label> Nome </label>
-			<input id="epName" type="input" name="epName" placeholder="ex.: Pilot" disabled required>
+			<input id="epName" type="input" name="epName" placeholder="ex.: Pilot" required>
 
 			<label>Número</label>
-			<input id="epNumber" type="number" min="1" name="epNumber" disabled required>
+			<input id="epNumber" type="number" min="1" name="epNumber" required>
 
 			<label>Sinopse</label>
-			<textarea id="epSynopsis" name="epSynopsis" disabled required></textarea>
+			<textarea id="epSynopsis" name="epSynopsis" required></textarea>
 
 			<label>Tempo (minutos)</label>
-			<input id="epTime" type="number" min="1" name="epTime" disabled required>
+			<input id="epTime" type="number" min="1" name="epTime" required>
 
 			<div id="buttons">
 				<button class="button" id="btnCancel" ><a href="./Index.jsp">Cancelar</a></button>
