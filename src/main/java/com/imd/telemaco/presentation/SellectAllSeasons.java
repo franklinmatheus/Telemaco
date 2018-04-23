@@ -16,6 +16,7 @@ import com.imd.telemaco.data.SeasonDAO;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.User;
 
 public class SellectAllSeasons extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,6 +28,9 @@ public class SellectAllSeasons extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
+		HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("logged");
+        
 		try {
 			String serieName = request.getParameter("serieName");
 
@@ -35,7 +39,7 @@ public class SellectAllSeasons extends HttpServlet {
 			SeasonDAO seasonDAO = new SeasonDAO();
             ArrayList<Season> seasons = seasonDAO.selectAllSeasons(serie.getId());
             
-            HttpSession session = request.getSession(true);
+            session = request.getSession(true);
             session.setAttribute("seasons", seasons);
             response.sendRedirect("RegisterEpisode.jsp");
 

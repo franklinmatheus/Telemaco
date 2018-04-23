@@ -36,6 +36,10 @@
     <servlet-name>RegisterEpisode</servlet-name>
     <servlet-class>com.imd.telemaco.presentation.RegisterEpisode</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>WatchEpisodes</servlet-name>
+    <servlet-class>com.imd.telemaco.presentation.WatchEpisodes</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>RegisterUser</servlet-name>
     <url-pattern>/RegisterUser</url-pattern>
@@ -71,6 +75,10 @@
   <servlet-mapping>
     <servlet-name>RegisterEpisode</servlet-name>
     <url-pattern>/RegisterEpisode</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>WatchEpisodes</servlet-name>
+    <url-pattern>/WatchEpisodes</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>3000</session-timeout>

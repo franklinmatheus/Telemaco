@@ -34,8 +34,13 @@
                 	%> <span> Temporada <%=tem.getNumber() %> </span>
                 	<p>  ========================= </p>
                 	<p> Episodes (<%=tem.getEpAmount()%>) </p> <%
-                	for (Episode ep : tem.getEpisodes()) {
-                		%> <p> Episódio <%=ep.getNumber()%>: <%=ep.getName()%> </p> <%	                		
+                	for (Episode ep : tem.getEpisodes()) { %>
+                		<form name="watchEpisodes" action="WatchEpisodes" method="post">
+	                		<p> Episódio <%=ep.getNumber()%>: <br> 
+	                			<input name="<%=ep.getName()%>" type="checkbox"> <%=ep.getName()%>
+	                			<button type="submit"> Confirmar episódios assistidos </button>
+	                		</p>
+                		</form><%	                		
                 	} %>
                 	<p>  ========================= </p> <%
                 }%>

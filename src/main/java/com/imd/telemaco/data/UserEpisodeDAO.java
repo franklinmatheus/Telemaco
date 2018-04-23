@@ -26,7 +26,7 @@ public class UserEpisodeDAO implements DAO<UserEpisode>{
 	
 	@Override
 	public void insert(UserEpisode userEpisode) throws DatabaseException, CloseConnectionException {
-		String sql = "INSERT INTO telemaco.userEpisode (idfkuser, idfkepisode) VALUES (?, ?)";
+		String sql = "INSERT INTO telemaco.user_episode (idfkuser, idfkepisode) VALUES (?, ?)";
 		Connection connection = (Connection) ConnectionFactory.getConnection();
 		
 		try {
@@ -48,7 +48,7 @@ public class UserEpisodeDAO implements DAO<UserEpisode>{
 
 	@Override
 	public UserEpisode select(int id) throws DatabaseException, CloseConnectionException {
-		String sql = "SELECT * FROM telemaco.userEpisode WHERE id='" + id + "'";
+		String sql = "SELECT * FROM telemaco.user_episode WHERE id='" + id + "'";
 		Connection connection = (Connection) ConnectionFactory.getConnection();
 		UserEpisode userEpsiode = null;
 		
@@ -77,7 +77,7 @@ public class UserEpisodeDAO implements DAO<UserEpisode>{
 
 	@Override
 	public void delete(UserEpisode userEpisode) throws DatabaseException, CloseConnectionException {
-		String sql = "DELETE FROM telemaco.userEpisode WHERE idfkuser='" + userEpisode.getIdUser() + "' AND idfkepisode='" + userEpisode.getIdEpisode() + "'";
+		String sql = "DELETE FROM telemaco.user_episode WHERE idfkuser='" + userEpisode.getIdUser() + "' AND idfkepisode='" + userEpisode.getIdEpisode() + "'";
 		Connection connection = (Connection) ConnectionFactory.getConnection();
 		
         try {
@@ -99,5 +99,4 @@ public class UserEpisodeDAO implements DAO<UserEpisode>{
 	public void update(UserEpisode object) throws DatabaseException, CloseConnectionException {
 		// Não vai ser necessário a implementação		
 	}
-	
 }
