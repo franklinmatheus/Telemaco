@@ -2,7 +2,6 @@ package com.imd.telemaco.business;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import java.sql.SQLException;
 
 import com.imd.telemaco.business.exception.EpisodeExistsException;
 import com.imd.telemaco.business.exception.EpisodeInvalidException;
@@ -20,8 +19,7 @@ public class ValidateEpisodeServices {
     /**
      * Default constructor
      */
-    public ValidateEpisodeServices() {
-    }
+    public ValidateEpisodeServices() { }
 
     /**
      * Verify if the name input is valid and correct
@@ -115,9 +113,17 @@ public class ValidateEpisodeServices {
      * @throws com.imd.telemaco.business.exception.DatabaseException
      * @throws com.imd.telemaco.business.exception.CloseConnectionException
      */
-    public void validEpisodeInsert(Episode episode) throws EpisodeExistsException, EpisodeInvalidException, DatabaseException, CloseConnectionException {
-        validEpisode(episode);
-        validEpisodeExistence(episode);
+    public void validEpisodeInsert(Episode episode) throws EpisodeExistsException, EpisodeInvalidException {
+        try {
+        	validEpisode(episode);
+            validEpisodeExistence(episode);
+			EpisodeDAO episodeDAO = new EpisodeDAO();
+			episodeDAO.insert(episode);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		} catch (CloseConnectionException e) {
+			e.printStackTrace();
+		}
     }
 
     /**

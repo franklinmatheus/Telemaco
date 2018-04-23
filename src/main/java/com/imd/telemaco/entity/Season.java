@@ -25,6 +25,19 @@ public class Season {
     /**
      * Parametric constructor 
      * @param number
+     * @param idSerie
+     */
+    public Season(int number, int idSerie) {
+    	this.number   = number;
+    	this.idSerie  = idSerie;
+        this.episodes = null;
+        this.epAmount = 0;
+    }
+    
+    /**
+     * Parametric constructor 
+     * @param id
+     * @param number
      * @param episodes
      * @param idSerie
      */

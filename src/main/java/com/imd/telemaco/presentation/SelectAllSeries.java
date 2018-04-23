@@ -46,10 +46,16 @@ public class SelectAllSeries extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("series", series);
                 response.sendRedirect("Series.jsp");
+<<<<<<< HEAD
             } catch (DatabaseException | CloseConnectionException e) {
                 response.sendRedirect("Error.jsp");
             }
             
+=======
+            } catch (SQLException ex) {
+            	//TODO
+            }   
+>>>>>>> shirley
         }
     }
 

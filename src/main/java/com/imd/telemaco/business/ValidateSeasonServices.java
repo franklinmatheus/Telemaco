@@ -2,7 +2,6 @@ package com.imd.telemaco.business;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import java.sql.SQLException;
 
 import com.imd.telemaco.business.exception.SeasonExistsException;
 import com.imd.telemaco.business.exception.SeasonIncompleteException;
@@ -20,8 +19,7 @@ public class ValidateSeasonServices {
     /**
      * Default constructor
      */
-    public ValidateSeasonServices() {
-    }
+    public ValidateSeasonServices() { }
 
     /**
      * Valid the data of the season
@@ -60,9 +58,17 @@ public class ValidateSeasonServices {
      * @throws com.imd.telemaco.business.exception.DatabaseException
      * @throws com.imd.telemaco.business.exception.CloseConnectionException
      */
-    public void validSeasonInsert(Season season) throws SeasonExistsException, SeasonIncompleteException, DatabaseException, CloseConnectionException {
-        validSeason(season);
-        validSeasonExistence(season);
+    public void validSeasonInsert(Season season) throws SeasonExistsException, SeasonIncompleteException {
+		try {
+			validSeason(season);
+	        validSeasonExistence(season);
+			SeasonDAO seasonDAO = new SeasonDAO();
+			seasonDAO.insert(season);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		} catch (CloseConnectionException e) {
+			e.printStackTrace();
+		}
     }
 
     /**

@@ -41,6 +41,7 @@ public class RegisterSerie extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF8");
         PrintWriter out = response.getWriter();
 
         try {
@@ -66,9 +67,15 @@ public class RegisterSerie extends HttpServlet {
                 User user = (User) session.getAttribute("logged");
 
                 try {
+<<<<<<< HEAD
                     ValidateSerieServices validate = new ValidateSerieServices();
                     validate.validSerieRegister(serie);
                     //mensagem que foi insedira com sucesso
+=======
+	                ValidateSerieServices validate = new ValidateSerieServices();
+	                validate.validSerieRegister(serie);
+                    //TODO mensagem que foi insedira com sucesso
+>>>>>>> shirley
                     response.sendRedirect("Logged.jsp");
                 } catch (SerieExistsException | SerieInvalidException e) {
                     response.sendRedirect("Error.jsp");
