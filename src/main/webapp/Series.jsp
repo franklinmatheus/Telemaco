@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="com.imd.telemaco.entity.Serie" %>
 <%@ page import="com.imd.telemaco.entity.Season" %>
+<%@ page import="com.imd.telemaco.entity.Episode" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.SQLException" %>
 <!DOCTYPE html>
@@ -31,9 +32,15 @@
                 ArrayList<Season> seasons = s.getSeasons();
                 for (Season tem : seasons) {
                 	%> <span> Temporada <%=tem.getNumber() %> </span>
-                <%}%>
-				<p> Sinopse: <%=s.getSynopsis() %> </p> <%
-                %> <p> ------------------------------------ </p> <%
+                	<p>  ========================= </p>
+                	<p> Episodes (<%=tem.getEpAmount()%>) </p> <%
+                	for (Episode ep : tem.getEpisodes()) {
+                		%> <p> Episódio <%=ep.getNumber()%>: <%=ep.getName()%> </p> <%	                		
+                	} %>
+                	<p>  ========================= </p> <%
+                }%>
+				<p> Sinopse: <%=s.getSynopsis() %> </p>
+                <p> ------------------------------------ </p> <%
             }
         }   
         %>

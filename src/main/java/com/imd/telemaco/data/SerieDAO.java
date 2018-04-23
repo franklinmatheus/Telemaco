@@ -65,7 +65,7 @@ public class SerieDAO implements DAO<Serie> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-        	connection.close();
+//        	connection.close();
         }
     }
     
@@ -125,7 +125,7 @@ public class SerieDAO implements DAO<Serie> {
     	} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
-			connection.close();
+//			connection.close();
 		}
     }
     
@@ -149,7 +149,7 @@ public class SerieDAO implements DAO<Serie> {
     	} catch (SQLException e) {
     		throw new RuntimeException (e);
     	} finally {
-    		connection.close();
+//    		connection.close();
         }
     }
 

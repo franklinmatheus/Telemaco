@@ -29,8 +29,12 @@
     <servlet-class>com.imd.telemaco.presentation.SelectAllSeries</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>SelectSeasonsAtSerie</servlet-name>
-    <servlet-class>com.imd.telemaco.presentation.SelectSeasonsAtSerie</servlet-class>
+    <servlet-name>SelectAllSeasons</servlet-name>
+    <servlet-class>com.imd.telemaco.presentation.SelectAllSeasons</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RegisterEpisode</servlet-name>
+    <servlet-class>com.imd.telemaco.presentation.RegisterEpisode</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegisterUser</servlet-name>
@@ -61,11 +65,15 @@
     <url-pattern>/SelectAllSeries</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>SelectSeasonsAtSerie</servlet-name>
-    <url-pattern>/SelectSeasonsAtSerie</url-pattern>
+    <servlet-name>SelectAllSeasons</servlet-name>
+    <url-pattern>/SelectAllSeasons</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RegisterEpisode</servlet-name>
+    <url-pattern>/RegisterEpisode</url-pattern>
   </servlet-mapping>
   <session-config>
-    <session-timeout>300</session-timeout>
+    <session-timeout>3000</session-timeout>
   </session-config>
   <welcome-file-list>
     <welcome-file>Overview.jsp</welcome-file>

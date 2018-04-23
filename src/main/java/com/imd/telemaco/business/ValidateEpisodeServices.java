@@ -103,7 +103,13 @@ public class ValidateEpisodeServices {
 	 */
 	public void validEpisodeInsert (Episode episode) throws EpisodeExistsException, EpisodeInvalidException {
 		validEpisode(episode);
-		validEpisodeExistence(episode);
+//		validEpisodeExistence(episode);
+		try {
+			EpisodeDAO episodeDAO = new EpisodeDAO();
+			episodeDAO.insert(episode);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

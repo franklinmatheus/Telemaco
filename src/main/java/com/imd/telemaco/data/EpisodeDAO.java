@@ -38,22 +38,22 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 	
 	@Override
 	public void insert (Episode episode) throws SQLException {
-		String sql = "INSERT INTO epsiode (id, name, number, time, synopsis, fkIdSeason) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO telemaco.episode (name, number, time, synopsis, idFkSeason) VALUES (?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(2, episode.getName());
-			statement.setInt(3, episode.getNumber());
-			statement.setInt(4, episode.getTime());
-			statement.setString(5, episode.getSynopsis());
-			statement.setInt(6, episode.getIdSeason());
+			statement.setString(1, episode.getName());
+			statement.setInt(2, episode.getNumber());
+			statement.setInt(3, episode.getTime());
+			statement.setString(4, episode.getSynopsis());
+			statement.setInt(5, episode.getIdSeason());
 
 			statement.execute();
 			statement.close();
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
-			connection.close();
+//			connection.close();
 		}
 	}
 
@@ -71,7 +71,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 				int number  	= result.getInt("number");
 				int time 		= result.getInt("time");
 				String synopsis = result.getString("synopsis");
-				int fkIdSeason  = result.getInt("fkIdSeason");
+				int fkIdSeason  = result.getInt("idFkSeason");
 				
 				episode = new Episode (id, name, number, time, synopsis, fkIdSeason);
 			}
@@ -81,13 +81,13 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
-			connection.close();
+//			connection.close();
 		}
 	}
 	
 	@Override
 	public Episode select(String name, int idSeason) throws SQLException {
-		String sql = "SELECT * FROM telemaco.episode WHERE name='" + name + "' AND fkIdSeason='" + idSeason + "'";
+		String sql = "SELECT * FROM telemaco.episode WHERE name='" + name + "' AND idFkSeason='" + idSeason + "'";
 		Episode episode = new Episode();
 		
 		try {
@@ -104,13 +104,13 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
-			connection.close();
+//			connection.close();
 		}
 	}
 	
 	@Override
 	public Episode select(int number, int idSeason) throws SQLException {
-		String sql = "SELECT * FROM telemaco.episode WHERE number='" + number + "' AND fkIdSeason='" + idSeason + "'";
+		String sql = "SELECT * FROM telemaco.episode WHERE number='" + number + "' AND idFkSeason='" + idSeason + "'";
 		Episode episode = new Episode();
 		
 		try {
@@ -127,7 +127,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 		} catch (SQLException e) {
 			throw new RuntimeException (e);
 		} finally {
-			connection.close();
+//			connection.close();
 		}
 	}
 	
@@ -177,7 +177,7 @@ public class EpisodeDAO implements DAOEpisodeSpecialOperations {
 				+ "number=?, "
 				+ "time=?, "
 				+ "synopsis=?, "
-				+ "fkIdSeason=? "
+				+ "idFkSeason=? "
 				+ "WHERE id=?";
 		
 		try {

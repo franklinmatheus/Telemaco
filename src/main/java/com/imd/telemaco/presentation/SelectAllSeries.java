@@ -43,7 +43,7 @@ public class SelectAllSeries extends HttpServlet {
                 ArrayList<Serie> series = dao.selectAllSeries();
                 HttpSession session = request.getSession(true);
                 session.setAttribute("series", series);
-                //response.sendRedirect("Series.jsp");
+                response.sendRedirect("Series.jsp");
             } catch (SQLException ex) {
             	//TODO
             }   
