@@ -188,19 +188,4 @@ public class ValidateSerieServices {
         CommentDAO commentDAO = CommentDAO.getInstance();
         commentDAO.insert(comment);
     }
-
-//   /**
-//    * Verify if the classification is correct.
-//    * @param classification 
-//    */
-//  public void validSerieClassification (Classification classification) {
-//
-//  }
-//   /**
-//    * Valid all the seasons thats be part of the series
-//    * @param serie 
-//    */
-//   public void validSerieSeasons(Serie serie) {
-//      
-//   }
 }

@@ -15,12 +15,17 @@
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     User logged = new User();
-    if(session.getAttribute("logged") == null)
+    if (session.getAttribute("logged") == null) {
         response.sendRedirect("Login.jsp");
-    else
+    } else {
         logged = (User) (session.getAttribute("logged"));
-    
+    }
+
     Serie serie = (Serie) session.getAttribute("serie");
+    
+    if(serie == null)
+        response.sendRedirect("Logged.jsp");
+    
     ArrayList<Comment> comments = (ArrayList<Comment>) session.getAttribute("comments");
 %>
 <html>
@@ -31,10 +36,15 @@
     <body>
         <p> <%=serie.getName()%> </p>
         <p> Ano: <%=serie.getYear()%> </p>
-        <p> Temporadas: <%=serie.getSeasons().size()%> </p> <%
+        <a href="RegisterSeason.jsp">Register season</a><br>
+        <a href="RegisterEpisode.jsp">Register episode</a><br>
+        <hr>
+        <p> Temporadas: <%=serie.getSeasons().size()%> </p> 
+        <%
             ArrayList<Season> seasons = serie.getSeasons();
             for (Season tem : seasons) {
-        %> <span> Temporada <%=tem.getNumber()%> </span>
+        %> 
+        <span> Temporada <%=tem.getNumber()%> </span>
         <p>  ========================= </p>
         <p> Episodes (<%=tem.getEpAmount()%>) </p> <%
             for (Episode ep : tem.getEpisodes()) {%>
@@ -43,10 +53,14 @@
                 <input name="<%=ep.getName()%>" type="checkbox"> <%=ep.getName()%>
                 <button type="submit"> Confirmar episódios assistidos </button>
             </p>
-        </form><%
-            } %>
-        <p>  ========================= </p> <%
-            }%>
+        </form>
+        <%
+            }
+        %>
+        <p>  ========================= </p> 
+        <%
+            }
+        %>
         <p> Sinopse: <%=serie.getSynopsis()%> </p>
         <hr>
         <p>Comentários</p>
@@ -68,17 +82,19 @@
                     }
                 }
             %>
-            <hr>
-            <form action="AddComment" method="GET">
-                <label>Add your comment here </label>
-                <br>
-                <textarea name="content" required maxlength="500" placeholder="..."></textarea>
-                <br>
-                <input type="submit" value="Add comment" />
-                <input type="hidden" name="idSerie" value="${serie.getId()}"/>
-                <input type="hidden" name="idUser" value="${logged.getId()}"/>
-            </form>
-            <hr>
         </table>
-    </body>
+        <hr>
+
+        <form action="AddComment" method="GET">
+            <label>Add your comment here </label>
+            <br>
+            <textarea name="content" required maxlength="500" placeholder="..."></textarea>
+            <br>
+            <input type="submit" value="Add comment" />
+            <input type="hidden" name="idSerie" value="${serie.getId()}"/>
+            <input type="hidden" name="idUser" value="${logged.getId()}"/>
+        </form>
+        <hr>
+    </table>
+</body>
 </html>

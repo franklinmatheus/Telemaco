@@ -57,7 +57,6 @@ public class AddComment extends HttpServlet {
             validateSerie.addComment(comment);
             
             ArrayList<Comment> comments = validateSerie.getComments(idSerie);
-            System.out.println(comments.size());
             HttpSession session = request.getSession();
             session.setAttribute("comments", comments);
             
