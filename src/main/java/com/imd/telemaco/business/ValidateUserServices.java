@@ -68,6 +68,24 @@ public class ValidateUserServices {
     }
     
     /**
+     * Select an user by id.
+     * @param id
+     * @return
+     * @throws DatabaseException
+     * @throws CloseConnectionException
+     * @throws UserNotExistsException 
+     */
+    public User select(int id) throws DatabaseException, CloseConnectionException, UserNotExistsException {
+        DAOUserSpecialOperations dao = UserDAO.getInstance();
+        User user = dao.select(id);
+        
+        if(user == null)
+            throw new UserNotExistsException();
+        
+        return user;
+    }
+    
+    /**
      * TODO
      * @param user
      * @param cOldPassword

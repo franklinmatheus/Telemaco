@@ -6,14 +6,15 @@
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateSerieServices;
+import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.data.SerieDAO;
+import com.imd.telemaco.business.exception.UserNotExistsException;
 import com.imd.telemaco.entity.Comment;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author franklin
  */
-public class SelectSerie extends HttpServlet {
+public class AddComment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,21 +39,30 @@ public class SelectSerie extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            int id = Integer.parseInt(request.getParameter("id"));
-
-            SerieDAO dao = SerieDAO.getInstance();
-            Serie serie = dao.select(id);
-
-            ValidateSerieServices validate = new ValidateSerieServices();
-            ArrayList<Comment> comments = validate.getComments(id);
-                    
-            HttpSession session = request.getSession(true);
-            session.setAttribute("serie", serie);
+        try {
+            ValidateSerieServices validateSerie = new ValidateSerieServices();
+            ValidateUserServices validateUser = new ValidateUserServices();
+            
+            String content = request.getParameter("content");
+            Date date = new Date();
+            int idSerie = Integer.parseInt(request.getParameter("idSerie"));
+            int idUser = Integer.parseInt(request.getParameter("idUser"));
+            User user = validateUser.select(idUser);
+            
+            Comment comment = new Comment();
+            comment.setContent(content);
+            comment.setDate(date);
+            comment.setUser(user);
+            comment.setSerieId(idSerie);
+            validateSerie.addComment(comment);
+            
+            ArrayList<Comment> comments = validateSerie.getComments(idSerie);
+            System.out.println(comments.size());
+            HttpSession session = request.getSession();
             session.setAttribute("comments", comments);
+            
             response.sendRedirect("Serie.jsp");
-
-        } catch (DatabaseException | CloseConnectionException e) {
+        } catch(DatabaseException | CloseConnectionException | UserNotExistsException e) {
             response.sendRedirect("Error.jsp");
         }
     }

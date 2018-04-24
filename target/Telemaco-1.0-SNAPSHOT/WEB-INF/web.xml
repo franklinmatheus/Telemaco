@@ -48,6 +48,10 @@
         <servlet-name>SelectSerie</servlet-name>
         <servlet-class>com.imd.telemaco.presentation.SelectSerie</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddComment</servlet-name>
+        <servlet-class>com.imd.telemaco.presentation.AddComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterUser</servlet-name>
         <url-pattern>/RegisterUser</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>SelectSerie</servlet-name>
         <url-pattern>/SelectSerie</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddComment</servlet-name>
+        <url-pattern>/AddComment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>3000</session-timeout>

@@ -8,7 +8,9 @@ import com.imd.telemaco.business.exception.RatingInvalidException;
 import com.imd.telemaco.business.exception.SeasonExistsException;
 import com.imd.telemaco.business.exception.SerieExistsException;
 import com.imd.telemaco.business.exception.SerieInvalidException;
+import com.imd.telemaco.data.CommentDAO;
 import com.imd.telemaco.data.SerieDAO;
+import com.imd.telemaco.entity.Comment;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
 import java.util.ArrayList;
@@ -160,6 +162,31 @@ public class ValidateSerieServices {
             throw new NoResultsException();
         
         return results;
+    }
+    
+    /**
+     * Select all comments of serie.
+     * @param id
+     * @return
+     * @throws DatabaseException
+     * @throws CloseConnectionException
+     */
+    public ArrayList<Comment> getComments(int id) throws DatabaseException, CloseConnectionException {
+        CommentDAO commentDAO = CommentDAO.getInstance();
+        ArrayList<Comment> comments = commentDAO.selectBySerie(id);
+        
+        return comments;
+    }
+    
+    /**
+     * Add a comment in database to related serie.
+     * @param comment
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public void addComment(Comment comment) throws DatabaseException, CloseConnectionException {
+        CommentDAO commentDAO = CommentDAO.getInstance();
+        commentDAO.insert(comment);
     }
 
 //   /**
