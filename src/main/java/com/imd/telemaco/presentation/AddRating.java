@@ -10,7 +10,7 @@ import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.business.exception.UserNotExistsException;
-import com.imd.telemaco.entity.Comment;
+import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author franklin
  */
-public class AddComment extends HttpServlet {
+public class AddRating extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,21 +44,23 @@ public class AddComment extends HttpServlet {
             ValidateUserServices validateUser = new ValidateUserServices();
             
             String content = request.getParameter("content");
+            int stars = Integer.parseInt(request.getParameter("rating"));
             Date date = new Date();
             int idSerie = Integer.parseInt(request.getParameter("idSerie"));
             int idUser = Integer.parseInt(request.getParameter("idUser"));
             User user = validateUser.select(idUser);
             
-            Comment comment = new Comment();
-            comment.setContent(content);
-            comment.setDate(date);
-            comment.setUser(user);
-            comment.setSerieId(idSerie);
-            validateSerie.addComment(comment);
+            Rating rating = new Rating();
+            rating.setComment(content);
+            rating.setDate(date);
+            rating.setUser(user);
+            rating.setIdSerie(idSerie);
+            rating.setStars(stars);
+            validateSerie.addRating(rating);
             
-            ArrayList<Comment> comments = validateSerie.getComments(idSerie);
+            ArrayList<Rating> ratings = validateSerie.getRatings(idSerie);
             HttpSession session = request.getSession();
-            session.setAttribute("comments", comments);
+            session.setAttribute("ratings", ratings);
             
             response.sendRedirect("Serie.jsp");
         } catch(DatabaseException | CloseConnectionException | UserNotExistsException e) {

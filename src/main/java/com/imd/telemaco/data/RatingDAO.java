@@ -7,7 +7,7 @@ package com.imd.telemaco.data;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Comment;
+import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,12 +21,12 @@ import java.util.Date;
  *
  * @author franklin
  */
-public class CommentDAO implements DAOCommentSpecialOperations {
+public class RatingDAO implements DAORatingSpecialOperations {
 
     private Connection connection;
-    private static CommentDAO commentDAO = null;
+    private static RatingDAO ratingDAO = null;
 
-    private CommentDAO() throws DatabaseException {
+    private RatingDAO() throws DatabaseException {
         this.connection = ConnectionFactory.getConnection();
     }
 
@@ -34,11 +34,11 @@ public class CommentDAO implements DAOCommentSpecialOperations {
      *
      * @return @throws DatabaseException
      */
-    public static synchronized CommentDAO getInstance() throws DatabaseException {
-        if (commentDAO == null) {
-            commentDAO = new CommentDAO();
+    public static synchronized RatingDAO getInstance() throws DatabaseException {
+        if (ratingDAO == null) {
+            ratingDAO = new RatingDAO();
         }
-        return commentDAO;
+        return ratingDAO;
     }
 
     private void startsConnection() throws DatabaseException {
@@ -52,19 +52,20 @@ public class CommentDAO implements DAOCommentSpecialOperations {
     }
 
     @Override
-    public void insert(Comment comment) throws DatabaseException, CloseConnectionException {
-        String sql = "INSERT INTO telemaco.comment (date, content, idfkuser, idfkserie) VALUES (?, ?, ?, ?)";
+    public void insert(Rating rating) throws DatabaseException, CloseConnectionException {
+        String sql = "INSERT INTO telemaco.rating (date, stars, rating, idfkuser, idfkserie) VALUES (?, ?, ?, ?, ?)";
 
         try {
             this.startsConnection();
 
-            java.sql.Date date = new java.sql.Date(comment.getDate().getTime());
+            java.sql.Date date = new java.sql.Date(rating.getDate().getTime());
 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setDate(1, date);
-            stm.setString(2, comment.getContent());
-            stm.setInt(3, comment.getUser().getId());
-            stm.setInt(4, comment.getSerieId());
+            stm.setInt(2, rating.getStars());
+            stm.setString(3, rating.getComment());
+            stm.setInt(4, rating.getUser().getId());
+            stm.setInt(5, rating.getIdSerie());
 
             stm.execute();
         } catch (SQLException e) {
@@ -80,9 +81,9 @@ public class CommentDAO implements DAOCommentSpecialOperations {
     }
 
     @Override
-    public Comment select(int id) throws DatabaseException, CloseConnectionException {
-        String sql = "SELECT * FROM telemaco.comment WHERE id='" + id + "'";
-        Comment comment = new Comment();
+    public Rating select(int id) throws DatabaseException, CloseConnectionException {
+        String sql = "SELECT * FROM telemaco.rating WHERE id='" + id + "'";
+        Rating rating = new Rating();
 
         try {
             this.startsConnection();
@@ -91,23 +92,25 @@ public class CommentDAO implements DAOCommentSpecialOperations {
             ResultSet result = statement.executeQuery(sql);
 
             if (result.next()) {
-                String content   = result.getString("content");
+                String content   = result.getString("rating");
                 Date date = result.getDate("date");
+                int stars = result.getInt("stars");
                 int idUser = result.getInt("idfkuser");
                 int idSerie = result.getInt("idfkserie");
                 
                 UserDAO userDAO = UserDAO.getInstance();
                 User user = userDAO.select(idUser);
                 
-                comment.setContent(content);
-                comment.setDate(date);
-                comment.setSerieId(idSerie);
-                comment.setUser(user);
+                rating.setComment(content);
+                rating.setDate(date);
+                rating.setStars(stars);
+                rating.setIdSerie(idSerie);
+                rating.setUser(user);
             } else {
-                comment = null;
+                rating = null;
             }
 
-            return comment;
+            return rating;
         } catch (SQLException e) {
             throw new DatabaseException();
         } finally {
@@ -120,8 +123,8 @@ public class CommentDAO implements DAOCommentSpecialOperations {
     }
 
     @Override
-    public void delete(Comment comment) throws DatabaseException, CloseConnectionException {
-        String sql = "DELETE FROM telemaco.comment WHERE id='" + comment.getId() + "'";
+    public void delete(Rating rating) throws DatabaseException, CloseConnectionException {
+        String sql = "DELETE FROM telemaco.rating WHERE id='" + rating.getId() + "'";
         try {
             this.startsConnection();
             
@@ -139,10 +142,11 @@ public class CommentDAO implements DAOCommentSpecialOperations {
     }
 
     @Override
-    public void update(Comment comment) throws DatabaseException, CloseConnectionException {
-        String sql = "UPDATE telemaco.user SET "
+    public void update(Rating rating) throws DatabaseException, CloseConnectionException {
+        String sql = "UPDATE telemaco.rating SET "
                 + "date=?, "
-                + "content=?, "
+                + "rating=?, "
+                + "stars=?, "
                 + "idfkuser=?, "
                 + "idfkserie=?, "
                 + "WHERE id=?";
@@ -150,13 +154,14 @@ public class CommentDAO implements DAOCommentSpecialOperations {
             this.startsConnection();
             PreparedStatement stm = connection.prepareStatement(sql);
             
-            java.sql.Date date = new java.sql.Date(comment.getDate().getTime());
+            java.sql.Date date = new java.sql.Date(rating.getDate().getTime());
             
             stm.setDate(1, date);
-            stm.setString(2, comment.getContent());
-            stm.setInt(3, comment.getUser().getId());
-            stm.setInt(4,  comment.getSerieId());
-            stm.setInt(4,  comment.getId());
+            stm.setString(2, rating.getComment());
+            stm.setInt(3, rating.getStars());
+            stm.setInt(4, rating.getUser().getId());
+            stm.setInt(5,  rating.getIdSerie());
+            stm.setInt(6,  rating.getId());
             
             stm.execute();
         } catch(SQLException e) {
@@ -171,9 +176,9 @@ public class CommentDAO implements DAOCommentSpecialOperations {
     }
 
     @Override
-    public ArrayList<Comment> selectBySerie(int idSerie) throws DatabaseException, CloseConnectionException {
-        String sql = "SELECT * FROM telemaco.comment WHERE idfkserie='" + idSerie + "'";
-        ArrayList<Comment> comments = new ArrayList<Comment>();
+    public ArrayList<Rating> selectBySerie(int idSerie) throws DatabaseException, CloseConnectionException {
+        String sql = "SELECT * FROM telemaco.rating WHERE idfkserie='" + idSerie + "'";
+        ArrayList<Rating> ratings = new ArrayList<Rating>();
 
         try {
             this.startsConnection();
@@ -184,22 +189,24 @@ public class CommentDAO implements DAOCommentSpecialOperations {
             
             while (set.next()) {
                 int id = set.getInt("id");
-                String content = set.getString("content");
+                String content = set.getString("rating");
+                int stars = set.getInt("stars");
                 Date date = set.getDate("date");
                 int idUser = set.getInt("idfkuser");
                 
                 User user = userDAO.select(idUser);
                 
-                Comment comment = new Comment();
-                comment.setContent(content);
-                comment.setDate(date);
-                comment.setSerieId(idSerie);
-                comment.setUser(user);
+                Rating rating = new Rating();
+                rating.setComment(content);
+                rating.setStars(stars);
+                rating.setDate(date);
+                rating.setIdSerie(idSerie);
+                rating.setUser(user);
                 
-                comments.add(comment);
+                ratings.add(rating);
             }
 
-            return comments;
+            return ratings;
         } catch (SQLException e) {
             throw new DatabaseException();
         } finally {

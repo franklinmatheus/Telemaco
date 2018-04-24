@@ -14,7 +14,8 @@
     }
     
     Serie serie = (Serie) session.getAttribute("serie");
-    int nextSeason = serie.getSeasons().size() + 1;
+    int numberSeasons = serie.getSeasons().size();
+    int nextSeason = numberSeasons + 1;
 %>
 <html>
     <head>
@@ -40,8 +41,8 @@
                 
                 <input type="text" disabled="true" value="<%=serie.getName()%>" />
 
-                <label>Number</label>
-                <input type="number" name="number" value="<%=nextSeason%>" disabled="true">
+                <label>Number <span>(a série já possui <%=numberSeasons%> temporadas)</span></label>
+                <input type="number" name="number" value="<%=nextSeason%>">
 
                 <div id="buttons">
                     <button class="button" id="btnCancel"><a href="./Index.jsp">Cancelar</a></button>

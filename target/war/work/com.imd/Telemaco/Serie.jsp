@@ -4,8 +4,8 @@
     Author     : franklin
 --%>
 
+<%@page import="com.imd.telemaco.entity.Rating"%>
 <%@page import="com.imd.telemaco.entity.User"%>
-<%@page import="com.imd.telemaco.entity.Comment"%>
 <%@page import="com.imd.telemaco.entity.Episode"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.imd.telemaco.entity.Season"%>
@@ -22,15 +22,19 @@
     }
 
     Serie serie = (Serie) session.getAttribute("serie");
-    
-    if(serie == null)
+
+    if (serie == null) {
         response.sendRedirect("Logged.jsp");
-    
-    ArrayList<Comment> comments = (ArrayList<Comment>) session.getAttribute("comments");
+    }
+
+    ArrayList<Rating> ratings = (ArrayList<Rating>) session.getAttribute("ratings");
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="./resources/css/rating.css">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="./resources/js/rating.js"></script>
         <title></title>
     </head>
     <body>
@@ -66,17 +70,18 @@
         <p>Comentários</p>
         <table>
             <%
-                if (comments.isEmpty()) {
+                if (ratings.isEmpty()) {
             %>
             <b>No comments yet!</b>
             <%
             } else {
-                for (Comment comment : comments) {
+                for (Rating rating : ratings) {
             %>
             <tr>
-                <td><%=comment.getUser().getName()%></td>
-                <td><%=comment.getDate()%></td>
-                <td><%=comment.getContent()%></td>
+                <td><%=rating.getUser().getName()%></td>
+                <td><%=rating.getDate()%></td>
+                <td><%=rating.getComment()%></td>
+                <td>(stars: <%=rating.getStars()%>)</td>
             </tr>
             <%
                     }
@@ -85,10 +90,19 @@
         </table>
         <hr>
 
-        <form action="AddComment" method="GET">
+        <form action="AddRating" method="GET" id="ratings">
             <label>Add your comment here </label>
             <br>
             <textarea name="content" required maxlength="500" placeholder="..."></textarea>
+            <br>
+            <div class="rating">
+                <span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
+                <span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
+                <span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
+                <span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
+                <span><input type="radio" name="rating" id="str1" value="1" required><label for="str1"></label></span>
+            </div>
+            <br>
             <br>
             <input type="submit" value="Add comment" />
             <input type="hidden" name="idSerie" value="${serie.getId()}"/>

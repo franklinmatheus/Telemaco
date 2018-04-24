@@ -7,14 +7,14 @@ package com.imd.telemaco.data;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Comment;
+import com.imd.telemaco.entity.Rating;
 import java.util.ArrayList;
 
 /**
  *
  * @author franklin
  */
-public interface DAOCommentSpecialOperations extends DAO<Comment> {
+public interface DAORatingSpecialOperations extends DAO<Rating> {
     
     /**
      * Select all comments from one serie.
@@ -23,5 +23,5 @@ public interface DAOCommentSpecialOperations extends DAO<Comment> {
      * @throws DatabaseException
      * @throws CloseConnectionException 
      */
-    public ArrayList<Comment> selectBySerie(int idSerie) throws DatabaseException, CloseConnectionException;
+    public ArrayList<Rating> selectBySerie(int idSerie) throws DatabaseException, CloseConnectionException;
 }

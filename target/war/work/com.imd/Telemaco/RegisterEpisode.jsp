@@ -16,6 +16,7 @@
     }
 
     Serie serie = (Serie) session.getAttribute("serie");
+    ArrayList<Season> seasons = serie.getSeasons();
 %>
 <html>
     <head>
@@ -42,14 +43,10 @@
                 <input type="text" disabled="true" value="<%=serie.getName()%>" />
 
                 <label>Temporada Pertencente</label>
-                <input name="seasonNumber" type="number" min="1" value="1"  required>
 
-                <select id="seasonNumber" name="seasonNumber" disabled onchange="enableAllInputs()" required>
+                <select id="seasonNumber" name="seasonNumber" onchange="enableAllInputs()" required>
                     <option value="" selected disabled> -- </option>
                     <%
-                        ArrayList<Season> seasons;
-                        seasons = serie.getSeasons();
-
                         for (Season s : seasons) {
                         %>
                         <option value="<%=s.getNumber()%>"><%=s.getNumber()%> </option>

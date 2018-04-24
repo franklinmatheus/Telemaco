@@ -9,7 +9,7 @@ import com.imd.telemaco.business.ValidateSerieServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.data.SerieDAO;
-import com.imd.telemaco.entity.Comment;
+import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.Serie;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,18 +38,18 @@ public class SelectSerie extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
             int id = Integer.parseInt(request.getParameter("id"));
 
             SerieDAO dao = SerieDAO.getInstance();
             Serie serie = dao.select(id);
 
             ValidateSerieServices validate = new ValidateSerieServices();
-            ArrayList<Comment> comments = validate.getComments(id);
+            ArrayList<Rating> ratings = validate.getRatings(id);
                     
             HttpSession session = request.getSession(true);
             session.setAttribute("serie", serie);
-            session.setAttribute("comments", comments);
+            session.setAttribute("ratings", ratings);
             response.sendRedirect("Serie.jsp");
 
         } catch (DatabaseException | CloseConnectionException e) {

@@ -8,9 +8,10 @@ import com.imd.telemaco.business.exception.RatingInvalidException;
 import com.imd.telemaco.business.exception.SeasonExistsException;
 import com.imd.telemaco.business.exception.SerieExistsException;
 import com.imd.telemaco.business.exception.SerieInvalidException;
-import com.imd.telemaco.data.CommentDAO;
+import com.imd.telemaco.data.RatingDAO;
+import com.imd.telemaco.data.DAORatingSpecialOperations;
 import com.imd.telemaco.data.SerieDAO;
-import com.imd.telemaco.entity.Comment;
+import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
 import java.util.ArrayList;
@@ -171,21 +172,21 @@ public class ValidateSerieServices {
      * @throws DatabaseException
      * @throws CloseConnectionException
      */
-    public ArrayList<Comment> getComments(int id) throws DatabaseException, CloseConnectionException {
-        CommentDAO commentDAO = CommentDAO.getInstance();
-        ArrayList<Comment> comments = commentDAO.selectBySerie(id);
+    public ArrayList<Rating> getRatings(int id) throws DatabaseException, CloseConnectionException {
+        DAORatingSpecialOperations commentDAO = RatingDAO.getInstance();
+        ArrayList<Rating> ratings = commentDAO.selectBySerie(id);
         
-        return comments;
+        return ratings;
     }
     
     /**
      * Add a comment in database to related serie.
-     * @param comment
+     * @param rating
      * @throws DatabaseException
      * @throws CloseConnectionException 
      */
-    public void addComment(Comment comment) throws DatabaseException, CloseConnectionException {
-        CommentDAO commentDAO = CommentDAO.getInstance();
-        commentDAO.insert(comment);
+    public void addRating(Rating rating) throws DatabaseException, CloseConnectionException {
+        DAORatingSpecialOperations commentDAO = RatingDAO.getInstance();
+        commentDAO.insert(rating);
     }
 }

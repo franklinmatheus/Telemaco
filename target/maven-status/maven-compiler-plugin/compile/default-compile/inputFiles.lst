@@ -18,6 +18,7 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Serie.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/LogoutUser.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/ConfirmInputsException.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/DAORatingSpecialOperations.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/RegisterSerie.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/SerieDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/SearchSerie.java
@@ -33,7 +34,6 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/RegisterSeason.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/UserDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/SelectSerie.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/AddComment.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/NoResultsException.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Episode.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateSeasonServices.java
@@ -44,11 +44,10 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/SerieInvalidException.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/WatchEpisodes.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateSerieServices.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/CommentDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/User.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/Comment.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/EpisodeInvalidException.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/UserEpisodeDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/RatingInvalidException.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/RatingDAO.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/AddRating.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/RegisterUser.java
-/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/DAOCommentSpecialOperations.java
