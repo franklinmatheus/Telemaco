@@ -5,11 +5,10 @@
  */
 package com.imd.telemaco.presentation;
 
-import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.business.exception.UserNotExistsException;
-import com.imd.telemaco.entity.User;
+import com.imd.telemaco.data.SerieDAO;
+import com.imd.telemaco.entity.Serie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author franklin
  */
-public class LoginUser extends HttpServlet {
+public class SelectSerie extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,17 +35,16 @@ public class LoginUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            ValidateUserServices validate = new ValidateUserServices();
-            User user = validate.login(request.getParameter("email"), request.getParameter("password"));
-            
+        try (PrintWriter out = response.getWriter()) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            SerieDAO dao = SerieDAO.getInstance();
+            Serie serie = dao.select(id);
             HttpSession session = request.getSession(true);
-            session.setAttribute("logged", user);
-            response.sendRedirect("Logged.jsp");
-
-        } catch (DatabaseException | CloseConnectionException | UserNotExistsException e) {
-            response.sendRedirect("Login.jsp");
+            session.setAttribute("serie", serie);
+            response.sendRedirect("Serie.jsp");
+            
+        } catch (DatabaseException | CloseConnectionException e) {
+            response.sendRedirect("Error.jsp");
         }
     }
 

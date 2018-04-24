@@ -7,6 +7,7 @@ com/imd/telemaco/business/exception/CloseConnectionException.class
 com/imd/telemaco/business/exception/SerieInvalidException.class
 com/imd/telemaco/business/exception/ConfirmInputsException.class
 com/imd/telemaco/business/exception/EpisodeExistsException.class
+com/imd/telemaco/business/exception/NoResultsException.class
 com/imd/telemaco/presentation/SelectAllSeries.class
 com/imd/telemaco/data/UserDAO.class
 com/imd/telemaco/business/exception/SeasonIncompleteException.class
@@ -15,12 +16,12 @@ com/imd/telemaco/data/DAO.class
 com/imd/telemaco/business/exception/RatingInvalidException.class
 com/imd/telemaco/business/ValidateUserServices.class
 com/imd/telemaco/presentation/LoginUser.class
-com/imd/telemaco/presentation/SellectAllSeasons.class
 com/imd/telemaco/business/exception/SerieExistsException.class
 com/imd/telemaco/entity/UserEpisode.class
 com/imd/telemaco/entity/enums/Classification.class
 com/imd/telemaco/entity/Serie.class
 com/imd/telemaco/business/ValidateSeasonServices.class
+com/imd/telemaco/presentation/RegisterSeason.class
 com/imd/telemaco/presentation/UpdatePassword.class
 com/imd/telemaco/presentation/RegisterSerie.class
 com/imd/telemaco/entity/Episode.class
@@ -28,16 +29,17 @@ com/imd/telemaco/presentation/SelectSeasonsAtSerie.class
 com/imd/telemaco/business/exception/DatabaseException.class
 com/imd/telemaco/entity/User.class
 com/imd/telemaco/data/DAOUserSpecialOperations.class
+com/imd/telemaco/presentation/SelectSerie.class
 com/imd/telemaco/business/exception/UserAlreadyExistsException.class
 com/imd/telemaco/business/exception/SeasonExistsException.class
 com/imd/telemaco/presentation/WatchEpisodes.class
 com/imd/telemaco/business/exception/UserNotExistsException.class
-com/imd/telemaco/presentation/ResgisterSeason.class
 com/imd/telemaco/data/SerieDAO.class
 com/imd/telemaco/business/ValidateEpisodeServices.class
 com/imd/telemaco/data/DAOSerieSpecialOperations.class
 com/imd/telemaco/presentation/RegisterEpisode.class
 com/imd/telemaco/data/SeasonDAO.class
+com/imd/telemaco/presentation/SelectAllSeasons.class
 com/imd/telemaco/data/UserEpisodeDAO.class
 com/imd/telemaco/data/DAOSeasonSpecialOperations.class
 com/imd/telemaco/entity/Serie$1.class
@@ -45,4 +47,5 @@ com/imd/telemaco/business/ValidateRatingService.class
 com/imd/telemaco/business/exception/EpisodeInvalidException.class
 com/imd/telemaco/presentation/LogoutUser.class
 com/imd/telemaco/data/ConnectionFactory.class
+com/imd/telemaco/presentation/SearchSerie.class
 com/imd/telemaco/business/ValidateSerieServices.class

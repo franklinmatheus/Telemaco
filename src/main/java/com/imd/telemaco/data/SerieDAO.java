@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -229,6 +231,36 @@ public class SerieDAO implements DAOSerieSpecialOperations {
             try {
                 connection.close();
             } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<Serie> search(String input) throws DatabaseException, CloseConnectionException {
+        String sql = "SELECT * from telemaco.serie WHERE LOWER(name) LIKE '%" + input.toLowerCase() + "%'";
+        ArrayList<Serie> results = new ArrayList<Serie>();
+        
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery(sql);
+            
+            while(set.next()) {
+                int id = set.getInt("id");
+                Serie serie = select(id);
+                results.add(serie);
+            }
+            
+            return results;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new DatabaseException();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
                 throw new CloseConnectionException();
             }
         }

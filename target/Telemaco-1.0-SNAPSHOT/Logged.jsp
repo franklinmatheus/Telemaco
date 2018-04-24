@@ -42,6 +42,11 @@
         <b>Password: </b><%=logged.getPassword()%><br/>
         <b>Gender: </b><%=logged.getGender()%><br/>
         
+        <form name="search" action="SearchSerie">
+            <input type="search" required name="input" />
+            <input type="submit" value="Search" />
+        </form>
+        
         <form name="logout" action="LogoutUser" method="POST">
             <input type="submit" value="Logout" />
         </form>

@@ -18,11 +18,11 @@ import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
 
-public class SellectAllSeasons extends HttpServlet {
+public class SelectAllSeasons extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ArrayList<Season> seasons = new ArrayList<>();
 	
-	public SellectAllSeasons () { }
+	public SelectAllSeasons () { }
 	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");

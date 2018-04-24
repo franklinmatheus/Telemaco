@@ -3,6 +3,7 @@ package com.imd.telemaco.business;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.business.exception.EpisodeInvalidException;
+import com.imd.telemaco.business.exception.NoResultsException;
 import com.imd.telemaco.business.exception.RatingInvalidException;
 import com.imd.telemaco.business.exception.SeasonExistsException;
 import com.imd.telemaco.business.exception.SerieExistsException;
@@ -10,6 +11,7 @@ import com.imd.telemaco.business.exception.SerieInvalidException;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
+import java.util.ArrayList;
 
 /**
  * Class to validate all services referent to the Series Class.
@@ -140,6 +142,24 @@ public class ValidateSerieServices {
        } catch (RatingInvalidException r) {
            throw new RatingInvalidException();
        }*/
+    }
+    
+    /**
+     * Return an array filled with series that matched with input.
+     * @param input
+     * @return
+     * @throws DatabaseException
+     * @throws CloseConnectionException
+     * @throws NoResultsException 
+     */
+    public ArrayList<Serie> search(String input) throws DatabaseException, CloseConnectionException, NoResultsException {
+        SerieDAO dao = SerieDAO.getInstance();
+        ArrayList<Serie> results = dao.search(input);
+        
+        if(results.isEmpty())
+            throw new NoResultsException();
+        
+        return results;
     }
 
 //   /**

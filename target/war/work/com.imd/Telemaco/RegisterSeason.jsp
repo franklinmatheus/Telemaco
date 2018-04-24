@@ -21,7 +21,7 @@
 	<div id="middle">
 		<label id="title">Cadastrar Temporada</label>
 
-		<form name="registerSeason" action="ResgisterSeason" method="post">
+		<form name="registerSeason" action="RegisterSeason" method="post">
 			<label>Série Pertencente</label>
 			<select name="serieName">
 				<%

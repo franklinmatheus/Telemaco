@@ -24,7 +24,7 @@ import com.imd.telemaco.entity.User;
  * Servlet implementation class ResgisterSeason
  */
 @WebServlet("/ResgisterSeason")
-public class ResgisterSeason extends HttpServlet {
+public class RegisterSeason extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 

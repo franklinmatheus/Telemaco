@@ -31,4 +31,13 @@ public interface DAOSerieSpecialOperations extends DAO<Serie> {
      * @throws com.imd.telemaco.business.exception.CloseConnectionException 
      */
     public ArrayList<Serie> selectAllSeries () throws DatabaseException, CloseConnectionException;
+    
+    /**
+     * Search series by name that user inputs.
+     * @param input
+     * @return
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public ArrayList<Serie> search(String input) throws DatabaseException, CloseConnectionException;
 }
