@@ -140,7 +140,19 @@ public class ValidateUserServices {
     }
     
     /**
-     * Get the user list of series.
+     * TODO
+     * @param idUser
+     * @param idSerie
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public void removeSerieFromList(int idUser, int idSerie) throws DatabaseException, CloseConnectionException {
+        DAOUserSpecialOperations dao = UserDAO.getInstance();
+        dao.deleteSerie(idUser, idSerie);
+    }
+    
+    /**
+     * TODO.
      * @param idUser
      * @return
      * @throws DatabaseException

@@ -59,7 +59,14 @@
             } else {
                 for (Serie serie : list) {
             %>
-            <p> <a href="SelectSerie?id=<%=serie.getId()%>"> <%=serie.getName()%> </a> </p>
+            <p> 
+            <form action="RemoveSerieFromList" method="GET">
+                <a href="SelectSerie?id=<%=serie.getId()%>"> <%=serie.getName()%> </a> 
+                <input type="hidden" name="idSerie" value="<%=serie.getId()%>" />
+                <input type="hidden" name="idUser" value="<%=logged.getId()%>" />
+                <input type="submit" value="Remove from list" />
+            </form>
+            </p>
             <%
                 }
             }

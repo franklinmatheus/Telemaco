@@ -109,7 +109,9 @@
                 <td><%=rating.getDate()%></td>
                 <td><%=rating.getComment()%></td>
                 <td>(stars: <%=rating.getStars()%>)</td>
-                <td><%=rating.getId()%></td>
+                <%
+                if(rating.getUser().getId() == logged.getId()) {
+                %>
                 <td>
                     <form action="RemoveRating" method="GET">
                         <input type="hidden" name="idRating" value="<%=rating.getId()%>" />
@@ -117,6 +119,9 @@
                         <input type="submit" value="Apagar sua avaliação" />
                     </form>
                 </td>
+                <%
+                }
+                %>
             </tr>
             <%
                     }

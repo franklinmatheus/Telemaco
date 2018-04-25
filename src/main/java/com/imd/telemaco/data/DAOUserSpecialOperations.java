@@ -51,4 +51,13 @@ public interface DAOUserSpecialOperations extends DAO<User> {
      * @throws CloseConnectionException 
      */
     public ArrayList<Integer> selectSeries(int id) throws DatabaseException, CloseConnectionException;
+    
+    /**
+     * Remove a serie from the user list.
+     * @param idUser
+     * @param idSerie
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public void deleteSerie(int idUser, int idSerie) throws DatabaseException, CloseConnectionException;
 }

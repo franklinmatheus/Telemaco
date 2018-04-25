@@ -304,4 +304,24 @@ public class UserDAO implements DAOUserSpecialOperations {
             }
         }
     }
+
+    @Override
+    public void deleteSerie(int idUser, int idSerie) throws DatabaseException, CloseConnectionException {
+        String sql = "DELETE FROM telemaco.user_serie WHERE idfkuser='" + idUser + "' AND idfkserie='" + idSerie + "'";
+        
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch(SQLException e) {
+            throw new DatabaseException();
+        } finally {
+            try { 
+                connection.close();
+            } catch(SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
+    }
 }

@@ -60,6 +60,10 @@
         <servlet-name>AddSerieToList</servlet-name>
         <servlet-class>com.imd.telemaco.presentation.AddSerieToList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RemoveSerieFromList</servlet-name>
+        <servlet-class>com.imd.telemaco.presentation.RemoveSerieFromList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterUser</servlet-name>
         <url-pattern>/RegisterUser</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>AddSerieToList</servlet-name>
         <url-pattern>/AddSerieToList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveSerieFromList</servlet-name>
+        <url-pattern>/RemoveSerieFromList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>3000</session-timeout>
