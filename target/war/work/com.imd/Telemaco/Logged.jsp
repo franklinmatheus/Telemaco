@@ -67,7 +67,6 @@
                 <input type="submit" value="Remove from list" />
             </form>
             </p>
-            
             <%
                 }
             }

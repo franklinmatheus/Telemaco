@@ -9,8 +9,11 @@ import com.imd.telemaco.business.ValidateSerieServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.data.SerieDAO;
+import com.imd.telemaco.data.UserEpisodeDAO;
+import com.imd.telemaco.entity.Episode;
 import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,6 +42,7 @@ public class SelectSerie extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            HttpSession session = request.getSession(true);
             int id = Integer.parseInt(request.getParameter("id"));
 
             SerieDAO dao = SerieDAO.getInstance();
@@ -46,8 +50,13 @@ public class SelectSerie extends HttpServlet {
 
             ValidateSerieServices validate = new ValidateSerieServices();
             ArrayList<Rating> ratings = validate.getRatings(id);
-                    
-            HttpSession session = request.getSession(true);
+            
+            User user = (User) (session.getAttribute("logged"));
+            UserEpisodeDAO ueDAO = new UserEpisodeDAO();
+
+            ArrayList<Episode> episodesSeen = ueDAO.selectAllEpisodes(user.getId());
+            session.setAttribute("episodesSeen", episodesSeen);
+            
             session.setAttribute("serie", serie);
             session.setAttribute("ratings", ratings);
             response.sendRedirect("Serie.jsp");

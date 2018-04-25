@@ -2,7 +2,6 @@ package com.imd.telemaco.data;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

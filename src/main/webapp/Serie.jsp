@@ -20,7 +20,8 @@
     } else {
         logged = (User) (session.getAttribute("logged"));
     }
-
+    
+    ArrayList<Episode> episodesSeen = (ArrayList<Episode>) session.getAttribute("episodesSeen");
     Serie serie = (Serie) session.getAttribute("serie");
 
     if (serie == null) {
@@ -70,29 +71,38 @@
         }
         %>
         <hr>
-        <p> Temporadas: <%=serie.getSeasons().size()%> </p> 
+        <p> Temporadas: <%=serie.getSeasons().size() %> </p> 
         <%
             ArrayList<Season> seasons = serie.getSeasons();
-            for (Season tem : seasons) {
+                for (Season tem : seasons) {
         %> 
         <span> Temporada <%=tem.getNumber()%> </span>
         <p>  ========================= </p>
-        <p> Episodes (<%=tem.getEpAmount()%>) </p> <%
-            for (Episode ep : tem.getEpisodes()) {%>
+        <p> Episodes (<%=tem.getEpAmount()%>) </p> 
         <form name="watchEpisodes" action="WatchEpisodes" method="post">
-            <p> Episódio <%=ep.getNumber()%>: <br> 
-                <input name="<%=ep.getName()%>" type="checkbox"> <%=ep.getName()%>
-                <button type="submit"> Confirmar episódios assistidos </button>
-            </p>
-        </form>
-        <%
-            }
+        <% 
+            for (Episode ep : tem.getEpisodes()) {
+                String isChecked = "";
+                for (Episode epSeen : episodesSeen) { // FIXME ajeitar essa complexidade
+                    if (epSeen.getId() == ep.getId()) {
+                        isChecked = "checked=\"checked\"";
+                	break;
+                    } 
+                }
         %>
+	<p> Episódio <%=ep.getNumber()%>: <br> 
+	    <input name="<%=ep.getName()%>" type="checkbox" <%=isChecked%>><%=ep.getName()%></br>
+	</p>      		
+        <%
+        }
+        %>
+        <button type="submit"> Cadastrar episódios assistidos </button>
+        </form>
         <p>  ========================= </p> 
         <%
-            }
+        }
         %>
-        <p> Sinopse: <%=serie.getSynopsis()%> </p>
+        <p> Sinopse: <%=serie.getSynopsis() %> </p>
         <hr>
         <p>Comentários</p>
         <table>
