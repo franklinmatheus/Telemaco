@@ -41,14 +41,17 @@ public class RegisterSeason extends HttpServlet {
 
             String number = request.getParameter("number");
             Serie serie = (Serie) session.getAttribute("serie");
-
             int numberInt = Integer.parseInt(number);
-
             season = new Season(numberInt, serie.getId());
 
             ValidateSeasonServices validate = new ValidateSeasonServices();
             validate.validSeasonInsert(season);
-            response.sendRedirect("Logged.jsp");
+
+            SerieDAO dao = SerieDAO.getInstance();
+            Serie updateSerie = dao.select(serie.getId());
+            session.setAttribute("serie", updateSerie);
+
+            response.sendRedirect("Serie.jsp");
             // TODO fazer mensagem de cadastrado com sucesso
 
         } catch (SeasonExistsException | SeasonIncompleteException | DatabaseException | CloseConnectionException e) {

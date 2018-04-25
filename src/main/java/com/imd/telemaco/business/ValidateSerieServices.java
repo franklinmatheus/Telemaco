@@ -180,13 +180,24 @@ public class ValidateSerieServices {
     }
     
     /**
-     * Add a comment in database to related serie.
+     * Add a rating in database to related serie.
      * @param rating
      * @throws DatabaseException
      * @throws CloseConnectionException 
      */
     public void addRating(Rating rating) throws DatabaseException, CloseConnectionException {
-        DAORatingSpecialOperations commentDAO = RatingDAO.getInstance();
-        commentDAO.insert(rating);
+        DAORatingSpecialOperations ratingDAO = RatingDAO.getInstance();
+        ratingDAO.insert(rating);
+    }
+    
+    /**
+     * Remove a rating in database.
+     * @param rating
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public void removeRating(Rating rating) throws DatabaseException, CloseConnectionException {
+        DAORatingSpecialOperations ratingDAO = RatingDAO.getInstance();
+        ratingDAO.delete(rating);
     }
 }

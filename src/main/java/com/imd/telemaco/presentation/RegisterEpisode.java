@@ -69,7 +69,12 @@ public class RegisterEpisode extends HttpServlet {
             try {
                 ValidateEpisodeServices validate = new ValidateEpisodeServices();
                 validate.validEpisodeInsert(episode);
-                response.sendRedirect("Logged.jsp");
+                
+                SerieDAO dao = SerieDAO.getInstance();
+                Serie updateSerie = dao.select(serie.getId());
+                session.setAttribute("serie", updateSerie);
+                
+                response.sendRedirect("Serie.jsp");
 
             } catch (EpisodeInvalidException e) {
                 e.printStackTrace();

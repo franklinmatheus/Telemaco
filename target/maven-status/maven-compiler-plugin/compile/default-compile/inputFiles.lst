@@ -8,6 +8,7 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/SelectAllSeasons.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/SelectSeasonsAtSerie.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/SerieExistsException.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/RemoveRating.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/RegisterEpisode.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/UserNotExistsException.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/SeasonDAO.java
@@ -45,6 +46,7 @@
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/WatchEpisodes.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/ValidateSerieServices.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/entity/User.java
+/home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/presentation/AddSerieToList.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/EpisodeInvalidException.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/data/UserEpisodeDAO.java
 /home/franklin/NetBeansProjects/Telemaco/Telemaco/src/main/java/com/imd/telemaco/business/exception/RatingInvalidException.java

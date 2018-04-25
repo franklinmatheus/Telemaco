@@ -202,6 +202,7 @@ public class RatingDAO implements DAORatingSpecialOperations {
                 rating.setDate(date);
                 rating.setIdSerie(idSerie);
                 rating.setUser(user);
+                rating.setId(id);
                 
                 ratings.add(rating);
             }

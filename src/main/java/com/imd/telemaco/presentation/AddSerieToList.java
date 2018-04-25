@@ -8,11 +8,8 @@ package com.imd.telemaco.presentation;
 import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.business.exception.UserNotExistsException;
 import com.imd.telemaco.entity.Serie;
-import com.imd.telemaco.entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author franklin
  */
-public class LoginUser extends HttpServlet {
+public class AddSerieToList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,19 +35,20 @@ public class LoginUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         try {
-            ValidateUserServices validate = new ValidateUserServices();
-            User user = validate.login(request.getParameter("email"), request.getParameter("password"));
-            ArrayList<Serie> seriesList = validate.getSeriesList(user.getId());
+            HttpSession session = request.getSession();
+            int idSerie = Integer.parseInt(request.getParameter("idSerie"));
+            int idUser = Integer.parseInt(request.getParameter("idUser"));
             
-            HttpSession session = request.getSession(true);
-            session.setAttribute("logged", user);
+            ValidateUserServices validate = new ValidateUserServices();
+            validate.addSerieToList(idUser, idSerie);
+            
+            ArrayList<Serie> seriesList = validate.getSeriesList(idUser);
             session.setAttribute("seriesList", seriesList);
-            response.sendRedirect("Logged.jsp");
-
-        } catch (DatabaseException | CloseConnectionException | UserNotExistsException e) {
-            response.sendRedirect("Login.jsp");
+            
+            response.sendRedirect("Serie.jsp");
+        } catch (DatabaseException | CloseConnectionException e) {
+            response.sendRedirect("Error.jsp");
         }
     }
 

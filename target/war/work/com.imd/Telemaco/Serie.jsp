@@ -28,6 +28,18 @@
     }
 
     ArrayList<Rating> ratings = (ArrayList<Rating>) session.getAttribute("ratings");
+    ArrayList<Serie> list = (ArrayList<Serie>) session.getAttribute("seriesList");
+    
+    boolean alreadyRated = false;
+    boolean alreadyOnList = false;
+    
+    for(Rating rating : ratings)
+        if(rating.getUser().getId() == logged.getId())
+            alreadyRated = true;
+            
+    for(Serie current : list)
+        if(current.getId() == serie.getId())
+            alreadyOnList = true;
 %>
 <html>
     <head>
@@ -42,6 +54,21 @@
         <p> Ano: <%=serie.getYear()%> </p>
         <a href="RegisterSeason.jsp">Register season</a><br>
         <a href="RegisterEpisode.jsp">Register episode</a><br>
+        <%
+        if(alreadyOnList == false) {
+        %>
+        <form action="AddSerieToList" method="GET">
+            <input type="hidden" value="<%=serie.getId()%>" name="idSerie" />
+            <input type="hidden" value="<%=logged.getId()%>" name="idUser" />
+            <input type="submit" value="Add to list" name="button" />
+        </form>
+        <%
+        } else {
+        %>
+        <p>This serie is already on your list!</p>
+        <%
+        }
+        %>
         <hr>
         <p> Temporadas: <%=serie.getSeasons().size()%> </p> 
         <%
@@ -82,6 +109,14 @@
                 <td><%=rating.getDate()%></td>
                 <td><%=rating.getComment()%></td>
                 <td>(stars: <%=rating.getStars()%>)</td>
+                <td><%=rating.getId()%></td>
+                <td>
+                    <form action="RemoveRating" method="GET">
+                        <input type="hidden" name="idRating" value="<%=rating.getId()%>" />
+                        <input type="hidden" name="idSerie" value="<%=serie.getId()%>" />
+                        <input type="submit" value="Apagar sua avaliação" />
+                    </form>
+                </td>
             </tr>
             <%
                     }
@@ -89,8 +124,11 @@
             %>
         </table>
         <hr>
-
-        <form action="AddRating" method="GET" id="ratings">
+        
+        <%
+            if(alreadyRated == false) {
+        %>
+        <form action="AddRating" method="GET">
             <label>Add your comment here </label>
             <br>
             <textarea name="content" required maxlength="500" placeholder="..."></textarea>
@@ -108,6 +146,13 @@
             <input type="hidden" name="idSerie" value="${serie.getId()}"/>
             <input type="hidden" name="idUser" value="${logged.getId()}"/>
         </form>
+        <%
+            } else {
+        %>
+        <p>You have already rated this serie.</p>
+        <%
+            }
+        %>
         <hr>
     </table>
 </body>

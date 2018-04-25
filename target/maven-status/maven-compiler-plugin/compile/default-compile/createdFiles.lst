@@ -6,6 +6,7 @@ com/imd/telemaco/business/exception/ValidateException.class
 com/imd/telemaco/business/exception/CloseConnectionException.class
 com/imd/telemaco/business/exception/SerieInvalidException.class
 com/imd/telemaco/business/exception/ConfirmInputsException.class
+com/imd/telemaco/presentation/RemoveRating.class
 com/imd/telemaco/business/exception/EpisodeExistsException.class
 com/imd/telemaco/business/exception/NoResultsException.class
 com/imd/telemaco/presentation/SelectAllSeries.class
@@ -48,6 +49,7 @@ com/imd/telemaco/data/DAOSeasonSpecialOperations.class
 com/imd/telemaco/entity/Serie$1.class
 com/imd/telemaco/business/ValidateRatingService.class
 com/imd/telemaco/business/exception/EpisodeInvalidException.class
+com/imd/telemaco/presentation/AddSerieToList.class
 com/imd/telemaco/presentation/LogoutUser.class
 com/imd/telemaco/data/ConnectionFactory.class
 com/imd/telemaco/presentation/SearchSerie.class
