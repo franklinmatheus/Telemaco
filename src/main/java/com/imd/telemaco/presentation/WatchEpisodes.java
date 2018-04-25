@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
+import com.imd.telemaco.data.EpisodeDAO;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.data.UserEpisodeDAO;
 import com.imd.telemaco.entity.Episode;
@@ -35,7 +37,6 @@ public class WatchEpisodes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF8");
-        PrintWriter out = response.getWriter();
         
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("logged");
@@ -50,24 +51,43 @@ public class WatchEpisodes extends HttpServlet {
             		ArrayList<Episode> episodes = season.getEpisodes();
             		if (episodes == null) break;
             		for (Episode ep : episodes) {
-            			boolean epWasSeen = request.getParameter(ep.getName()) != null;
+            			boolean epWasSeen = request.getParameter(ep.getName()) != null;            			
+
+        				UserEpisodeDAO ueDAO = new UserEpisodeDAO();
+            			ArrayList<Episode> episodesSeen = ueDAO.selectAllEpisodes(user.getId());
             			
-            			if (epWasSeen) {
-            				System.out.println(user);
-            				System.out.println(user.getId()); // ERROR is here
-            				System.out.println(ep.getId());
+            			if (epWasSeen && !existEpisode(episodesSeen, ep)) {
+//            				System.out.println(user);
+//            				System.out.println(user.getId()); // ERROR is here
+//            				System.out.println(ep.getId());
+
             				UserEpisode userEpisode = new UserEpisode(user.getId(), ep.getId());
-            				UserEpisodeDAO ueDAO = new UserEpisodeDAO();
+            				
             				ueDAO.insert(userEpisode);
+            			}
+            			
+            			if (!epWasSeen && existEpisode(episodesSeen, ep)) {
+            				UserEpisode userEpisode = new UserEpisode(user.getId(), ep.getId());
+            				ueDAO.delete(userEpisode);
             			}
             		}
             	}
             }
-            response.sendRedirect("Series.jsp");
+            
+            request.setAttribute("mensagem", "Episódios assistidos cadastrados com sucesso!"); // FIXME 
+            response.sendRedirect("SelectAllSeries");
         } catch (DatabaseException | CloseConnectionException e) {
         	e.printStackTrace();
             response.sendRedirect("Error.jsp");
         }
+    }
+    
+    private boolean existEpisode (ArrayList<Episode> episodes, Episode ep) {
+    	for (Episode e : episodes) {
+    		if (e.compareTo(ep) == 0) 
+    			return true;
+    	}
+    	return false;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

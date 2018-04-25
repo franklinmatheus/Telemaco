@@ -2,6 +2,7 @@ package com.imd.telemaco.data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
@@ -9,6 +10,9 @@ import com.imd.telemaco.entity.UserEpisode;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
+
+import com.imd.telemaco.entity.User;
+import com.imd.telemaco.entity.Episode;
 
 public class UserEpisodeDAO implements DAO<UserEpisode>{
 	private static UserEpisodeDAO userEpisodeDAO = null;
@@ -48,7 +52,7 @@ public class UserEpisodeDAO implements DAO<UserEpisode>{
 
 	@Override
 	public UserEpisode select(int id) throws DatabaseException, CloseConnectionException {
-		String sql = "SELECT * FROM telemaco.user_episode WHERE id='" + id + "'";
+		String sql = "SELECT * FROM telemaco.user_episode WHERE id='" + id + "'"; // FIXME it's broke
 		Connection connection = (Connection) ConnectionFactory.getConnection();
 		UserEpisode userEpsiode = null;
 		
@@ -64,6 +68,34 @@ public class UserEpisodeDAO implements DAO<UserEpisode>{
 			} 
 			
 			return userEpsiode;
+		} catch (SQLException e) {
+			throw new DatabaseException(e.getMessage());
+		} finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
+		}
+	}
+	
+	public ArrayList<Episode> selectAllEpisodes (int idUser) throws DatabaseException, CloseConnectionException {  
+		String sql = "SELECT * FROM telemaco.user_episode WHERE idfkuser='" + idUser + "'";
+		Connection connection = (Connection) ConnectionFactory.getConnection();
+		ArrayList<Episode> episodes = new ArrayList<>(); 
+		
+		try {
+			Statement stm = (Statement) connection.createStatement();
+			ResultSet result = stm.executeQuery(sql);
+			while (result.next()) {
+					int idEpisode = result.getInt("idfkepisode");
+					
+					EpisodeDAO epDAO = new EpisodeDAO();
+					Episode ep = epDAO.select(idEpisode);
+					episodes.add(ep);			 
+			}
+			
+			return episodes;
 		} catch (SQLException e) {
 			throw new DatabaseException(e.getMessage());
 		} finally {

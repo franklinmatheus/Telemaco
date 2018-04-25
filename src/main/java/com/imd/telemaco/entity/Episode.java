@@ -8,7 +8,7 @@ package com.imd.telemaco.entity;
  * @author  Shirley Ohara (shirleyohara@ufrn.edu.br)
  * @version 10.04.2018
  */
-public class Episode {
+public class Episode implements Comparable<Episode> {
 	private int 	id; 	  /*< The identify of the Episode */
     private String 	name;	  /*< The name of the Episode */
     private int 	number;   /*< The number of the Episode */
@@ -155,4 +155,13 @@ public class Episode {
     public String toString() {
         return "Episódio " + this.number + ": " + name;
     }
+
+	@Override
+	public int compareTo(Episode episode) {
+		if (this.getId() == episode.getId())
+			return 0;
+		if (this.getNumber() <=  episode.getNumber())
+			return 1;
+		else return -1;
+	}
 }

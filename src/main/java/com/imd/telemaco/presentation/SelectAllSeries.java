@@ -8,6 +8,8 @@ package com.imd.telemaco.presentation;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.data.SerieDAO;
+import com.imd.telemaco.data.UserEpisodeDAO;
+import com.imd.telemaco.entity.Episode;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
 
@@ -39,19 +41,25 @@ public class SelectAllSeries extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-	    try (PrintWriter out = response.getWriter()) {
-            try {
-                SerieDAO dao = new SerieDAO();
-                ArrayList<Serie> series = dao.selectAllSeries();
-                
-                HttpSession session = request.getSession(true);
-                session.setAttribute("series", series);
-                response.sendRedirect("Series.jsp");
-            } catch (DatabaseException | CloseConnectionException e) {
-            	e.printStackTrace();
-                response.sendRedirect("Error.jsp");
-            }
+
+        try {
+            SerieDAO dao = new SerieDAO();
+            ArrayList<Serie> series = dao.selectAllSeries();
+            
+            HttpSession session = request.getSession(true);
+            session.setAttribute("series", series);
+            
+            User user = (User) (session.getAttribute("logged"));
+            UserEpisodeDAO ueDAO = new UserEpisodeDAO();
+            
+            ArrayList <Episode> episodesSeen = ueDAO.selectAllEpisodes(user.getId());
+            System.out.println(episodesSeen);
+            session.setAttribute("episodesSeen", episodesSeen);
+            
+            response.sendRedirect("Series.jsp");
+        } catch (DatabaseException | CloseConnectionException e) {
+        	e.printStackTrace();
+            response.sendRedirect("Error.jsp");
         }
     }
 
