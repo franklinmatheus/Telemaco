@@ -1,11 +1,14 @@
 package com.imd.telemaco.data;
 
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,16 +19,16 @@ public class UserDAO implements DAOUserSpecialOperations {
     private Connection connection;
     private static UserDAO userDAO = null;
     
-    public UserDAO() throws SQLException {
+    public UserDAO() throws DatabaseException {
         this.connection = ConnectionFactory.getConnection();
     }
     
     /**
      * TODO
-     * @return
-     * @throws SQLException 
+     * @return 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
      */
-    public static synchronized UserDAO getInstance() throws SQLException {
+    public static synchronized UserDAO getInstance() throws DatabaseException {
         if(userDAO == null)
             userDAO = new UserDAO();
         return userDAO;
@@ -35,13 +38,17 @@ public class UserDAO implements DAOUserSpecialOperations {
      * TODO
      * @throws SQLException 
      */
-    private void startsConnection() throws SQLException {
-        if(this.connection.isClosed())
-               this.connection = ConnectionFactory.getConnection();
+    private void startsConnection() throws DatabaseException {
+        try {
+            if(this.connection.isClosed())
+                this.connection = ConnectionFactory.getConnection();
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex.getMessage());
+        }
     }
     
     @Override
-    public void insert(User user) throws SQLException {
+    public void insert(User user) throws DatabaseException, CloseConnectionException {
         String sql = "INSERT INTO telemaco.user (name, email, password, lastname, birthday, gender) VALUES (?,?,?,?,?,?)";
         try {
             this.startsConnection();
@@ -57,16 +64,18 @@ public class UserDAO implements DAOUserSpecialOperations {
             
             statement.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseException(e.getMessage());
         } finally {
             try {
                 connection.close();
-            } catch (SQLException e) { /* empty */ }
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
         }
     }
     
     @Override
-    public User select(int id) throws SQLException {
+    public User select(int id) throws DatabaseException, CloseConnectionException {
         String sql = "SELECT * FROM telemaco.user WHERE id='" + id + "'";
         User user = new User();
         try {
@@ -97,16 +106,18 @@ public class UserDAO implements DAOUserSpecialOperations {
             return user;
             
         } catch(SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseException();
         } finally {
             try {
                 connection.close();
-            } catch(SQLException e) { /* empty */ }
+            } catch(SQLException e) {
+                throw new CloseConnectionException();
+            }
         }
     }
     
     @Override
-    public void update(User user) throws SQLException {
+    public void update(User user) throws DatabaseException, CloseConnectionException {
         String sql = "UPDATE telemaco.user SET "
                 + "name=?, "
                 + "email=?, "
@@ -130,16 +141,18 @@ public class UserDAO implements DAOUserSpecialOperations {
             
             statement.execute();
         } catch (SQLException e) {
-             new RuntimeException();
+            throw new DatabaseException();
         } finally {
             try {
                 connection.close();
-            } catch (SQLException e) { /* empty */ }
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
         }
     }
     
     @Override
-    public void delete(User user) {
+    public void delete(User user) throws DatabaseException, CloseConnectionException {
         String sql = "DELETE FROM telemaco.user WHERE id='" + user.getId() + "'";
         
         try {
@@ -148,16 +161,18 @@ public class UserDAO implements DAOUserSpecialOperations {
             Statement statement = connection.createStatement();
             statement.execute(sql);
         } catch(SQLException e) {
-            throw new RuntimeException();
+            throw new DatabaseException();
         } finally {
             try { 
                 connection.close();
-            } catch(SQLException e) { /* empty */ }
+            } catch(SQLException e) {
+                throw new CloseConnectionException();
+            }
         }
     }
     
     @Override
-    public User select(String email, String password) throws SQLException {
+    public User select(String email, String password) throws DatabaseException, CloseConnectionException {
         String sql = "SELECT * FROM telemaco.user WHERE email='" + email + "' AND password='" + password + "'";
         User user = new User();
         try {
@@ -187,16 +202,18 @@ public class UserDAO implements DAOUserSpecialOperations {
             return user;
             
         } catch(SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseException();
         } finally {
             try {
                 connection.close();
-            } catch(SQLException e) { /* empty */ }
+            } catch(SQLException e) {
+                throw new CloseConnectionException();
+            }
         }
     }
 
     @Override
-    public User select(String email) throws SQLException {
+    public User select(String email) throws DatabaseException, CloseConnectionException {
         String sql = "SELECT * FROM telemaco.user WHERE email='" + email + "'";
         User user = new User();
         try {
@@ -211,7 +228,7 @@ public class UserDAO implements DAOUserSpecialOperations {
                 String lastname = resultSet.getString("lastname");
                 String gender = resultSet.getString("gender");
                 String password = resultSet.getString("password");
-                Date birth = resultSet.getDate("birth");
+                Date birth = resultSet.getDate("birthday");
                 int id = resultSet.getInt("id");
                 
                 user.setEmail(email);
@@ -227,11 +244,83 @@ public class UserDAO implements DAOUserSpecialOperations {
             return user;
             
         } catch(SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseException();
         } finally {
             try {
                 connection.close();
-            } catch(SQLException e) { /* empty */ }
+            } catch(SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
+    }
+
+    @Override
+    public void insertSerie(int idUser, int idSerie) throws DatabaseException, CloseConnectionException {
+        String sql = "INSERT INTO telemaco.user_serie (idfkuser, idfkserie) VALUES (?,?)";
+        try {
+            this.startsConnection();
+            
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idUser);
+            statement.setInt(2, idSerie);
+            statement.execute();
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<Integer> selectSeries(int id) throws DatabaseException, CloseConnectionException {
+        String sql = "SELECT * FROM telemaco.user_serie WHERE idfkuser='" + id + "'";
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            
+            while(resultSet.next()) {
+                int currentSerieId = resultSet.getInt("idfkserie");
+                ids.add(currentSerieId);
+            }
+            
+            return ids;
+            
+        } catch(SQLException e) {
+            throw new DatabaseException();
+        } finally {
+            try {
+                connection.close();
+            } catch(SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
+    }
+
+    @Override
+    public void deleteSerie(int idUser, int idSerie) throws DatabaseException, CloseConnectionException {
+        String sql = "DELETE FROM telemaco.user_serie WHERE idfkuser='" + idUser + "' AND idfkserie='" + idSerie + "'";
+        
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch(SQLException e) {
+            throw new DatabaseException();
+        } finally {
+            try { 
+                connection.close();
+            } catch(SQLException e) {
+                throw new CloseConnectionException();
+            }
         }
     }
 }

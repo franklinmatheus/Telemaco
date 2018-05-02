@@ -5,14 +5,16 @@
  */
 package com.imd.telemaco.presentation;
 
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.data.SerieDAO;
+import com.imd.telemaco.data.UserEpisodeDAO;
+import com.imd.telemaco.entity.Episode;
 import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,8 @@ import javax.servlet.http.HttpSession;
  * @author franklin
  */
 public class SelectAllSeries extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,11 +47,12 @@ public class SelectAllSeries extends HttpServlet {
                 ArrayList<Serie> series = dao.selectAllSeries();
                 HttpSession session = request.getSession(true);
                 session.setAttribute("series", series);
+
                 response.sendRedirect("Series.jsp");
-            } catch (SQLException ex) {
-                
+            } catch (DatabaseException | CloseConnectionException e) {
+                e.printStackTrace();
+                response.sendRedirect("Error.jsp");
             }
-            
         }
     }
 

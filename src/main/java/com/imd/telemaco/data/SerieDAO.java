@@ -5,6 +5,8 @@
  */
 package com.imd.telemaco.data;
 
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.enums.Classification;
@@ -15,41 +17,47 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author franklin
  */
-public class SerieDAO implements DAO<Serie> {
+public class SerieDAO implements DAOSerieSpecialOperations {
     private Connection connection;
     private static SerieDAO serieDAO = null;
     
-    public SerieDAO() throws SQLException {
+    public SerieDAO() throws DatabaseException {
         this.connection = ConnectionFactory.getConnection();
     }
     
     /**
      * 
-     * @return
-     * @throws SQLException 
+     * @return 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
      */
-    public static synchronized SerieDAO getInstance() throws SQLException {
+    public static synchronized SerieDAO getInstance() throws DatabaseException {
         if(serieDAO == null)
             serieDAO = new SerieDAO();
         return serieDAO;
     }
     
-    private void statsConnection() throws SQLException {
-        if(this.connection.isClosed())
-            this.connection = ConnectionFactory.getConnection();
+    private void startsConnection() throws DatabaseException {
+        try {
+            if(this.connection.isClosed())
+                this.connection = ConnectionFactory.getConnection();
+        } catch (SQLException e) {
+            throw new DatabaseException();
+        }   
     }
     
     @Override
-    public void insert(Serie serie) throws SQLException {
+    public void insert(Serie serie) throws DatabaseException, CloseConnectionException {
         String sql = "INSERT INTO telemaco.serie (name, year, status, creator, classification, genre, synopsis, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            this.statsConnection();
+            this.startsConnection();
             
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, serie.getName());
@@ -63,21 +71,27 @@ public class SerieDAO implements DAO<Serie> {
             
             stm.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseException();
         } finally {
-        	connection.close();
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
         }
     }
     
     @Override
-    public Serie select(int id) throws SQLException {
+    public Serie select(int id) throws DatabaseException, CloseConnectionException {
         String sql = "SELECT * FROM telemaco.serie WHERE id='" + id + "'";
         Serie serie = new Serie();
         
         try {
-            Statement stm = connection.createStatement();
-            ResultSet result = stm.executeQuery(sql);
+            this.startsConnection();
             
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
             if(result.next()) {
                 String name     = result.getString("name");
                 int    year     = result.getInt("year");
@@ -90,86 +104,103 @@ public class SerieDAO implements DAO<Serie> {
                 
                 SeasonDAO seasonDAO = new SeasonDAO();
                 ArrayList<Season> seasons = seasonDAO.selectAllSeasons(id);
-                
                 Classification classification = serie.stringToClassif(classif);
                 
                 serie = new Serie(id, name, year, status, creator, classification, genre, synopsis, image, seasons);
             } else
                 serie = null;
             
-            result.close();
-            stm.close();
             return serie;
         } catch(SQLException e) {
-            throw new RuntimeException();
+            throw new DatabaseException();
         } finally {
-//        	connection.close();
+//            try {
+//                connection.close();
+//            } catch(SQLException e) {
+//                throw new CloseConnectionException();
+//            }
         }
     }
     
-    public Serie select (String name) throws SQLException {
+
+    @Override
+    public Serie select (String name) throws DatabaseException, CloseConnectionException {
     	String sql = "SELECT * FROM telemaco.serie WHERE name='" + name + "'";
-    	Serie serie = null;
-    	
+    	Serie serie = null;    	
+
     	try {
-    		Statement stm = connection.createStatement();
-    		ResultSet result = stm.executeQuery(sql);
+            this.startsConnection();
+            
+            Statement stm = connection.createStatement();
+            ResultSet result = stm.executeQuery(sql);
     		
-    		if (result.next()) {
-    			int id = result.getInt("id");
-    			serie = select(id);
-    		}
-    		
-    		stm.close();
-    		return serie;
+            if (result.next()) {
+    		int id = result.getInt("id");
+                serie = select(id);
+            }
+            
+            return serie;
     	} catch (SQLException e) {
-			throw new RuntimeException (e);
-		} finally {
-			connection.close();
-		}
+            throw new DatabaseException();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
     }
     
-    public ArrayList<Serie> selectAllSeries () throws SQLException {
+    @Override
+    public ArrayList<Serie> selectAllSeries () throws DatabaseException, CloseConnectionException {
     	ArrayList <Serie> series = new ArrayList<Serie>();
     	String sql = "SELECT * FROM telemaco.serie";
     	
-    	try {    		
-    		Statement stm = connection.createStatement();
-    		ResultSet result = stm.executeQuery(sql);
+    	try {
+            this.startsConnection();
+            
+            Statement stm = connection.createStatement();
+            ResultSet result = stm.executeQuery(sql);
 
-    		while (result.next()) {
-    			int id = result.getInt("id");
-    			Serie serie = this.select(id);
-    			series.add(serie);
-    		}
-    		
-     		result.close();
-    		stm.close();
-    		return series;
+            while (result.next()) {
+            	int id = result.getInt("id");
+                Serie serie = select(id);
+                series.add(serie);
+            }
+
+            return series;
     	} catch (SQLException e) {
-    		throw new RuntimeException (e);
+            throw new DatabaseException(e.getMessage());
     	} finally {
-    		connection.close();
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
         }
     }
 
     @Override
-    public void delete(Serie serie) throws SQLException {
+    public void delete(Serie serie) throws DatabaseException, CloseConnectionException {
         String sql = "DELETE FROM telemaco.user WHERE id='" + serie.getId() + "'";
         try {
-            this.statsConnection();
+            this.startsConnection();
             
             Statement statement = connection.createStatement();
             statement.execute(sql);
         } catch(SQLException e) {
             throw new RuntimeException();
         } finally {
-        	connection.close();
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
         }
     }
    
     @Override
-    public void update(Serie serie) throws SQLException {
+    public void update(Serie serie) throws DatabaseException, CloseConnectionException {
         String sql = "UPDATE telemaco.user SET "
                 + "name=?, "
                 + "year=?, "
@@ -181,7 +212,7 @@ public class SerieDAO implements DAO<Serie> {
                 + "image=? "
                 + "WHERE id=?";
         try {
-            this.statsConnection();
+            this.startsConnection();
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, serie.getName());
             stm.setInt(2, serie.getYear());
@@ -195,9 +226,43 @@ public class SerieDAO implements DAO<Serie> {
             
             stm.execute();
         } catch(SQLException e) {
-            throw new RuntimeException();
+            throw new DatabaseException();
         } finally {
-            connection.close();
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<Serie> search(String input) throws DatabaseException, CloseConnectionException {
+        String sql = "SELECT * from telemaco.serie WHERE LOWER(name) LIKE '%" + input.toLowerCase() + "%'";
+        ArrayList<Serie> results = new ArrayList<Serie>();
+        
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery(sql);
+            
+            while(set.next()) {
+                int id = set.getInt("id");
+                Serie serie = select(id);
+                results.add(serie);
+            }
+            
+            return results;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new DatabaseException();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                throw new CloseConnectionException();
+            }
         }
     }
 }

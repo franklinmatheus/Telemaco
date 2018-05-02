@@ -6,6 +6,11 @@
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateUserServices;
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.ConfirmInputsException;
+import com.imd.telemaco.business.exception.DatabaseException;
+import com.imd.telemaco.business.exception.UserAlreadyExistsException;
+import com.imd.telemaco.business.exception.ValidateException;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,6 +44,7 @@ public class RegisterUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF8");
         
         PrintWriter out = response.getWriter();
         try {            
@@ -57,11 +63,9 @@ public class RegisterUser extends HttpServlet {
             ValidateUserServices validate = new ValidateUserServices();
             
             User user = new User(name, lastname, email, password, parsedDate, gender);
-            if(validate.validUserInsert(user, cemail, cpassword))
-                response.sendRedirect("Overview.jsp");
-            else
-                response.sendRedirect("Register.jsp");
-        } catch(ParseException e) {
+            validate.insert(user, cemail, cpassword);
+            response.sendRedirect("Overview.jsp");
+        } catch(ParseException | DatabaseException | CloseConnectionException | ConfirmInputsException | UserAlreadyExistsException | ValidateException e) {
             response.sendRedirect("Register.jsp");
         } finally {
             out.close();
@@ -85,6 +89,7 @@ public class RegisterUser extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**
@@ -99,11 +104,11 @@ public class RegisterUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-			processRequest(request, response);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**

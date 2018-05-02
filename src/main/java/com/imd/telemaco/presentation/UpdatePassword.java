@@ -6,6 +6,9 @@
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateUserServices;
+import com.imd.telemaco.business.exception.CloseConnectionException;
+import com.imd.telemaco.business.exception.ConfirmInputsException;
+import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,14 +43,12 @@ public class UpdatePassword extends HttpServlet {
             String cOldPassword = request.getParameter("coldpassword");
             String newPassword = request.getParameter("newpassword");
             String cNewPassword = request.getParameter("cnewpassword");
-            
+
             ValidateUserServices validate = new ValidateUserServices();
-            if(validate.validUserPasswordUpdate(user, cOldPassword, newPassword, cNewPassword))
-                response.sendRedirect("Logged.jsp");
-            else
-                response.sendRedirect("UpdatePassword.jsp");
-        } catch(Exception e) {
-            response.sendRedirect("Error.jsp");
+            validate.updatePassword(user, cOldPassword, newPassword, cNewPassword);
+            response.sendRedirect("Logged.jsp");
+        } catch (DatabaseException | CloseConnectionException | ConfirmInputsException e) {
+            response.sendRedirect("UpdatePassword.jsp");
         }
     }
 

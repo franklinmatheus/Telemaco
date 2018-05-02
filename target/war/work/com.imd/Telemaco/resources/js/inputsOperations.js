@@ -1,10 +1,10 @@
-function disableSeasons () {
-	var selectSerie = document.getElementById("serieName");
-	var selectSeason = document.getElementById("seasonNumber");
-	
-	if (selectSerie.value != "") 
-		selectSeason.disabled = false;
-}
+//function enableSeasons () {
+//	var selectSerie = document.getElementById("serieName");
+//	var selectSeason = document.getElementById("seasonNumber");
+//	
+//	if (selectSerie.value != "") 
+//		selectSeason.disabled = false;
+//}
 
 function enableAllInputs () {
 	var selectSeason = document.getElementById("seasonNumber");
@@ -19,7 +19,7 @@ function enableAllInputs () {
 		epNumber.disabled = false;
 		epSynopsis.disabled = false;
 		epTime.disabled = false;
-	}	
+	}
 }
 
 //function alertSerieChosen (idSerie) {

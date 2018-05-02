@@ -5,6 +5,7 @@
  */
 package com.imd.telemaco.data;
 
+import com.imd.telemaco.business.exception.DatabaseException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,30 +17,22 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     private static final String bd = "telemaco";
     //*  mudar se estiver com host e porta diferente
-    private static final String url = "jdbc:mysql://localhost:3306/" + bd;
-    private static final String usuario = "root";
-    private static final String senha = "telemaco98";
-    private static final String driver = "com.mysql.jdbc.Driver";
+    private static final String url = "jdbc:postgresql://localhost:5432/" + bd;
+    private static final String usuario = "postgres";
+    private static final String senha = "admin";
+    private static final String driver = "org.postgresql.Driver";
     
     /**
      * TODO
      * @return
-     * @throws SQLException 
+     * @throws com.imd.telemaco.business.exception.DatabaseException 
      */
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws DatabaseException {
         try {
             Class.forName(driver);
             return DriverManager.getConnection(url, usuario, senha);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-            throw new SQLException(e.getMessage());
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new DatabaseException();
         }
     }
-    
-    /*public static void main(String[] args) throws SQLException {
-		System.out.println(ConnectionFactory.getConnection());
-		UserDAO u = new UserDAO();
-		System.out.println(u.select(1));
-	}*/
 }
