@@ -22,6 +22,19 @@
 	<link rel="stylesheet" type="text/css" href="./resources/css/styleRegisterSerie.css">
 	<link rel="icon" type="png" href="./resources/media/images/icon.png">
 	<script type="text/javascript" src="./resources/js/inputOperations.js"></script>
+	<script type="text/javascript">
+		function changeImgNameFile () {
+			var inputFile = document.getElementById("image");
+			var outputFile = document.getElementById("txtImgFile");
+			
+			
+			if (inputFile.value == "Nenhum arquivo selecionado" || inputFile.value == "")
+				outputFile.innerHTML = "Nenhum arquivo selecionado";
+			else 
+				outputFile.innerHTML = inputFile.value;//.split('\\').pop();
+		}
+	</script>
+	
 </head>
 <body>
 	<header>
@@ -83,8 +96,8 @@
 
 			<label>Imagem</label>
 			<span class="inputfile">
-				<span id="txtImgFile">Nenhum arquivo inserido</span>
-				<input id="imgFile" type="file" name="imagem" accept="image/*" onchange="changeImgNameFile()">
+				<span id="txtImgFile" name="txtImgFile">Nenhum arquivo inserido</span>
+				<input id="image" size="50" type="file" name="image" accept="image/*" onchange="changeImgNameFile()">
 				<img src="./resources/media/images/upload.png">
 			</span>
 
