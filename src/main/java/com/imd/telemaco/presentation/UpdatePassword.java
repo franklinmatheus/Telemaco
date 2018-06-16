@@ -43,11 +43,11 @@ public class UpdatePassword extends HttpServlet {
             String cOldPassword = request.getParameter("coldpassword");
             String newPassword = request.getParameter("newpassword");
             String cNewPassword = request.getParameter("cnewpassword");
-            
+
             ValidateUserServices validate = new ValidateUserServices();
             validate.updatePassword(user, cOldPassword, newPassword, cNewPassword);
             response.sendRedirect("Logged.jsp");
-        } catch(DatabaseException | CloseConnectionException | ConfirmInputsException e) {
+        } catch (DatabaseException | CloseConnectionException | ConfirmInputsException e) {
             response.sendRedirect("UpdatePassword.jsp");
         }
     }

@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * @author franklin
  */
 public class ConnectionFactory {
-    private static final String bd = "telemaco";
+	private static final String bd = "telemaco";
     //*  mudar se estiver com host e porta diferente
     private static final String url = "jdbc:mysql://localhost:3306/" + bd;
     private static final String usuario = "root";

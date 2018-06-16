@@ -19,7 +19,8 @@ public class ValidateSeasonServices {
     /**
      * Default constructor
      */
-    public ValidateSeasonServices() { }
+    public ValidateSeasonServices() {
+    }
 
     /**
      * Valid the data of the season
@@ -59,10 +60,10 @@ public class ValidateSeasonServices {
      * @throws com.imd.telemaco.business.exception.CloseConnectionException
      */
     public void validSeasonInsert(Season season) throws SeasonExistsException, SeasonIncompleteException, DatabaseException, CloseConnectionException {
-		validSeason(season);
+        //validSeason(season);
         validSeasonExistence(season);
-		SeasonDAO seasonDAO = new SeasonDAO();
-		seasonDAO.insert(season);
+        SeasonDAO seasonDAO = new SeasonDAO();
+        seasonDAO.insert(season);
     }
 
     /**

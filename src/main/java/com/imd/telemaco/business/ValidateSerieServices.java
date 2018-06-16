@@ -3,13 +3,18 @@ package com.imd.telemaco.business;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.business.exception.EpisodeInvalidException;
+import com.imd.telemaco.business.exception.NoResultsException;
 import com.imd.telemaco.business.exception.RatingInvalidException;
 import com.imd.telemaco.business.exception.SeasonExistsException;
 import com.imd.telemaco.business.exception.SerieExistsException;
 import com.imd.telemaco.business.exception.SerieInvalidException;
+import com.imd.telemaco.data.RatingDAO;
+import com.imd.telemaco.data.DAORatingSpecialOperations;
 import com.imd.telemaco.data.SerieDAO;
+import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
+import java.util.ArrayList;
 
 /**
  * Class to validate all services referent to the Series Class.
@@ -141,19 +146,58 @@ public class ValidateSerieServices {
            throw new RatingInvalidException();
        }*/
     }
-
-//   /**
-//    * Verify if the classification is correct.
-//    * @param classification 
-//    */
-//  public void validSerieClassification (Classification classification) {
-//
-//  }
-//   /**
-//    * Valid all the seasons thats be part of the series
-//    * @param serie 
-//    */
-//   public void validSerieSeasons(Serie serie) {
-//      
-//   }
+    
+    /**
+     * Return an array filled with series that matched with input.
+     * @param input
+     * @return
+     * @throws DatabaseException
+     * @throws CloseConnectionException
+     * @throws NoResultsException 
+     */
+    public ArrayList<Serie> search(String input) throws DatabaseException, CloseConnectionException, NoResultsException {
+        SerieDAO dao = SerieDAO.getInstance();
+        ArrayList<Serie> results = dao.search(input);
+        
+        if(results.isEmpty())
+            throw new NoResultsException();
+        
+        return results;
+    }
+    
+    /**
+     * Select all comments of serie.
+     * @param id
+     * @return
+     * @throws DatabaseException
+     * @throws CloseConnectionException
+     */
+    public ArrayList<Rating> getRatings(int id) throws DatabaseException, CloseConnectionException {
+        DAORatingSpecialOperations commentDAO = RatingDAO.getInstance();
+        ArrayList<Rating> ratings = commentDAO.selectBySerie(id);
+        
+        return ratings;
+    }
+    
+    /**
+     * Add a rating in database to related serie.
+     * @param rating
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public void addRating(Rating rating) throws DatabaseException, CloseConnectionException {
+        DAORatingSpecialOperations ratingDAO = RatingDAO.getInstance();
+        ratingDAO.insert(rating);
+    }
+    
+    /**
+     * Remove a rating in database.
+     * @param rating
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public void removeRating(Rating rating) throws DatabaseException, CloseConnectionException {
+        DAORatingSpecialOperations ratingDAO = RatingDAO.getInstance();
+        ratingDAO.delete(rating);
+    }
 }

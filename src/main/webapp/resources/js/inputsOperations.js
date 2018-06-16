@@ -29,10 +29,10 @@ function enableAllInputs () {
 function changeImgNameFile () {
 	var inputFile = document.getElementById("imgFile");
 	var outputFile = document.getElementById("txtImgFile");
-	alert("To cheafando aq");
 
-//	if (inputFile.value == "Nenhum arquivo selecionado" || inputFile.value == "")
-//		outputFile.innerHTML = "Nenhum arquivo selecionado";
-//	else 
-		outputFile.innerHTML = inputFile.value; //.split('\\').pop();
+
+	if (inputFile.value == "Nenhum arquivo selecionado" || inputFile.value == "")
+		outputFile.innerHTML = "Nenhum arquivo selecionado";
+	else 
+		outputFile.innerHTML = inputFile.value.split('\\').pop();
 }

@@ -11,9 +11,13 @@ import com.imd.telemaco.business.exception.ConfirmInputsException;
 import com.imd.telemaco.business.exception.UserAlreadyExistsException;
 import com.imd.telemaco.business.exception.UserNotExistsException;
 import com.imd.telemaco.business.exception.ValidateException;
+import com.imd.telemaco.data.DAOSerieSpecialOperations;
 import com.imd.telemaco.data.DAOUserSpecialOperations;
+import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.data.UserDAO;
+import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
+import java.util.ArrayList;
 
 /**
  *
@@ -68,6 +72,24 @@ public class ValidateUserServices {
     }
     
     /**
+     * Select an user by id.
+     * @param id
+     * @return
+     * @throws DatabaseException
+     * @throws CloseConnectionException
+     * @throws UserNotExistsException 
+     */
+    public User select(int id) throws DatabaseException, CloseConnectionException, UserNotExistsException {
+        DAOUserSpecialOperations dao = UserDAO.getInstance();
+        User user = dao.select(id);
+        
+        if(user == null)
+            throw new UserNotExistsException();
+        
+        return user;
+    }
+    
+    /**
      * TODO
      * @param user
      * @param cOldPassword
@@ -103,6 +125,50 @@ public class ValidateUserServices {
             dao.delete(user); 
         } else
             throw new UserNotExistsException();
+    }
+    
+    /**
+     * TODO
+     * @param idUser
+     * @param idSerie
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public void addSerieToList(int idUser, int idSerie) throws DatabaseException, CloseConnectionException {
+        DAOUserSpecialOperations dao = UserDAO.getInstance();
+        dao.insertSerie(idUser, idSerie);
+    }
+    
+    /**
+     * TODO
+     * @param idUser
+     * @param idSerie
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public void removeSerieFromList(int idUser, int idSerie) throws DatabaseException, CloseConnectionException {
+        DAOUserSpecialOperations dao = UserDAO.getInstance();
+        dao.deleteSerie(idUser, idSerie);
+    }
+    
+    /**
+     * TODO.
+     * @param idUser
+     * @return
+     * @throws DatabaseException
+     * @throws CloseConnectionException 
+     */
+    public ArrayList<Serie> getSeriesList(int idUser) throws DatabaseException, CloseConnectionException {
+        DAOUserSpecialOperations userDAO = UserDAO.getInstance();
+        ArrayList<Integer> seriesIds = userDAO.selectSeries(idUser);
+        
+        DAOSerieSpecialOperations serieDAO = SerieDAO.getInstance();
+        ArrayList<Serie> series = new ArrayList<Serie>();
+        for(Integer currentSerieId : seriesIds) {
+            Serie serie = serieDAO.select(currentSerieId);
+            series.add(serie);
+        }
+        return series;
     }
     
     /**

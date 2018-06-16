@@ -12,7 +12,6 @@ import com.imd.telemaco.data.UserEpisodeDAO;
 import com.imd.telemaco.entity.Episode;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.User;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -27,9 +26,10 @@ import javax.servlet.http.HttpSession;
  * @author franklin
  */
 public class SelectAllSeries extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	/**
+    private static final long serialVersionUID = 1L;
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -41,25 +41,18 @@ public class SelectAllSeries extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            try {
+                SerieDAO dao = new SerieDAO();
+                ArrayList<Serie> series = dao.selectAllSeries();
+                HttpSession session = request.getSession(true);
+                session.setAttribute("series", series);
 
-        try {
-            SerieDAO dao = new SerieDAO();
-            ArrayList<Serie> series = dao.selectAllSeries();
-            
-            HttpSession session = request.getSession(true);
-            session.setAttribute("series", series);
-            
-            User user = (User) (session.getAttribute("logged"));
-            UserEpisodeDAO ueDAO = new UserEpisodeDAO();
-            
-            ArrayList <Episode> episodesSeen = ueDAO.selectAllEpisodes(user.getId());
-            System.out.println(episodesSeen);
-            session.setAttribute("episodesSeen", episodesSeen);
-            
-            response.sendRedirect("Series.jsp");
-        } catch (DatabaseException | CloseConnectionException e) {
-        	e.printStackTrace();
-            response.sendRedirect("Error.jsp");
+                response.sendRedirect("Series.jsp");
+            } catch (DatabaseException | CloseConnectionException e) {
+                e.printStackTrace();
+                response.sendRedirect("Error.jsp");
+            }
         }
     }
 

@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -246,6 +247,76 @@ public class UserDAO implements DAOUserSpecialOperations {
             throw new DatabaseException();
         } finally {
             try {
+                connection.close();
+            } catch(SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
+    }
+
+    @Override
+    public void insertSerie(int idUser, int idSerie) throws DatabaseException, CloseConnectionException {
+        String sql = "INSERT INTO telemaco.user_serie (idfkuser, idfkserie) VALUES (?,?)";
+        try {
+            this.startsConnection();
+            
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idUser);
+            statement.setInt(2, idSerie);
+            statement.execute();
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<Integer> selectSeries(int id) throws DatabaseException, CloseConnectionException {
+        String sql = "SELECT * FROM telemaco.user_serie WHERE idfkuser='" + id + "'";
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            
+            while(resultSet.next()) {
+                int currentSerieId = resultSet.getInt("idfkserie");
+                ids.add(currentSerieId);
+            }
+            
+            return ids;
+            
+        } catch(SQLException e) {
+            throw new DatabaseException();
+        } finally {
+            try {
+                connection.close();
+            } catch(SQLException e) {
+                throw new CloseConnectionException();
+            }
+        }
+    }
+
+    @Override
+    public void deleteSerie(int idUser, int idSerie) throws DatabaseException, CloseConnectionException {
+        String sql = "DELETE FROM telemaco.user_serie WHERE idfkuser='" + idUser + "' AND idfkserie='" + idSerie + "'";
+        
+        try {
+            this.startsConnection();
+            
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch(SQLException e) {
+            throw new DatabaseException();
+        } finally {
+            try { 
                 connection.close();
             } catch(SQLException e) {
                 throw new CloseConnectionException();

@@ -31,7 +31,7 @@
             <label for="email">Email</label>
             <input type="email" name="email" class="inputText" placeholder="user@email.me" required>
 
-            <label for="password">Senha</label>
+            <label for="psd">Senha</label>
             <input type="password" name="password" class="inputText" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
         </div>
 

@@ -8,21 +8,13 @@ import com.imd.telemaco.business.exception.SerieInvalidException;
 import com.imd.telemaco.entity.Serie;
 import com.imd.telemaco.entity.enums.Classification;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Time;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.postgresql.util.MD5Digest;
 
 /**
  *
@@ -57,11 +49,11 @@ public class RegisterSerie extends HttpServlet {
             String classif = request.getParameter("classification");
             String genre = request.getParameter("genre");
             String synopsis = request.getParameter("synopsis");
-            String imageName = request.getParameter("image");
+            String image = request.getParameter("image");
             int yearInt = Integer.parseInt(year);
             Classification classification = serie.stringToClassif(classif);
-            
-            serie = new Serie(name, yearInt, status, creator, classification, genre, synopsis, imageName.toLowerCase());
+
+            serie = new Serie(name, yearInt, status, creator, classification, genre, synopsis, image);
 
             if ((name == null || name.isEmpty())) {
                 response.sendRedirect("RegisterSerie.jsp");
