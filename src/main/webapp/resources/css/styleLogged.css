@@ -140,7 +140,7 @@ header ul li:hover > ul {
 #profile {
 	float: right;
 	height: 100%;
-	width: 40px;
+	width: 80px;
 	position: relative;
 	line-height: 100px;
 }
@@ -148,8 +148,7 @@ header ul li:hover > ul {
 #profile img {
 	vertical-align: middle;
 	position: relative;
-	margin: 0 auto;
-	right: 20px;
+	right: -15px;
 }
 
 #profile:hover > ul {
@@ -158,15 +157,16 @@ header ul li:hover > ul {
 }
 
 #profile-ul {
-	padding: 0;
 	width: 200px;
 	height: auto;
+	padding: 0;
 	display: none;
 	float: right;
 	margin-top: -10px;
 }
 
 #profile ul li { 
+	float: left;
 	height: 60px;
 	width: 100%;
 	line-height: 60px;
@@ -183,6 +183,21 @@ header ul li:hover > ul {
 
 #profile ul li:hover { 
 	background: #222;	
+}
+
+#profile ul li form {
+	height: 100%;
+	width: 100%;
+}
+
+#profile ul li form input {
+	height: 100%;
+	width: 100%;
+	text-align: left;
+	background: transparent;
+	border: none;
+	font-weight: bold;
+	color: #fff;	
 }
 
 #middle {
@@ -203,21 +218,20 @@ header ul li:hover > ul {
 .middle-div-title {
 	color: #fff;
 	font-weight: bold; 
-	height: 20%;
+	height: 16%;
 	line-height: 50px;
 	font-size: large;
 }
 
 .middle-div-series {
 	float: left;
-	height: 80%;
+	height: 84%;
 	background: #222;
 	width: 100%;
-	overflow-x: scroll;
 }
 
 .middle-div-serie {
-	display: inline-table;
+	display: inline-block;
 	width: 150px;
 	background: #fff;
 	margin-right: 20px;

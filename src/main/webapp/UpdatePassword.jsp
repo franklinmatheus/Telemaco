@@ -16,20 +16,41 @@
 %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update password</title>
-    </head>
-    <body>
-       <p><a href="Logged.jsp">Home </a>></p>
-       <h1>Update password</h1>
-        <p>
-        <form name="UpdatePassword" action="UpdatePassword" method="POST">
-            <p><span>Current password</span><input type="password" name="coldpassword" required /></p>
-            <p><span>New password</span><input type="password" name="newpassword" required /></p>
-            <p><span>Confirm new password</span><input type="password" name="cnewpassword" required /></p>
-            <p><input type="submit" name="UpdatePassword" /></p>
+<head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <style type="text/css"></style>
+    <link rel="stylesheet" type="text/css" href="./resources/css/styleUpdatePsw.css">
+    <link rel="stylesheet" type="text/css" href="./resources/css/style.css">
+    <link rel="icon" type="png" href="./resources/media/images/icon.png">
+</head>
+<body>
+    <header>
+        <a href="./Logged.jsp">
+            <img src="./resources/media/images/icon.png" height="80%"> 
+            Telemaco
+        </a>
+    </header>
+
+    <div id="middle">
+        <form action="" method="post">
+            <label id="title"><b>Atualizar senha</b></label>
+
+            <div id="form">
+                <label for="senha_atual">Senha atual</label>
+                <input type="password" name="senha_atual" class="inputText" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+
+                <label for="senha">Nova senha</label>
+                <input type="password" name="senha" class="inputText" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+
+                <label for="csenha">Confirme a nova senha</label>
+                <input type="password" name="csenha" class="inputText" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+            </div>
+
+            <div id="buttons">
+                <button class="button" id="btnConfirm">Atualizar</button>
+            </div>
         </form>
-        </p>
-    </body>
+    </div>
+</body>
 </html>

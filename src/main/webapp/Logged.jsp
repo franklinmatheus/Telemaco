@@ -75,12 +75,11 @@
 	            <img src="./resources/media/images/profile.png" height="50%"> 
 	
 	            <ul id="profile-ul">
-	                <li><a href="">Perfil</a></li>
-	                <li><a href="">Configurações</a></li>
+	                <li><a href="./UpdatePassword.jsp">Atualizar Senha</a></li>
+	                <!-- <li><a href="">Configurações</a></li> -->
 	                <li>
 	                	<form name="logout" action="LogoutUser" method="POST">
-			                <a type="submit" class=".button"> Sair </a> 
-			                
+			                <input type="submit" value="Sair" />
 			            </form>
 	                </li>
 	                <!-- <form name="logout" action="LogoutUser" method="POST">
@@ -119,7 +118,7 @@
                 <div class="middle-div">
                 	<div class="middle-div-title"> Testezin do Terror </div> 
                 	<div class="middle-div-series">  <%
-	                for (int i = 0; i < 20; i++) { %>
+	                for (int i = 0; i < 7; i++) { %>
 	        			<div class="middle-div-serie"> 
 	        				<%-- <a href="SelectSerie?id=<%=s.getId()%>"> <%=s.getName()%> </a> --%> 
 	        			</div> <%
