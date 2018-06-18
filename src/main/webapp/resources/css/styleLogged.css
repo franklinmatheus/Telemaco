@@ -1,0 +1,393 @@
+body {
+	background: #333;
+	overflow-x: hidden; 
+}
+
+header {
+	width: 100%;
+	height: 90px;
+	background: #E9872A;
+	position: fixed;
+}
+
+#btn-menu {
+	display: none;
+}
+
+#icon {
+	float: left;
+	margin-left: 3%;
+	height: 90%;
+	position: relative;
+	line-height: 90px;
+}
+
+#icon img {
+	vertical-align: middle;
+}
+
+header ul {
+	margin: 0;
+	float: left;
+	width: 83%;
+	height: 100%;
+}
+
+header ul li {
+	display: inline-block;
+	list-style: none;
+	width: 12%;
+	height: 100%;
+}
+
+header > ul > li:hover {
+	background: rgba(206, 106, 12, .9);
+	transition: 1s;
+}
+
+header ul li a {
+	height: 40%;
+	color: #fff;
+	margin-top: 50px;
+	display: block;
+	font-size: 80%;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+header ul ul {
+	background: #ce6a0c;
+	width: 500px;
+	height: auto;
+	display: none;
+	padding-left: 0;
+	margin-top: 0;
+}
+
+header ul ul li {
+	height: 60px;
+	width: 50%;
+	float: left;
+	line-height: 60px;
+}
+
+header ul ul li a {
+	text-align: left;
+	margin-top: 0;
+	margin-left: 3%;
+	color: #fff;
+	width: 100%;
+}
+
+header ul ul li:hover {
+	background: #111;
+	transition: .6s;
+}
+
+header ul li:hover > ul {
+	display: block;
+}
+
+#li-search {
+	height: 40%;
+	width: 32%;
+	max-width: 800px;
+	display: inline-block;
+	margin-left: 20px;
+	float: right;
+	margin-top: 35px;
+}
+
+#li-search > form {
+	height: 100%;
+	width: 100%;	
+}
+
+#li-search > form > input {
+	width: 90%;
+	border: none;
+	height: 100%;
+	background: transparent;
+	font-family: arial;
+	outline: none;
+	color: #fff;
+	font-size: 120%;
+}
+
+#li-search:hover {
+	background: #E9872A;
+}
+
+#li-search:hover input {
+	border-bottom: #fff 1px solid;
+	transition: margin-left 2s linear;
+}
+
+#li-search button {
+	background: #fff;
+	height: 100%;
+	background: transparent;
+	float: right;
+	padding: 0;
+}
+
+#li-search button img {
+	float: left;
+	height: 25px;
+}
+
+#profile {
+	float: right;
+	height: 100%;
+	width: 40px;
+	position: relative;
+	line-height: 100px;
+}
+
+#profile img {
+	vertical-align: middle;
+	position: relative;
+	margin: 0 auto;
+	right: 20px;
+}
+
+#profile:hover > ul {
+	display: block;
+	background: #ce6a0c;
+}
+
+#profile-ul {
+	padding: 0;
+	width: 200px;
+	height: auto;
+	display: none;
+	float: right;
+	margin-top: -10px;
+}
+
+#profile ul li { 
+	height: 60px;
+	width: 100%;
+	line-height: 60px;
+}
+
+#profile ul li a { 
+	text-align: left;
+	margin-top: 0;
+	margin-left: 3%;
+	color: #fff;
+	width: 100%;
+	height: 100%;
+}
+
+#profile ul li:hover { 
+	background: #222;	
+}
+
+#middle {
+	width: 90%;
+	padding-top: 100px;
+	margin: 0 auto;	
+}
+
+.middle-div {
+	width: 100%;
+	height: 300px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+	float: left;
+	
+}
+
+.middle-div-title {
+	color: #fff;
+	font-weight: bold; 
+	height: 20%;
+	line-height: 50px;
+	font-size: large;
+}
+
+.middle-div-series {
+	float: left;
+	height: 80%;
+	background: #222;
+	width: 100%;
+	overflow-x: scroll;
+}
+
+.middle-div-serie {
+	display: inline-table;
+	width: 150px;
+	background: #fff;
+	margin-right: 20px;
+	height: 100%;
+	vertical-align: middle;
+}
+
+
+/* footer {
+	width: 100%;
+	height: 300px;
+	background: #555;
+	margin: 0 auto;
+	margin-bottom: 0;
+} */
+
+@media screen and (max-width: 1280px) {
+	header {
+		width: 100%;
+		height: 90px;
+		background: #E9872A;
+		position: fixed;
+	}
+
+	#btn-menu {
+		float: left;
+		display: inline;
+		position: relative;
+		background: transparent;
+		height: 100%;
+		margin-left: 1px;
+		text-align: center;
+	}
+
+	#btn-menu img {
+		line-height: 90px;
+		/* height: 60px; */
+	}
+
+	#icon {
+		display: block;
+		line-height: 90px;
+		position: absolute;
+		left: 47%;
+	}
+	
+	#icon img {
+		vertical-align: middle;
+	}
+
+	header ul {
+		display: none;
+		margin: 0;
+		float: left;
+		height: 100%;
+		width: 80%;
+	}
+
+	header ul li {
+		display: inline-block;
+		list-style: none;
+		width: 130px;
+		height: 100%;
+	}
+
+	header > ul > li:hover {
+		background: rgba(206, 106, 12, .9);
+		transition: 1s;
+	}
+
+	header ul li a {
+		height: 45%;
+		margin-top: 50%;
+		color: #fff;
+		display: block;
+		font-size: 75%;
+		text-align: center;
+		font-weight: bold;
+		text-decoration: none;
+	}
+
+	header ul ul {
+		background: #ce6a0c;
+		width: 500px;
+		height: auto;
+		display: none;
+		padding-left: 0;
+	}
+
+	header ul ul li {
+		height: 60px;
+		width: 50%;
+		float: left;
+		line-height: 60px;
+	}
+
+	header ul ul li a {
+		text-align: left;
+		margin-top: 0;
+		margin-left: 3%;
+		color: #fff;
+		width: 100%;
+	}
+
+	header ul ul li:hover {
+		background: #333;
+		transition: .7s;
+	}
+
+	header ul li:hover > ul {
+		display: block;
+	}
+
+	#li-search {
+		height: 40%;
+		width: 270px;
+		margin-left: 5%;
+		display: inline-table !important;
+	}
+
+	#li-search input {
+		width: 70%;
+		border: none;
+		padding-left: 10px;
+		height: 100%;
+		border-right: 3px solid #333;
+		border-radius: 5px 0 0 5px ;
+		font-family: arial;
+	}
+
+	#li-search button {
+		width: 25%;
+		background: #fff;
+		border: none;
+		border-radius: 0 5px 5px 0;
+		float: right;
+	}
+
+	#li-search button img {
+		vertical-align: middle;
+	}
+
+	#searchImg{
+		height: 50%;
+	}
+
+	#profile {
+		display: none;
+		float: right;
+		height: 100%;
+		width: 40px;
+		position: relative;
+		margin-right: 25px;
+		line-height: 100px;
+	}
+	
+	#profile img {
+		vertical-align: middle;
+	}
+	
+	
+	#profile:hover > ul {
+		display: block;
+		background: #fff;
+	}
+	
+	#profile-ul {
+		display: none !important;
+	}
+}
+
+/*TODO the reponsive part 
+	link to reference: https://www.youtube.com/watch?v=TTbYFzAz-Lg*/
