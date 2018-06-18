@@ -25,17 +25,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="./resources/css/style.css">
-        <link rel="stylesheet" type="text/css" href="./resources/css/styleLogged.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./resources/css/style.css?version=13">
+        <link rel="stylesheet" type="text/css" href="./resources/css/styleLogged.css?version=13">
         <link rel="icon" type="png" href="./resources/media/images/icon.png">
         <title>Telemaco</title>
     </head>
     <body>
 		<header>
 	        <button id="btn-menu">
-	            <img src="./resources/media/images/menu.png">
+	            <img src="./resources/media/images/menu.png" height="70%">
 	        </button>
-	        <a id="icon" href="./Index.html"><img src="./resources/media/images/icon.png" height="60%"></a>
+	        <a id="icon" href="./Logged.jsp"><img src="./resources/media/images/icon.png" height="80%"></a>
 	        <ul>
 	            <li><a href="">CATEGORIAS</a>
 	                <ul>
@@ -61,71 +62,76 @@
 	            <li><a href="">LANÇAMENTOS</a></li>
 	            <li><a href="">RECOMENDADOS</a></li>
 	            <li id="li-search">
-	                <input type="text" name="search" placeholder="Procurar...">
-	                <button>    
-	                    <img src="./resources/media/images/search.png" id="searchImg">
-	                </button>
+	                <form name="search" action="SearchSerie">
+			            <input type="search" required name="input" />
+			            <button type="submit" value="Search">
+	                    	<img src="./resources/media/images/search.png" id="searchImg">
+	                	</button>
+			        </form>
 	            </li>
 	        </ul>
 	
 	        <div id="profile"> 
-	            <img src="./resources/media/images/profile.png"> 
+	            <img src="./resources/media/images/profile.png" height="50%"> 
 	
 	            <ul id="profile-ul">
 	                <li><a href="">Perfil</a></li>
 	                <li><a href="">Configurações</a></li>
-	                <li><a href="">Sair</a></li>
+	                <li>
+	                	<form name="logout" action="LogoutUser" method="POST">
+			                <a type="submit" class=".button"> Sair </a> 
+			                
+			            </form>
+	                </li>
+	                <!-- <form name="logout" action="LogoutUser" method="POST">
+		                <button type="submit" class=".button"> Sair </button> 
+		            </form> -->
 	            </ul>
 	
 	        </div>
 	    </header>        
 
-        <a href="RegisterSerie.jsp">Register serie</a><br/>
-        <a href="UpdatePassword.jsp">Update password</a><br/>
-
-        <form action="SelectAllSeries" method="post">
-            <button type="submit"> ver series </button>
-        </form>
-        <br/>
-		<%--<h2>Your informations:</h2>
-        <b>Birth: </b><%=logged.getBirth()%><br/>
-        <b>Id: </b><%=logged.getId()%><br/>
-        <b>Last name: </b><%=logged.getLastName()%><br/>
-        <b>Email: </b><%=logged.getEmail()%><br/>
-        <b>Password: </b><%=logged.getPassword()%><br/>
-        <b>Gender: </b><%=logged.getGender()%><br/> --%>
-
-        <form name="search" action="SearchSerie">
-            <input type="search" required name="input" />
-            <input type="submit" value="Search" />
-        </form>
-
-        <div>
-            <h2>Your series</h2>
-            <%
-            if (list.isEmpty()) {
-            %>
-            <p>You have no series in your list!</p>
-            <%
-            } else {
-                for (Serie serie : list) {
-            %>
-            <p> 
-            <form action="RemoveSerieFromList" method="GET">
-                <a href="SelectSerie?id=<%=serie.getId()%>"> <%=serie.getName()%> </a> 
-                <input type="hidden" name="idSerie" value="<%=serie.getId()%>" />
-                <input type="hidden" name="idUser" value="<%=logged.getId()%>" />
-                <input type="submit" value="Remove from list" />
-            </form>
-            </p>
-            <%
+        <div id="middle">  
+            <%-- <div>
+                <%
+                if (!list.isEmpty()) { %> 
+                	<h2>Your series</h2> <%
+                    for (Serie serie : list) { %>
+	                <p> 
+	                <form action="RemoveSerieFromList" method="GET">
+	                    <a href="SelectSerie?id=<%=serie.getId()%>"> <%=serie.getName()%> </a> 
+	                    <input type="hidden" name="idSerie" value="<%=serie.getId()%>" />
+	                    <input type="hidden" name="idUser" value="<%=logged.getId()%>" />
+	                    <input type="submit" value="Remove from list" />
+	                </form>
+	                </p> <%
+                    }
                 }
+                %>
+            </div> --%>
+            
+           	<%
+            ArrayList<Serie> series;
+            if (session.getAttribute("series") == null)
+                response.sendRedirect("Logged");
+            else {
+                series = (ArrayList<Serie>) session.getAttribute("series"); %>
+                <div class="middle-div">
+                	<div class="middle-div-title"> Testezin do Terror </div> 
+                	<div class="middle-div-series">  <%
+	                for (int i = 0; i < 20; i++) { %>
+	        			<div class="middle-div-serie"> 
+	        				<%-- <a href="SelectSerie?id=<%=s.getId()%>"> <%=s.getName()%> </a> --%> 
+	        			</div> <%
+	                } %>
+			        </div>      
+                </div> <%
             }
-            %>
+        	%>
         </div>
-
-        <form name="logout" action="LogoutUser" method="POST">
-            <input type="submit" value="Logout" />
-        </form>
+        
+        <footer>
+        	
+        </footer>
     </body>
 </html>

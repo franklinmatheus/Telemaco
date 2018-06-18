@@ -14,7 +14,13 @@
     <body>
         <h2>Bem vindo, escolha uma opção!</h2>
         <ul>
-            <li><a href="CadastrarSerie.jsp">Cadastrar Serie</a></li>
+            <%--<h2>Your informations:</h2>
+            <b>Birth: </b><%=logged.getBirth()%><br/>
+            <b>Id: </b><%=logged.getId()%><br/>
+            <b>Last name: </b><%=logged.getLastName()%><br/>
+            <b>Email: </b><%=logged.getEmail()%><br/>
+            <b>Password: </b><%=logged.getPassword()%><br/>
+            <b>Gender: </b><%=logged.getGender()%><br/> --%>
         </ul>
     </body>
 </html>

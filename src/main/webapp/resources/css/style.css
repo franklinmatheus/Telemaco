@@ -9,6 +9,7 @@ button {
 	border-radius: 4px;
 	padding: 10px 20px 10px 20px;
 	font-size: 100%;
+	outline: none;
 }
 
 button a {
