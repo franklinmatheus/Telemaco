@@ -16,7 +16,13 @@
     }
 
     Serie serie = (Serie) session.getAttribute("serie");
-    ArrayList<Season> seasons = serie.getSeasons();
+    ArrayList<Season> seasons = null;
+    String serieName = "";
+    if (serie != null) { 
+    	seasons = serie.getSeasons();
+    	serieName = serie.getName();
+    	
+    }
 %>
 <html>
     <head>
@@ -29,7 +35,7 @@
     </head>
     <body>
         <header>
-            <a href="./Index.jsp">
+            <a href="./Logged.jsp">
                 <img src="./resources/media/images/icon.png" height="80%"> 
                 Telemaco
             </a>
@@ -39,21 +45,27 @@
             <label id="title">Cadastrar Episódio</label>
 
             <form name="registerEpisode" action="RegisterEpisode" method="post">
-                <label>Série Pertencente</label>
-                <input type="text" disabled="true" value="<%=serie.getName()%>" />
+                <label>Série Pertencente</label> <%
+                if (serie != null) { %>
+                	<input type="text" disabled value="<%=serieName%>" /> <%
+                } else { %>
+                	<input type="text" value="<%=serieName%>" /> <%
+                } %>
 
                 <label>Temporada Pertencente</label>
 
-                <select id="seasonNumber" name="seasonNumber" onchange="enableAllInputs()" required>
-                    <option value="" selected disabled> -- </option>
-                    <%
-                        for (Season s : seasons) {
-                        %>
-                        <option value="<%=s.getNumber()%>"><%=s.getNumber()%> </option>
-                        <%
-                        }
-                    %>
-                </select>
+                <%
+                if (seasons != null) { %>
+               		<select id="seasonNumber" name="seasonNumber" onchange="enableAllInputs()" required>
+                        <option value="" selected disabled> -- </option> <%
+                    	for (Season s : seasons) { %>
+                    		<option value="<%=s.getNumber()%>"><%=s.getNumber()%> </option> <%
+                    	} %>
+                   	</select> <%
+                } else { %>
+                	<input id="seasonNumber" name="seasonNumber" onchange="enableAllInputs()" type="number" min="1" required /> <%
+                } %>
+                
 
                 <label> Nome </label>
                 <input id="epName" type="input" name="epName" placeholder="ex.: Pilot" required>

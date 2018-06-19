@@ -14,8 +14,14 @@
     }
     
     Serie serie = (Serie) session.getAttribute("serie");
-    int numberSeasons = serie.getSeasons().size();
-    int nextSeason = numberSeasons + 1;
+    String serieName = "Série";
+    int numberSeasons = 0;
+    int nextSeason = 1;
+    if (serie != null) {
+    	serieName = serie.getName();
+    	numberSeasons = serie.getSeasons().size();
+    	nextSeason = numberSeasons + 1;
+    }
 %>
 <html>
     <head>
@@ -27,7 +33,7 @@
     </head>
     <body>
         <header>
-            <a href="./Index.jsp">
+            <a href="./Logged.jsp">
                 <img src="./resources/media/images/icon.png" height="80%"> 
                 Telemaco
             </a>
@@ -39,8 +45,13 @@
             <form name="registerSeason" action="RegisterSeason" method="post">
                 <label>Série Pertencente</label>
                 
-                <input type="text" disabled="true" value="<%=serie.getName()%>" />
-
+                <%
+                if (serie != null) { %>
+                	<input type="text" disabled value="<%=serieName%>" /> <%
+                } else { %>
+					<input type="text" value="" /> <%
+                } %>
+                
                 <label>Number <span>(a série já possui <%=numberSeasons%> temporadas)</span></label>
                 <input type="number" name="number" value="<%=nextSeason%>">
 

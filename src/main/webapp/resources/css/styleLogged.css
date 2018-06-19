@@ -221,6 +221,7 @@ header ul li:hover > ul {
 	height: 16%;
 	line-height: 50px;
 	font-size: large;
+	text-transform: capitalize;
 }
 
 .middle-div-series {
@@ -238,15 +239,6 @@ header ul li:hover > ul {
 	height: 100%;
 	vertical-align: middle;
 }
-
-
-/* footer {
-	width: 100%;
-	height: 300px;
-	background: #555;
-	margin: 0 auto;
-	margin-bottom: 0;
-} */
 
 @media screen and (max-width: 1280px) {
 	header {

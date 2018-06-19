@@ -42,6 +42,7 @@ public class SearchSerie extends HttpServlet {
             ArrayList<Serie> results = validate.search(input);
             HttpSession session = request.getSession();
             session.setAttribute("results", results);
+            session.setAttribute("input", input);
             response.sendRedirect("SearchResult.jsp");
         } catch(DatabaseException | CloseConnectionException e) {
             response.sendRedirect("Error.jsp");

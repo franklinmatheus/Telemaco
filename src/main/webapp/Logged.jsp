@@ -76,6 +76,9 @@
 	
 	            <ul id="profile-ul">
 	                <li><a href="./UpdatePassword.jsp">Atualizar Senha</a></li>
+	                <li><a href="./RegisterSerie.jsp">Cadastrar Série</a></li>
+	                <li><a href="./RegisterSeason.jsp">Cadastrar Temporada</a></li>
+	                <li><a href="./RegisterEpisode.jsp">Cadastrar Episódio</a></li>
 	                <!-- <li><a href="">Configurações</a></li> -->
 	                <li>
 	                	<form name="logout" action="LogoutUser" method="POST">
@@ -115,22 +118,66 @@
                 response.sendRedirect("Logged");
             else {
                 series = (ArrayList<Serie>) session.getAttribute("series"); %>
+                
                 <div class="middle-div">
-                	<div class="middle-div-title"> Testezin do Terror </div> 
+                	<div class="middle-div-title"> Sua lista </div> 
                 	<div class="middle-div-series">  <%
-	                for (int i = 0; i < 7; i++) { %>
+	                for (int i = 0; i < 6; i++) { %>
 	        			<div class="middle-div-serie"> 
 	        				<%-- <a href="SelectSerie?id=<%=s.getId()%>"> <%=s.getName()%> </a> --%> 
 	        			</div> <%
 	                } %>
 			        </div>      
-                </div> <%
+                </div>
+                
+                <div class="middle-div">
+                	<div class="middle-div-title"> Ação </div> 
+                	<div class="middle-div-series">  <%
+	                for (int i = 0; i < 6; i++) { %>
+	        			<div class="middle-div-serie"> 
+	        				<%-- <a href="SelectSerie?id=<%=s.getId()%>"> <%=s.getName()%> </a> --%> 
+	        			</div> <%
+	                } %>
+			        </div>      
+                </div> 
+                
+                <div class="middle-div">
+                	<div class="middle-div-title"> Aventura </div> 
+                	<div class="middle-div-series">  <%
+	                for (int i = 0; i < 6; i++) { %>
+	        			<div class="middle-div-serie"> 
+	        				<%-- <a href="SelectSerie?id=<%=s.getId()%>"> <%=s.getName()%> </a> --%> 
+	        			</div> <%
+	                } %>
+			        </div>      
+                </div>
+                
+                <div class="middle-div">
+                	<div class="middle-div-title"> Recomendados </div> 
+                	<div class="middle-div-series">  <%
+	                for (int i = 0; i < 6; i++) { %>
+	        			<div class="middle-div-serie"> 
+	        				<%-- <a href="SelectSerie?id=<%=s.getId()%>"> <%=s.getName()%> </a> --%> 
+	        			</div> <%
+	                } %>
+			        </div>      
+                </div>                
+                
+                <div class="middle-div">
+                	<div class="middle-div-title"> Terror </div> 
+                	<div class="middle-div-series">  <%
+	                for (int i = 0; i < 6; i++) { %>
+	        			<div class="middle-div-serie"> 
+	        				<%-- <a href="SelectSerie?id=<%=s.getId()%>"> <%=s.getName()%> </a> --%> 
+	        			</div> <%
+	                } %>
+			        </div>      
+                </div>
+                
+                <%
             }
         	%>
         </div>
         
-        <footer>
-        	
-        </footer>
     </body>
 </html>

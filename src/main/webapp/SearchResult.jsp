@@ -20,23 +20,32 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Result</title>
+        <link rel="stylesheet" type="text/css" href="./resources/css/style.css">
+		<link rel="stylesheet" type="text/css" href="./resources/css/styleSearchResult.css">
+        <link rel="icon" type="png" href="./resources/media/images/icon.png">
+        <title>Resultado</title>
     </head>
     <body>
-        <%
-            ArrayList<Serie> results = (ArrayList<Serie>) session.getAttribute("results");
-            
-            if(results == null) {
-                %>
-                    <p>No results, <a href="Logged.jsp"> return no home page </a></p>
-                <%
-            } else {
-                for(Serie result : results) {
-                %>
-                    <p><a href="SelectSerie?id=<%=result.getId()%>"> <%=result.getName() %> </a></p>
-                <%
-                }    
-            }
-        %>
+	    <header>
+			<a href="./Logged.jsp">
+				<img src="./resources/media/images/icon.png" height="80%"> 
+				Telemaco
+			</a>
+		</header>
+		<div id="middle"> 
+	        <%
+	            ArrayList<Serie> results = (ArrayList<Serie>) session.getAttribute("results"); 
+	            String search = (String) session.getAttribute("input"); %>
+	        	<h1>Resultados para "<%=search%>"</h1>    <%
+	        
+	            if(results == null) { %>
+	                    <p>Sem resultados, <a href="Logged.jsp"> returnar para a página inicial</a></p>  <%
+	            } else {
+	                for(Serie result : results) { %>
+	                    <p><a href="SelectSerie?id=<%=result.getId()%>"> <%=result.getName() %> </a></p> <%
+	                }    
+	            }
+	        %>
+	   </div>
     </body>
 </html>

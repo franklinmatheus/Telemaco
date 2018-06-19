@@ -25,7 +25,7 @@
 </head>
 <body>
 	<header>
-		<a href="./Index.jsp">
+		<a href="./Logged.jsp">
 			<img src="./resources/media/images/icon.png" height="80%"> 
 			Telemaco
 		</a>
