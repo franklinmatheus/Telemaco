@@ -3,12 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.imd.telemaco.data;
+package main.java.com.imd.telemaco.data;
 
-import com.imd.telemaco.business.exception.CloseConnectionException;
-import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Rating;
-import com.imd.telemaco.entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+
+import main.java.com.imd.telemaco.business.exception.CloseConnectionException;
+import main.java.com.imd.telemaco.business.exception.DatabaseException;
+import main.java.com.imd.telemaco.entity.Rating;
+import main.java.com.imd.telemaco.entity.User;
 
 /**
  *
@@ -123,7 +124,7 @@ public class RatingDAO implements DAORatingSpecialOperations {
     }
 
     @Override
-    public void delete(Rating rating) throws DatabaseException, CloseConnectionException {
+    public static void delete(Rating rating) throws DatabaseException, CloseConnectionException {
         String sql = "DELETE FROM telemaco.rating WHERE id='" + rating.getId() + "'";
         try {
             this.startsConnection();

@@ -1,20 +1,21 @@
-package com.imd.telemaco.business;
+package main.java.com.imd.telemaco.business;
 
-import com.imd.telemaco.business.exception.CloseConnectionException;
-import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.business.exception.EpisodeInvalidException;
-import com.imd.telemaco.business.exception.NoResultsException;
-import com.imd.telemaco.business.exception.RatingInvalidException;
-import com.imd.telemaco.business.exception.SeasonExistsException;
-import com.imd.telemaco.business.exception.SerieExistsException;
-import com.imd.telemaco.business.exception.SerieInvalidException;
-import com.imd.telemaco.data.RatingDAO;
-import com.imd.telemaco.data.DAORatingSpecialOperations;
-import com.imd.telemaco.data.SerieDAO;
-import com.imd.telemaco.entity.Rating;
-import com.imd.telemaco.entity.Serie;
-import com.imd.telemaco.entity.User;
 import java.util.ArrayList;
+
+import main.java.com.imd.telemaco.business.exception.CloseConnectionException;
+import main.java.com.imd.telemaco.business.exception.DatabaseException;
+import main.java.com.imd.telemaco.business.exception.EpisodeInvalidException;
+import main.java.com.imd.telemaco.business.exception.NoResultsException;
+import main.java.com.imd.telemaco.business.exception.RatingInvalidException;
+import main.java.com.imd.telemaco.business.exception.SeasonExistsException;
+import main.java.com.imd.telemaco.business.exception.SerieExistsException;
+import main.java.com.imd.telemaco.business.exception.SerieInvalidException;
+import main.java.com.imd.telemaco.data.DAORatingSpecialOperations;
+import main.java.com.imd.telemaco.data.RatingDAO;
+import main.java.com.imd.telemaco.data.SerieDAO;
+import main.java.com.imd.telemaco.entity.Rating;
+import main.java.com.imd.telemaco.entity.Serie;
+import main.java.com.imd.telemaco.entity.User;
 
 /**
  * Class to validate all services referent to the Series Class.
@@ -198,6 +199,6 @@ public class ValidateSerieServices {
      */
     public void removeRating(Rating rating) throws DatabaseException, CloseConnectionException {
         DAORatingSpecialOperations ratingDAO = RatingDAO.getInstance();
-        ratingDAO.delete(rating);
+        RatingDAO.delete(rating);
     }
 }

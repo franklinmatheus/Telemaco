@@ -3,13 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.imd.telemaco.data;
-
-import com.imd.telemaco.business.exception.CloseConnectionException;
-import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Season;
-import com.imd.telemaco.entity.Serie;
-import com.imd.telemaco.entity.enums.Classification;
+package main.java.com.imd.telemaco.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,8 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import main.java.com.imd.telemaco.business.exception.CloseConnectionException;
+import main.java.com.imd.telemaco.business.exception.DatabaseException;
+import main.java.com.imd.telemaco.entity.Season;
+import main.java.com.imd.telemaco.entity.Serie;
+import main.java.com.imd.telemaco.entity.enums.Classification;
 
 /**
  *

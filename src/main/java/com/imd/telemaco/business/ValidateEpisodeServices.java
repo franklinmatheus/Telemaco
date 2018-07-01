@@ -1,12 +1,11 @@
-package com.imd.telemaco.business;
+package main.java.com.imd.telemaco.business;
 
-import com.imd.telemaco.business.exception.CloseConnectionException;
-import com.imd.telemaco.business.exception.DatabaseException;
-
-import com.imd.telemaco.business.exception.EpisodeExistsException;
-import com.imd.telemaco.business.exception.EpisodeInvalidException;
-import com.imd.telemaco.data.EpisodeDAO;
-import com.imd.telemaco.entity.Episode;
+import main.java.com.imd.telemaco.business.exception.CloseConnectionException;
+import main.java.com.imd.telemaco.business.exception.DatabaseException;
+import main.java.com.imd.telemaco.business.exception.EpisodeExistsException;
+import main.java.com.imd.telemaco.business.exception.EpisodeInvalidException;
+import main.java.com.imd.telemaco.data.EpisodeDAO;
+import main.java.com.imd.telemaco.entity.Episode;
 
 /**
  * Class to validate all services offered by Episode class
